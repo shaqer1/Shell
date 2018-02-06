@@ -48,7 +48,7 @@ read-line.o: read-line.c
 .PHONY: git-commit
 git-commit:
 	git checkout master >> .local.git.out || echo
-	git add *.cc *.h *.l *.y Makefile >> .local.git.out  || echo
+	git add *.cc *.hh *.l *.y Makefile >> .local.git.out  || echo
 	git add test-shell/testall.out >> .local.git.out  || echo
 	git commit -a -m 'Commit' >> .local.git.out || echo
 	git push origin master

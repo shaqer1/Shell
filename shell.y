@@ -65,11 +65,11 @@ simple_command:
   | error NEWLINE { yyerrok; }
   ;
 
-pipe_list:
+/*pipe_list:
 	pipe_list PIPE command_and_args
 	| command_and_args
 	;
-
+*/
 
 command_and_args:
   command_word argument_list {
@@ -98,13 +98,12 @@ command_word:
   }
   ;
 
-iomodifier_list:
-	iomodifier_list iomodifier_opt
-	| /*empty*/
-	;
+/*iomodifier_list:
+  iomodifier_list iomodifier_opt*/
+/*|*/ /*empty*/
+/*;*/
 
 	/*----end*/
-
 iomodifier_opt:
   GREAT WORD {
     printf("   Yacc: insert output \"%s\"\n", $2->c_str());

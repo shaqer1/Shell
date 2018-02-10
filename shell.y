@@ -28,7 +28,7 @@
 }
 
 %token <cpp_string> WORD
-%token NOTOKEN GREAT NEWLINE PIPE LESS AMPER
+%token NOTOKEN GREAT NEWLINE GREATGREAT PIPE LESS AMPER GREATAMPERSAND GREATGREATAMPERSAND
 
 %{
 //#define yylex yylex
@@ -62,6 +62,10 @@ simple_command:
   | NEWLINE 
   | error NEWLINE { yyerrok; }
   ;
+pipe_list:
+	pipe_list PIPE command_and_args
+	| command_and_args
+	;
 
 command_and_args:
   command_word argument_list {
@@ -90,13 +94,63 @@ command_word:
   }
   ;
 
+iomodifier_list:
+	iomodifier_list iomodifier_opt
+	| /*empty*/
+	;
+
 iomodifier_opt:
-  GREAT WORD {
-    printf("   Yacc: insert output \"%s\"\n", $2->c_str());
-    Shell::_currentCommand._outFile = $2;
-  }
-  | /* can be empty */ 
-  ;
+  GREATGREAT WORD {
+		/* printf("   Yacc: append output \"%s\"\n", $2); */
+		if (Command::_currentCommand._outFile != 0) {
+			Command::_currentCommand._ambiguity = 1;
+		}
+		Command::_currentCommand._append = 1;
+		Command::_currentCommand._outFile = $2;
+	}
+	| GREAT WORD {
+		/* printf("   Yacc: insert output \"%s\"\n", $2); */
+		if (Command::_currentCommand._outFile != 0) {
+			Command::_currentCommand._ambiguity = 1;
+		}
+		Command::_currentCommand._append = 0;
+		Command::_currentCommand._outFile = $2;
+	}
+	| GREATGREATAMPERSAND WORD {
+		/* printf("   Yacc: append output & \"%s\"\n", $2); */
+		if (Command::_currentCommand._outFile != 0) {
+			Command::_currentCommand._ambiguity = 1;
+		}
+		Command::_currentCommand._append = 1;
+		Command::_currentCommand._outFile = $2;
+		Command::_currentCommand._errFile = $2;
+	}
+	| GREATAMPERSAND WORD {
+		/* printf("   Yacc: insert output & \"%s\"\n", $2); */
+		if (Command::_currentCommand._outFile != 0) {
+			Command::_currentCommand._ambiguity = 1;
+		}
+		Command::_currentCommand._append = 0;
+		Command::_currentCommand._outFile = $2;
+		Command::_currentCommand._errFile = $2;
+	}
+	| LESS WORD {
+		if (Command::_currentCommand._inFile != 0) {
+			Command::_currentCommand._ambiguity = 1;
+		}
+		/* printf("   Yacc: insert input \"%s\"\n", $2); */
+		Command::_currentCommand._append = 0;
+		Command::_currentCommand._inFile = $2;
+	}
+	/*|  can be empty */ 
+	;
+
+	background_optional:
+	AMPERSAND {
+		Command::_currentCommand._background = 1;
+	}
+	| /*empty*/
+	;
 
 %%
 

@@ -55,23 +55,21 @@ void myunputc(int c) {
 
 %%
 
-\n {
-  return NEWLINE;
-}
+\n 	{
+		return NEWLINE;
+	}
 
-[ \t] {
-  /* Discard spaces and tabs */
-}
+[ \t] 	{
+		/* Discard spaces and tabs */
+     	}	
 
-"|" {
-  return PIPE;
-}
+"|" 	{
+		return PIPE;
+	}
 
-
-">" {
-  return GREAT;
-}
-
+">" 	{
+		return GREAT;
+	}
 
 "<" 	{
 		return LESS;

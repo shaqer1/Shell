@@ -93,7 +93,7 @@ void myunputc(int c) {
 
 `[^\n`]*` {
 //printf("%s\n", "backticks");
-	//char * stuff = strdup(++yytext);
+	char * stuff = strdup(yytext);
 	stuff[strlen(yytext) - 1] = '\0';
 	int tmpin = dup(0);
 	int tmpout = dup(1);

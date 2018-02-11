@@ -90,58 +90,8 @@ void myunputc(int c) {
 "&" 	{
 		return AMPERSAND;
 	}
-
-`[^\n`]*` {
-//printf("%s\n", "backticks");
-	char * stuff = strdup(++yytext);
-	stuff[strlen(yytext--) - 1] = '\0';
-	int tmpin = dup(0);
-	int tmpout = dup(1);
-	int piper[2];
-	int piper2[2];
-	pipe(piper);
-	pipe(piper2);
-	write(piper[1], stuff, strlen(stuff));
-	write(piper[1], "\nexitNoPrint\n", 13);
-	close(piper[1]);
-	dup2(piper[0], 0);
-	close(piper[0]);
-	dup2(piper2[1], 1);
-	close(piper2[1]);
-	int ret = fork();
-	if(ret == 0) {
-		execvp("/proc/self/exe", NULL);
-		_exit(1);
-	}
-	else if (ret < 0 ) {
-		perror("fork");
-		exit(-1);
-	}
-	dup2(tmpin, 0);
-	dup2(tmpout, 1);
-	close(tmpin);
-	close(tmpout);
-	char c;
-	char * buff = (char *) malloc(sizeof(char)*2048);
-	int i = 0;
-	while(read(piper2[0], &c, 1)) {
-		if(c == '\n') {
-			buff[i] = ' ';
-			i++;
-		}
-		else {
-			buff[i] = c;
-			i++;
-		}
-	}
-	buff[i] = '\0';
-	for (i = strlen(buff); i >= 0; i--) {
-		unput(buff[i]);
-	}
-	free(buff);
-
-	//yylval.string_val = yytext;
-	//return WORD;
+[ \t] {
+  /* Discard spaces and tabs */
 }
 
 [^ \t\n]*\\[^\t\n]* {

@@ -154,6 +154,8 @@ void Command::execute() {
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(1);
+	  }else{
+	    printf("help me jesus!!");
 	  }
 	}
 	

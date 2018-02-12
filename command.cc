@@ -97,6 +97,7 @@ void Command::execute() {
 
     int tmpin=dup(0);
     int tmpout=dup(1);
+    int tmperr=dup(2);
 //set the initial input
     int fdin;
     if (_inFile) {

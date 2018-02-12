@@ -62,7 +62,7 @@ void Command::clear() {
 }
 
 void Command::print() {
-    printf("\n\n");
+  /*printf("\n\n");
     printf("              COMMAND TABLE                \n");
     printf("\n");
     printf("  #   Simple Commands\n");
@@ -83,7 +83,7 @@ void Command::print() {
             _inFile?_inFile->c_str():"default",
             _errFile?_errFile->c_str():"default",
             _background?"YES":"NO");
-    printf( "\n\n" );
+	    printf( "\n\n" );*/
 }
 
 void Command::execute() {

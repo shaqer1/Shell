@@ -117,16 +117,16 @@ void Command::execute() {
 	    dup2( defaulterr, 2);
 	  }
 	  if(ret == 0){
-	    //char *argv[_simpleCommands[i]->_arguments.size() + 1];
-	    //int j =0;
+	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
+	    int j =0;
 		close( defaultin );
 		close( defaultout );
 		close( defaulterr );
-		/*for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
-	      argv[j++] =  _simpleCommands[i]->_arguments[k]->c_str();
-	      }*/
-		//argv[j] = NULL;
-		execvp(_simpleCommands[i]->_arguments[0]->c_str(), _simpleCommands[i]->_arguments);
+	      for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
+		argv[j++] =  _simpleCommands[i]->_arguments[k]->c_str();
+	      }
+		argv[j] = NULL;
+		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
 	    exit(1);
 	  }else if(ret < 0){
 	    perror("fork");

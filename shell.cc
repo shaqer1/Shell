@@ -1,11 +1,11 @@
 #include <cstdio>
-#include <unistd.h>
+
 #include "shell.hh"
 
 int yyparse(void);
 
 void Shell::prompt() {
-  if(isatty(0)) {
+  /*if(isatty(0)) {
     if (getenv("PROMPT")) {
       printf("%s>", getenv("PROMPT"));
     }
@@ -13,9 +13,9 @@ void Shell::prompt() {
       printf("myshell>");
     }
     fflush(stdout);
-  }/*
+  }*/
   printf("myshell>");
-  fflush(stdout);*/
+  fflush(stdout);
 }
 
 int main() {

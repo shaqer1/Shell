@@ -111,25 +111,40 @@ background_optional:
  ;
 io_modifier:
   GREAT WORD {
+    if (Shell::_currentCommand._outFile != 0) {
+      Shell::_currentCommand._ambiguity = 1;
+    }
     //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._append = 0;
   }
   | GREATGREAT WORD{
+    if (Shell::_currentCommand._outFile != 0) {
+      Shell::_currentCommand._ambiguity = 1;
+    }
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._append = 1;    
   }
   | GREATGREATAMPERSAND WORD{
+    if (Shell::_currentCommand._outFile != 0) {
+      Shell::_currentCommand._ambiguity = 1;
+    }
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._errFile = $2;
     Shell::_currentCommand._append = 1;
   }
   | GREATAMPERSAND WORD{
+    if (Shell::_currentCommand._outFile != 0) {
+      Shell::_currentCommand._ambiguity = 1;
+    }
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._errFile = $2;  
     Shell::_currentCommand._append = 0;  
   }
   | LESS WORD{
+    if (Shell::_currentCommand._inFile != 0) {
+      Shell::_currentCommand._ambiguity = 1;
+    }
     Shell::_currentCommand._inFile = $2;
     Shell::_currentCommand._append = 0;
   }

@@ -11,6 +11,7 @@ struct Command {
   std::string * _inFile;
   std::string * _errFile;
   int _append;
+  int _ambiguity;
   bool _background;
 
   Command();

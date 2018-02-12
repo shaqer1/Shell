@@ -118,7 +118,7 @@ io_modifier:
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._append = 0;
   }
-  | TWOGREAT Word{
+  | TWOGREAT WORD{
     if (Shell::_currentCommand._outFile != 0) {
       Shell::_currentCommand._ambiguity = 1;
     }

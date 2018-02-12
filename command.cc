@@ -149,7 +149,7 @@ void Command::execute() {
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    size_t k;
 	      for(k =0; k < _simpleCommands[i]->_arguments.size(); k++){
-		*argv[k] =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
+		argv[k] =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[k] = NULL;
 		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);

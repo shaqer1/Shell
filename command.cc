@@ -147,7 +147,8 @@ void Command::execute() {
 	  if(ret == 0){
 	    //printf("Yass jesus %d", ret);
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
-	      for(size_t k =0; k < _simpleCommands[i]->_arguments.size(); k++){
+	    size_t k;
+	      for(k =0; k < _simpleCommands[i]->_arguments.size(); k++){
 		*argv =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[k] = NULL;

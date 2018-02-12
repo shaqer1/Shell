@@ -108,7 +108,7 @@ void Command::execute() {
 	  //set up io
 	  int fin, fout,ferror;
 	  if (_inFile){
-	    fin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+	    fin = open(_inFile->c_str(), O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
 	  }
 	}
     // and call exec

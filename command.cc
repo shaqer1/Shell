@@ -94,11 +94,10 @@ void Command::execute() {
         Shell::prompt();
         return;
     }
-
-    perror("temp");
     
     if (_ambiguity) {
       perror("Ambiguous output redirect.\n");
+      exit(1);
     }
 
     int tmpin=dup(0);

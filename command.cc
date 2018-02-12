@@ -117,7 +117,7 @@ void Command::execute() {
 	    dup2( defaulterr, 2);
 	  }
 	  if(ret == 0){
-	    const char *argv[_simpleCommands[i]->_arguments.size() + 1];
+	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    int j =0;
 		close( defaultin );
 		close( defaultout );

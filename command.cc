@@ -102,6 +102,9 @@ void Command::execute() {
 	for (uint i = 0; i < _simpleCommands.size(); i++) {
 	  ret = fork();
 		//redirect input
+	  if(ret < 0){
+	    printf("FUCK!!!!!!!!!!!!!");
+	  }
 	}
     // and call exec
 

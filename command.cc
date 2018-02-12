@@ -106,7 +106,7 @@ void Command::execute() {
       fdin=dup(tmpin);
     }
     int ret;
-    int fdout;
+    int fdout,fderr;
     // Print contents of Command data structure
     //print();
 
@@ -131,10 +131,10 @@ void Command::execute() {
 	    }
 	    if (_errFile) {
 	      if (_append) {
-		fderr = open(_errFile, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+		fderr = open(_errFile->c_str(), O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
 	      }
 	      else {
-		fderr = open(_errFile, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+		fderr = open(_errFile->c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
 	      }
 	    }
 	    else {

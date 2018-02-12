@@ -94,7 +94,7 @@ argument_list argument
 
 argument:
   WORD {
-    printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
+    //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
     Command::_currentSimpleCommand->insertArgument( $1 );\
   }
   ;
@@ -111,7 +111,7 @@ background_optional:
  ;
 io_modifier:
   GREAT WORD {
-    printf("   Yacc: insert output \"%s\"\n", $2->c_str());
+    //printf("   Yacc: insert output \"%s\"\n", $2->c_str());
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._append = 0;
   }

@@ -132,10 +132,10 @@ void Command::execute() {
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(2);
-	  }else{
-	    waitpid(ret,NULL,0);
+	  }
+	  if(!_background){
+	    waitpid(ret, NULL);
 	    printf("FUCK");
-	    exit(0);
 	  }
 	}
     // and call exec

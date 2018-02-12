@@ -5,8 +5,17 @@
 int yyparse(void);
 
 void Shell::prompt() {
+  if(isatty(0)) {
+    if (getenv("PROMPT")) {
+      printf("%s>", getenv("PROMPT"));
+    }
+    else {
+      printf("myshell>");
+    }
+    fflush(stdout);
+  }/*
   printf("myshell>");
-  fflush(stdout);
+  fflush(stdout);*/
 }
 
 int main() {

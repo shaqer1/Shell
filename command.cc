@@ -129,6 +129,20 @@ void Command::execute() {
 	      // Use default output
 	      fdout=dup(tmpout);
 	    }
+	    if (_errFile) {
+	      if (_append) {
+		fderr = open(_errFile, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+	      }
+	      else {
+		fderr = open(_errFile, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+	      }
+	    }
+	    else {
+	      //use default error
+	      fderr = dup(tmperr);
+	    }
+	    dup2(fderr, 2);
+	    close(fderr);
 	  }else {
 	    // Not last
 	    //simple command

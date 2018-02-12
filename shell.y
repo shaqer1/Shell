@@ -47,7 +47,7 @@ goal:
   ;
 command_line:
   pipe_list io_modifier_list background_optional NEWLINE {
-		printf("   Yacc: Execute command\n"); 
+    //printf("   Yacc: Execute command\n"); 
 		Shell::_currentCommand.execute();
 	}
   | NEWLINE
@@ -81,7 +81,7 @@ command_and_args:
 
 command_word:
   WORD {
-    printf("   Yacc: insert command \"%s\"\n", $1->c_str());
+    //printf("   Yacc: insert command \"%s\"\n", $1->c_str());
     Command::_currentSimpleCommand = new SimpleCommand();
     Command::_currentSimpleCommand->insertArgument( $1 );
   }

@@ -65,7 +65,10 @@ void myunputc(int c) {
 
 "&" 	{
 		return AMPERSAND;
-	}
+}
+"2>"{
+return TWOGREAT;
+}
 [ \t] {
   /* Discard spaces and tabs */
 }

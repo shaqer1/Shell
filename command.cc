@@ -100,7 +100,7 @@ void Command::execute() {
     // For every simple command fork a new process
     int fdin;
 	if (_inFile) {
-		open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+		fdin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
 	}
 	else {
 		//use default input

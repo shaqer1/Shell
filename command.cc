@@ -148,8 +148,8 @@ void Command::execute() {
 	    //printf("Yass jesus %d", ret);
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    int j =0;
-	      for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
-		*argv =   _simpleCommands[i]->_arguments[k]->c_str();
+	      for(uint k =0; i < _simpleCommands[i]->_arguments.size() - 1; k++){
+		*argv =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[j] = NULL;
 		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);

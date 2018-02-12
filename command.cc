@@ -98,7 +98,7 @@ void Command::execute() {
 
     // Add execution here
     // For every simple command fork a new process
-	for (int i = 0; i < _simpleCommands.size(); i++) {
+	for (uint i = 0; i < _simpleCommands.size(); i++) {
 	  ret = fork();
 		//redirect input
 	}

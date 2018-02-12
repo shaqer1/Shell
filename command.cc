@@ -123,7 +123,7 @@ void Command::execute() {
 		close( defaultout );
 		close( defaulterr );
 	    for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
-	      argv[j++] =  _simpleCommands[i]->_arguments[k]->c_str();
+	      argv[j++] =  (const char *)_simpleCommands[i]->_arguments[k]->c_str();
 	    }
 	    argv[j] = NULL;
 	    execvp(argv[0], argv);

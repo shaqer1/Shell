@@ -113,20 +113,25 @@ io_modifier:
   GREAT WORD {
     printf("   Yacc: insert output \"%s\"\n", $2->c_str());
     Shell::_currentCommand._outFile = $2;
+    Shell::_currentCommand._append = 0;
   }
   | GREATGREAT WORD{
     Shell::_currentCommand._outFile = $2;
+    Shell::_currentCommand._append = 1;    
   }
   | GREATGREATAMPERSAND WORD{
     Shell::_currentCommand._outFile = $2;
     Shell::_currentCommand._errFile = $2;
+    Shell::_currentCommand._append = 1;
   }
   | GREATAMPERSAND WORD{
     Shell::_currentCommand._outFile = $2;
-    Shell::_currentCommand._errFile = $2;    
+    Shell::_currentCommand._errFile = $2;  
+    Shell::_currentCommand._append = 0;  
   }
   | LESS WORD{
     Shell::_currentCommand._inFile = $2;
+    Shell::_currentCommand._append = 0;
   }
   ;
 

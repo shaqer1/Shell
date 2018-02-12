@@ -95,47 +95,74 @@ void Command::execute() {
         return;
     }
 
-    //int defaultin = dup( 0 );
-    //int defaultout = dup( 1 );
-    //int defaulterr = dup( 2 );
+    int tmpin=dup(0);
+    int tmpout=dup(1);
+//set the initial input
+    int fdin;
+    if (_inFile) {
+      fdin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+    } else {
+      // Use default input
+      fdin=dup(tmpin);
+    }
+    int ret;
+    int fdout;
     // Print contents of Command data structure
     //print();
 
     // Add execution here
     // For every simple command fork a new process
 	for (uint i = 0; i < _simpleCommands.size(); i++) {
-	  
-	  int ret = fork();
-		//redirect input
-	  /*if(_inFile){
-	    dup2( defaultin, 0 );
-	  }
-	  if(__outFile){
-	    dup2( defaultout, 1);
-	  }
-	  if(_errFile){
-	    dup2( defaulterr, 2);
-	    }*/
+	  dup2(fdin, 0);
+	  close(fdin);
+	  if (i == _simpleCommands.size()-1){
+	    // Last simple command
+	    if(_outFile){
+	      if(_append) {//does not work here
+		fdout = open(_outFile, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+	      }
+	      else {//works here// work for >
+		fdout = open(_outFile, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+	      }
+	    }
+	    else {
+	      // Use default output
+	      fdout=dup(tmpout);
+	    }
+	  }else {
+	    // Not last
+	    //simple command
+	    //create pipe
+	    int fdpipe[2];
+	    pipe(fdpipe);
+	    fdout=fdpipe[1];
+	    fdin=fdpipe[0];
+	  }// if/else
+	  // Redirect output
+	  dup2(fdout,1);
+	  close(fdout);
+	  ret = fork();
 	  if(ret == 0){
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    int j =0;
-	    //close( defaultin );
-	    //close( defaultout );
-	    //close( defaulterr );
 	      for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
 		*argv =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[j] = NULL;
-		printf("HI");
 		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
 		exit(1);
 	  }else if(ret < 0){
 	    perror("fork");
-	    exit(2);
+	    exit(1);
 	  }
-	  if(!_background){
-	    waitpid(ret,NULL,0);
-	  }
+	}
+	
+	dup2(tmpin,0);
+        dup2(tmpout,1);
+	close(tmpin);
+        close(tmpout);
+	if(!_background){
+	  waitpid(ret,NULL,0);
 	}
     // and call exec
 

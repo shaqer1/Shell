@@ -100,7 +100,7 @@ void Command::execute() {
 //set the initial input
     int fdin;
     if (_inFile) {
-      fdin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+      fdin = open(_inFile->c_str(), O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
     } else {
       // Use default input
       fdin=dup(tmpin);
@@ -119,10 +119,10 @@ void Command::execute() {
 	    // Last simple command
 	    if(_outFile){
 	      if(_append) {//does not work here
-		fdout = open(_outFile, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+		fdout = open(_outFile->c_str(), O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
 	      }
 	      else {//works here// work for >
-		fdout = open(_outFile, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+		fdout = open(_outFile->c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
 	      }
 	    }
 	    else {

@@ -10,9 +10,9 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <fstream> 
-#include <iostream>
 
+#include <iostream>
+#include <sys/stat.h> 
 #include "command.hh"
 #include "shell.hh"
 

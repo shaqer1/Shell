@@ -99,7 +99,7 @@ void Command::execute() {
 	int defaultout = dup( 1 );
 	int defaulterr = dup( 2 );
     // Print contents of Command data structure
-    //print();
+    print();
 
     // Add execution here
     // For every simple command fork a new process

@@ -143,7 +143,7 @@ void Command::execute() {
 	  close(fdout);
 	  // ret = fork();
 	  ret = fork();
-	  printf("%d",ret);
+	  //printf("%d",ret);
 	  if(ret == 0){
 	    //printf("Yass jesus %d", ret);
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];

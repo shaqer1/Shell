@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <iostream>
+#include <sys/types.h>
+#include <wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "command.hh"
@@ -93,22 +95,45 @@ void Command::execute() {
         return;
     }
 
+    	int defaultin = dup( 0 );
+	int defaultout = dup( 1 );
+	int defaulterr = dup( 2 );
     // Print contents of Command data structure
     //print();
 
     // Add execution here
     // For every simple command fork a new process
-    int ret = 0;
 	for (uint i = 0; i < _simpleCommands.size(); i++) {
-	  ret = fork();
+	  
+	  int ret = fork();
 		//redirect input
-	  if(ret < 0){
-	    printf("FUCK!!!!!!!!!!!!!");
+	  if(_inFile){
+	    dup2( defaultin, 0 );
 	  }
-	  //set up io
-	  int fin, fout,ferror;
-	  if (_inFile){
-	    fin = open(_inFile->c_str(), O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+	  if(__outFile){
+	    dup2( defaultout, 1);
+	  }
+	  if(_errFile){
+	    dup2( defaulterr, 2);
+	  }
+	  if(ret == 0){
+	    char *argv[_simpleCommands[i]._arguments.size() + 1];
+	    int j =0;
+		close( defaultin );
+		close( defaultout );
+		close( defaulterr );
+	    for(uint k =0; i < _simpleCommands[i]._arguments.size(); k++){
+	      argv[j++] =  _simpleCommands[i]._arguments[k];
+	    }
+	    argv[j] = NULL;
+	    execvp(argv[0], argv);
+	    exit(1);
+	  }else if(ret < 0){
+	    perror("fork");
+	    exit(2);
+	  }else{
+	    waitpid(ret,NULL,0);
+	    exit(0);
 	  }
 	}
     // and call exec

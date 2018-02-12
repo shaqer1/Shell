@@ -105,7 +105,7 @@ void Command::execute() {
       // Use default input
       fdin=dup(tmpin);
     }
-    int ret = fork();
+    int ret;
     printf("%d",ret);
     int fdout;
     // Print contents of Command data structure
@@ -113,7 +113,8 @@ void Command::execute() {
 
     // Add execution here
     // For every simple command fork a new process
-	for (uint i = 0; i < _simpleCommands.size(); i++) {
+	for (uint i = 0; i < _simpleCommands.size(); i++){
+	  ret = fork();
 	  dup2(fdin, 0);
 	  close(fdin);
 	  if (i == _simpleCommands.size()-1){
@@ -142,8 +143,7 @@ void Command::execute() {
 	  // Redirect output
 	  dup2(fdout,1);
 	  close(fdout);
-	  ret = fork();
-	  ret = fork();
+	  // ret = fork();
 	  printf("%d",ret);
 	  if(ret == 0){
 	    //printf("Yass jesus %d", ret);

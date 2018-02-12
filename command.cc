@@ -134,9 +134,7 @@ void Command::execute() {
 	    exit(2);
 	  }
 	  if(!_background){
-	    waitpid(ret,NULL,0);
-	    printf("FUCK");
-	  }
+	    waitpid(ret,NULL,0);	  }
 	}
     // and call exec
 

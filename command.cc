@@ -113,8 +113,6 @@ void Command::execute() {
     // Add execution here
     // For every simple command fork a new process
 	for (uint i = 0; i < _simpleCommands.size(); i++){
-	  ret = fork();
-    printf("%d",ret);
 	  dup2(fdin, 0);
 	  close(fdin);
 	  if (i == _simpleCommands.size()-1){
@@ -144,7 +142,9 @@ void Command::execute() {
 	  dup2(fdout,1);
 	  close(fdout);
 	  // ret = fork();
-	  if(ret == 0){
+	  ret = fork();
+	  //printf("%d",ret);
+	  if(ret >= 0){
 	    //printf("Yass jesus %d", ret);
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    int j =0;

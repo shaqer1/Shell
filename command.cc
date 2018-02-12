@@ -97,7 +97,20 @@ void Command::execute() {
 
     // Add execution here
     // For every simple command fork a new process
+    int fdin;
+	if (_inFile) {
+		fdin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
+	}
+	else {
+		//use default input
+		fdin = dup(tmpin);
+	}
     // Setup i/o redirection
+	for (i = 0; i < _simpleCommands.size(); i++) {
+		//redirect input
+		dup2(fdin, 0);
+		close(fdin);
+	}
     // and call exec
 
     // Clear to prepare for next command

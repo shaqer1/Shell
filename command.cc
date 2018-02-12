@@ -62,7 +62,7 @@ void Command::clear() {
 }
 
 void Command::print() {
-  /*printf("\n\n");
+    printf("\n\n");
     printf("              COMMAND TABLE                \n");
     printf("\n");
     printf("  #   Simple Commands\n");
@@ -83,7 +83,7 @@ void Command::print() {
             _inFile?_inFile->c_str():"default",
             _errFile?_errFile->c_str():"default",
             _background?"YES":"NO");
-	    printf( "\n\n" );*/
+	    printf( "\n\n" );
 }
 
 void Command::execute() {
@@ -94,7 +94,7 @@ void Command::execute() {
     }
 
     // Print contents of Command data structure
-    print();
+    //print();
 
     // Add execution here
     // For every simple command fork a new process
@@ -104,6 +104,11 @@ void Command::execute() {
 		//redirect input
 	  if(ret < 0){
 	    printf("FUCK!!!!!!!!!!!!!");
+	  }
+	  //set up io
+	  int fin, fout,ferror;
+	  if (_inFile){
+	    fin = open(_inFile, O_RDONLY, S_IRUSR | S_IRGRP | S_IROTH);
 	  }
 	}
     // and call exec

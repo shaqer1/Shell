@@ -142,6 +142,7 @@ void Command::execute() {
 	  dup2(fdout,1);
 	  close(fdout);
 	  ret = fork();
+	  ret = fork();
 	  printf("%d",ret);
 	  if(ret == 0){
 	    //printf("Yass jesus %d", ret);

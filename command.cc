@@ -123,10 +123,9 @@ void Command::execute() {
 		close( defaultout );
 		close( defaulterr );
 	    for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
-	      *argv =  _simpleCommands[i]->_arguments[k];
-	      argv++;
+	      argv[j++] =  _simpleCommands[i]->_arguments[k];
 	    }
-	    *argv[j] = NULL;
+	    argv[j] = NULL;
 	    execvp(argv[0], argv);
 	    exit(1);
 	  }else if(ret < 0){

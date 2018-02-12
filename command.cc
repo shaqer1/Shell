@@ -97,7 +97,7 @@ void Command::execute() {
 
     
     if (_ambiguity) {
-      perror("Ambiguous output redirect.");
+      perror("Ambiguous output redirect.\n");
     }
 
     int tmpin=dup(0);

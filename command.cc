@@ -126,13 +126,15 @@ void Command::execute() {
 		*argv =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[j] = NULL;
+		printf("HI");
 		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
-		//exit(1);
+		exit(1);
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(2);
 	  }else{
 	    waitpid(ret,NULL,0);
+	    printf("FUCK");
 	    exit(0);
 	  }
 	}

@@ -95,6 +95,7 @@ void Command::execute() {
         return;
     }
 
+    perror("temp");
     
     if (_ambiguity) {
       perror("Ambiguous output redirect.\n");

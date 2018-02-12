@@ -118,7 +118,7 @@ void Command::execute() {
 	  }
 	  if(ret == 0){
 	    //char *argv[_simpleCommands[i]->_arguments.size() + 1];
-	    int j =0;
+	    //int j =0;
 		close( defaultin );
 		close( defaultout );
 		close( defaulterr );
@@ -126,7 +126,7 @@ void Command::execute() {
 	      argv[j++] =  _simpleCommands[i]->_arguments[k]->c_str();
 	      }*/
 		//argv[j] = NULL;
-	    execvp(_simpleCommands[i]->_arguments[0], _simpleCommands[i]->_arguments);
+		execvp(_simpleCommands[i]->_arguments[0]->c_str(), _simpleCommands[i]->_arguments);
 	    exit(1);
 	  }else if(ret < 0){
 	    perror("fork");

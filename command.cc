@@ -95,9 +95,9 @@ void Command::execute() {
         return;
     }
 
-    	int defaultin = dup( 0 );
-	int defaultout = dup( 1 );
-	int defaulterr = dup( 2 );
+    //int defaultin = dup( 0 );
+    //int defaultout = dup( 1 );
+    //int defaulterr = dup( 2 );
     // Print contents of Command data structure
     //print();
 
@@ -107,21 +107,21 @@ void Command::execute() {
 	  
 	  int ret = fork();
 		//redirect input
-	  if(_inFile){
+	  /*if(_inFile){
 	    dup2( defaultin, 0 );
 	  }
-	  /*if(__outFile){
+	  if(__outFile){
 	    dup2( defaultout, 1);
-	  }*/
+	  }
 	  if(_errFile){
 	    dup2( defaulterr, 2);
-	  }
+	    }*/
 	  if(ret == 0){
 	    char *argv[_simpleCommands[i]->_arguments.size() + 1];
 	    int j =0;
-		close( defaultin );
-		close( defaultout );
-		close( defaulterr );
+	    //close( defaultin );
+	    //close( defaultout );
+	    //close( defaulterr );
 	      for(uint k =0; i < _simpleCommands[i]->_arguments.size(); k++){
 		*argv =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
@@ -134,7 +134,8 @@ void Command::execute() {
 	    exit(2);
 	  }
 	  if(!_background){
-	    waitpid(ret,NULL,0);	  }
+	    waitpid(ret,NULL,0);
+	  }
 	}
     // and call exec
 

@@ -105,7 +105,8 @@ void Command::execute() {
       // Use default input
       fdin=dup(tmpin);
     }
-    int ret;
+    int ret = fork();
+    printf("%d",ret);
     int fdout;
     // Print contents of Command data structure
     //print();

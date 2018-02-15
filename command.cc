@@ -40,19 +40,6 @@ Command::Command() {
 	exit(2);
     }
 
-    for (;;) {
-		
-		char s[ 20 ];
-		printf( "prompt>");
-		fflush( stdout );
-		fgets( s, 20, stdin );
-
-		if ( !strcmp( s, "exit\n" ) ) {
-			printf( "Bye!\n");
-			exit( 1 );
-		}
-    }
-
     _outFile = NULL;
     _inFile = NULL;
     _errFile = NULL;
@@ -116,7 +103,20 @@ void Command::print() {
             _background?"YES":"NO");
 	    printf( "\n\n" );
 }
+/*
+for (;;) {
+		
+		char s[ 20 ];
+		printf( "prompt>");
+		fflush( stdout );
+		fgets( s, 20, stdin );
 
+		if ( !strcmp( s, "exit\n" ) ) {
+			printf( "Bye!\n");
+			exit( 1 );
+		}
+    }
+ */
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -128,6 +128,11 @@ void Command::execute() {
       // errno = 0;
       printf("Ambiguous output redirect.\n");
     }
+    if (!strcmp(_simpleCommands[0]->_arguments[0], "exit")) {
+		printf("\nGood Bye!!\n\n");
+		tty_normal_mode();
+		exit(0);
+	}
 
     int tmpin=dup(0);
     int tmpout=dup(1);

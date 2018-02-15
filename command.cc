@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <iostream>
+#include <signal.h>
 #include <sys/types.h>
 #include <wait.h>
 #include <sys/stat.h>
@@ -23,6 +24,15 @@
 Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();
+    struct sigaction sa;
+    sa.sa_handler = disp;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+
+    if(sigaction(SIGINT, &sa, NULL)){
+        perror("sigaction");
+        exit(2);
+    }
 
     _outFile = NULL;
     _inFile = NULL;

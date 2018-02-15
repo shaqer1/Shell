@@ -24,7 +24,9 @@
 
 extern "C" void disp( int sig )
 {
-	fprintf( stderr, "\nsig:%d      Ouch!\n", sig);
+  putchar('\n');
+	Shell::_currentCommand.clear();
+	Shell::_currentCommand.prompt();
 }
 
 Command::Command() {
@@ -122,10 +124,11 @@ void Command::execute() {
     struct sigaction sa;
     sa.sa_handler = disp;
     sigemptyset(&sa.sa_mask);
-    //sa.sa_flags = 0;
+    sa.sa_flags = SA_RESTART;
 
     if(sigaction(SIGINT, &sa, NULL)){
         perror("sigaction");
+	exit(-1);
     }
     if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit")) {
 		printf("\nGood Bye!!\n\n");

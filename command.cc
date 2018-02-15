@@ -121,8 +121,8 @@ void Command::execute() {
     }
     struct sigaction sa;
     sa.sa_handler = disp;
-    //sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+    //sa.sa_flags = 0;
 
     if(sigaction(SIGINT, &sa, NULL)){
         perror("sigaction");

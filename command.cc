@@ -127,16 +127,7 @@ void Command::execute() {
       // errno = 0;
       printf("Ambiguous output redirect.\n");
     }
-    struct sigaction sa;
-    sa.sa_handler = disp;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
-
-    if(sigaction(SIGINT, &sa, NULL)){
-        perror("sigaction");
-	exit(2);
-    }
-
+    
     if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit")) {
       printf("\nGood Bye!!\n\n");
       exit(0);
@@ -216,17 +207,6 @@ void Command::execute() {
 		argv[k] = NULL;
 		execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
 		exit(1);
-		
-    struct sigaction sa2;
-    sa2.sa_handler = killZombies;
-    sigemptyset(&sa2.sa_mask);
-    sa2.sa_flags = SA_RESTART;
-    if (sigaction(SIGCHLD, &sa2, NULL)) {
-      perror("sigactionZombie");
-      exit(-1);
-    }
-    
-
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(1);

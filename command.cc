@@ -36,7 +36,23 @@ Command::Command() {
 
     if(sigaction(SIGINT, &sa, NULL)){
         perror("sigaction");
+	exit(2);
     }
+
+    for (;;) {
+		
+		char s[ 20 ];
+		printf( "prompt>");
+		fflush( stdout );
+		fgets( s, 20, stdin );
+
+		if ( !strcmp( s, "exit\n" ) ) {
+			printf( "Bye!\n");
+			exit( 1 );
+		}
+    }
+
+	return 0;
 
     _outFile = NULL;
     _inFile = NULL;

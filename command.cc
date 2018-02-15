@@ -128,7 +128,7 @@ void Command::execute() {
 
     if(sigaction(SIGINT, &sa, NULL)){
         perror("sigaction");
-	exit(-1);
+	exit(2);
     }
     if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit")) {
 		printf("\nGood Bye!!\n\n");

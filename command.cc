@@ -21,6 +21,11 @@
 #include "shell.hh"
 #include <stdlib.h>
 
+extern "C" void disp( int sig )
+{
+	fprintf( stderr, "\nsig:%d      Ouch!\n", sig);
+}
+
 Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();

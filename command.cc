@@ -22,11 +22,6 @@
 #include "shell.hh"
 #include <stdlib.h>
 
-extern "C" void disp( int sig )
-{
-	fprintf( stderr, "\nsig:%d      Ouch!\n", sig);
-}
-
 Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();
@@ -130,7 +125,6 @@ void Command::execute() {
     }
     if (!strcmp(_simpleCommands[0]->_arguments[0], "exit")) {
 		printf("\nGood Bye!!\n\n");
-		tty_normal_mode();
 		exit(0);
 	}
 

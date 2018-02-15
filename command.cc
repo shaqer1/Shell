@@ -113,8 +113,8 @@ for (;;) {
 		}
     }
  */
-extern "C" void killZombies(){
-  while(waitpid(-1, NULL, WNOHANG) > 0);
+extern "C" void killZombies(int sig){
+  while(waitpid(-1, NULL, WNOHANG) >0);
 }
 void Command::execute() {
     // Don't do anything if there are no simple commands

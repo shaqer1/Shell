@@ -25,12 +25,7 @@
 #include "shell.hh"
 #include <stdlib.h>
 
-extern "C" void disp( int sig )
-{
-  putchar('\n');
-	Shell::_currentCommand.clear();
-	Shell::prompt();
-}
+
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -113,9 +108,6 @@ for (;;) {
 		}
     }
  */
-extern "C" void killZombies(int sig){
-  while(waitpid(-1, NULL, WNOHANG) >0);
-}
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {

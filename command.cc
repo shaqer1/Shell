@@ -31,8 +31,8 @@ Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();
     struct sigaction sa;
-    //sa.sa_handler = disp;
-    sigemptyset(&sa.sa_mask);
+    sa.sa_handler = disp;
+    //sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
 
     if(sigaction(SIGINT, &sa, NULL)){

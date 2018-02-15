@@ -17,6 +17,9 @@
 #include <sys/types.h>
 #include <wait.h>
 #include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include "command.hh"
 #include "shell.hh"
@@ -110,6 +113,9 @@ for (;;) {
 		}
     }
  */
+extern "C" void killZombies(int sig){
+  wait3(-1, NULL, WNOHANG);
+}
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -130,10 +136,20 @@ void Command::execute() {
         perror("sigaction");
 	exit(2);
     }
+
+    struct sigaction sa2;
+    sa2.sa_handler = killZombies;
+    sigemptyset(&sa2.sa_mask);
+    sa2.sa_flags = SA_RESTART;
+    if (sigaction(SIGCHLD, &sa2, NULL)) {
+      perror("sigactionZombie");
+      exit(-1);
+    }
+    
     if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit")) {
-		printf("\nGood Bye!!\n\n");
-		exit(0);
-	}
+      printf("\nGood Bye!!\n\n");
+      exit(0);
+    }
 
     int tmpin=dup(0);
     int tmpout=dup(1);

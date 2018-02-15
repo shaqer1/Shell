@@ -26,7 +26,7 @@ extern "C" void disp( int sig )
 {
   putchar('\n');
 	Shell::_currentCommand.clear();
-	Shell::_currentCommand.prompt();
+	Shell::prompt();
 }
 
 Command::Command() {

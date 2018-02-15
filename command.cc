@@ -123,7 +123,7 @@ void Command::execute() {
       // errno = 0;
       printf("Ambiguous output redirect.\n");
     }
-    if (!strcmp(_simpleCommands[0]->_arguments[0], "exit")) {
+    if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit")) {
 		printf("\nGood Bye!!\n\n");
 		exit(0);
 	}

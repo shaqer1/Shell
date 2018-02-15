@@ -36,7 +36,6 @@ Command::Command() {
 
     if(sigaction(SIGINT, &sa, NULL)){
         perror("sigaction");
-        exit(2);
     }
 
     _outFile = NULL;

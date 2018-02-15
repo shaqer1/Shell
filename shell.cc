@@ -1,8 +1,24 @@
 #include <cstdio>
 #include <unistd.h>
 #include "shell.hh"
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+
 
 int yyparse(void);
+
+extern "C" void disp( int sig ) {
+  putchar('\n');
+  Shell::_currentCommand.clear();
+  Shell::prompt();
+}
+
+extern "C" void killZombies(int sig){
+  while(waitpid(-1, NULL, WNOHANG) >0);
+}
 
 void Shell::prompt() {
   if(isatty(0)) {

@@ -113,7 +113,7 @@ for (;;) {
 		}
     }
  */
-extern "C" void killZombies(int sig){
+extern "C" void killZombies(){
   while(waitpid(-1, NULL, WNOHANG) > 0);
 }
 void Command::execute() {

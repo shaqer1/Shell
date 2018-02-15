@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <signal.h>
+#include <string.h>
 #include <sys/types.h>
 #include <wait.h>
 #include <sys/stat.h>

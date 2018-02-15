@@ -53,8 +53,6 @@ Command::Command() {
 		}
     }
 
-	return 0;
-
     _outFile = NULL;
     _inFile = NULL;
     _errFile = NULL;

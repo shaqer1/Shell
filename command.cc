@@ -70,7 +70,7 @@ void Command::clear() {
     _background = false;
 }
 
-void Command::print() {
+void Command::print() {  
     printf("\n\n");
     printf("              COMMAND TABLE                \n");
     printf("\n");

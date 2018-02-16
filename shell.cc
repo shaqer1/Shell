@@ -53,8 +53,8 @@ int main() {
     exit(-1);
   }
 
-  yyparse();
   Shell::prompt();
+  yyparse();
 }
 
 Command Shell::_currentCommand;

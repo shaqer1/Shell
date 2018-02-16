@@ -47,7 +47,8 @@ int main() {
   sa2.sa_handler = killZombies;
   sigemptyset(&sa2.sa_mask);
   sa2.sa_flags = SA_RESTART;
-  if (sigaction(SIGCHLD, &sa2, NULL)) {
+  int error =0;
+  if ((error = sigaction(SIGCHLD, &sa2, NULL)) {
     perror("sigactionZombie");
     exit(-1);
   }

@@ -209,7 +209,7 @@ void Command::execute() {
                 printf("Usage: setenv arg1 arg2 \n");
                 continue;
             }
-            setenv(_simpleCommands[i]->_arguments[1]->c_str(), _simpleCommands[i]->_arguments[2], 1); //the one is for overwriting
+            setenv(_simpleCommands[i]->_arguments[1]->c_str(), _simpleCommands[i]->_arguments[2]->c_str(), 1); //the one is for overwriting
             continue;
         }
         //implement unsetting an evironment variable

@@ -49,7 +49,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       i++;
     }
     argument->assign(complete);
-    _arguments.push_back((char *) argument->c_str());
+    _arguments.push_back(argument);
   } else if (argument->at(0) == '~' && argument->size() == 1) {
     _arguments.push_back(strdup(getenv("HOME")));
     //printf("%s\n", _arguments[ _numOfArguments ]);

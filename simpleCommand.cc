@@ -60,7 +60,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       }
       i++;
     }
-    argument = strdup(complete);
+    argument = (strdup(complete));
     _arguments.push_back(argument);
   }
 

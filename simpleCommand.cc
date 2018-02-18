@@ -27,7 +27,8 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       if (argument->at(i) == '$') {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i);
-        argument->assign(argument->substr(0,argument->find('{')) + varName + 
+        std::string var (getenv(varName))
+        argument->assign(argument->substr(0,argument->find('{')) + var + 
           argument->substr(argument->find("}" +1)));
       }
       i++;

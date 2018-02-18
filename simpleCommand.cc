@@ -52,16 +52,11 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   } else if (argument->at(0) == '~' && argument->size() == 1) {
     std::string s (strdup(getenv("HOME")));
     _arguments.push_back(s);
-    //printf("%s\n", _arguments[ _numOfArguments ]);
   }else if(argument->at(0) == '~') {
-    char * s = argument->substr(1)->c_str(); //get rid of ~
+    argument.assign(argument.substr("/homes/" + argument->substr(1))); //get rid of ~
     //printf("%s\n", s);
-    const char * homes = "/homes/";
-    std::string complete;
-    complete.append(homes);
-    complete.append(s);
     //printf("%s\n",complete);
-    _arguments.push_back(complete);
+    _arguments.push_back(argument);
   }else {
     _arguments.push_back(argument);
     //printf("%s\n", argument);

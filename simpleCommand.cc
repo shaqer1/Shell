@@ -22,7 +22,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
-    while (i <= argument->size()) {
+    while (i < argument->size()) {
       if (argument->at(i) == '$') {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));

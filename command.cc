@@ -203,10 +203,10 @@ void Command::execute() {
                 Shell::prompt();
                 return;
             }
-            yyin = myin;
+            /*yyin = myin;
             clear();
             fflush(stdout);
-            /*yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
+            yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
             yyparse();
             yypop_buffer_state();
             yyparse();

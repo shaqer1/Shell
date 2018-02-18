@@ -26,10 +26,10 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     int j = 0;
     while (argument->at(i) != '\0') {
       if (argument->at(i) == '$') {
-        i = argument.find('}');
-        std::string varName = argument.substr(argument.find('{') +1, i);
-        argument = argument.substr(0,argument.find('{')) + varName + 
-          argument.substr(argument.find("}" +1));
+        i = argument->find('}');
+        std::string varName = argument->substr(argument->find('{') +1, i);
+        argument = argument->substr(0,argument->find('{')) + varName + 
+          argument->substr(argument->find("}" +1));
 
         //printf("varname <= ");
         /*while (argument->at(i) != '}') {

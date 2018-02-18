@@ -226,7 +226,7 @@ void Command::execute() {
             if (error == -1) {
                 //printf("");
                 std::string s;
-                s.assign(("cd: " + (_simpleCommands[i]->_arguments[1])->c_str() + /*": No such file or directory \n"*/));
+                s.assign(("cd: " + (_simpleCommands[i]->_arguments[1]) + /*": No such file or directory \n"*/));
                 perror(s.c_str());
                 //error should go to error file
                 //perror(_simpleCommands[i]->_arguments[1]->c_str());

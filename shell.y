@@ -35,6 +35,7 @@
 #include <cstdio>
 #include "shell.hh"
 
+extern FILE * yyin;
 void yyerror(const char * s);
 int yylex();
 

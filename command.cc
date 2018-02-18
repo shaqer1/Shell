@@ -108,6 +108,7 @@ for (;;) {
 		}
     }
  */
+extern char ** environ;
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -187,6 +188,24 @@ void Command::execute() {
 	  dup2(fdout,1);
 	  close(fdout);
 
+      if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
+            FILE * myin = fopen(_simpleCommands[i]->_arguments[1], "r");
+            if (myin == NULL) {
+                clear();
+                prompt();
+                return;
+            }
+            yyin = myin;
+            clear();
+            fflush(stdout);
+            yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
+            yyparse();
+            yypop_buffer_state();
+            yyparse();
+            prompt();
+            return;
+        }
+
       if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "cd")){
             int error = 0;
             if (_simpleCommands[i]->_arguments.size() > 1) {
@@ -255,8 +274,6 @@ void Command::execute() {
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(1);
-	  }else{
-	    //printf("help me jesus!! %d", ret);
 	  }
 	}
 	

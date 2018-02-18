@@ -224,7 +224,7 @@ void Command::execute() {
                 chdir(getenv("HOME"));
             }
             if (error == -1) {
-                printf("myshell> cd: %s: No such file or directory \n", _simpleCommands[i]->_arguments[1]->c_str());
+                printf("cd: %s: No such file or directory \n", _simpleCommands[i]->_arguments[1]->c_str());
                 //error should go to error file
                 //perror(_simpleCommands[i]->_arguments[1]->c_str());
             }

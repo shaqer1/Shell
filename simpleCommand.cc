@@ -53,15 +53,15 @@ void SimpleCommand::insertArgument( std::string * argument ) {
           i++;
         }
         //printf("\n  others: %s\n", others);
-        complete.apped(others);
+        complete.append(others);
         j = 0;
         free(others);
         i--;
       }
       i++;
     }
-    argument = complete;
-    _arguments.push_back(argument->c_str());
+    argument = *complete;
+    _arguments.push_back((char *) argument->c_str());
   }
 
   //implement tilde expansion
@@ -70,12 +70,12 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     //printf("%s\n", _arguments[ _numOfArguments ]);
   }
   else if(argument->at(0) == '~') {
-    char * s = argument->substr (1)->c_str(); //get rid of ~
+    char * s = argument->substr(1)->c_str(); //get rid of ~
     //printf("%s\n", s);
     const char * homes = "/homes/";
-    char * complete = (char *) calloc((strlen(s) + 7), sizeof(char));
-    strcat(complete, homes);
-    strcat(complete, s);
+    std::string complete;
+    complete.append(homes);
+    complete.append(s);
     //printf("%s\n",complete);
     _arguments.push_back(complete);
   }

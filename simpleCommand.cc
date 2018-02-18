@@ -50,7 +50,8 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     argument->assign(complete);
     _arguments.push_back(argument);
   } else if (argument->at(0) == '~' && argument->size() == 1) {
-    _arguments.push_back(std::string s (strdup(getenv("HOME"))));
+    std::string s (strdup(getenv("HOME")));
+    _arguments.push_back(s);
     //printf("%s\n", _arguments[ _numOfArguments ]);
   }else if(argument->at(0) == '~') {
     char * s = argument->substr(1)->c_str(); //get rid of ~

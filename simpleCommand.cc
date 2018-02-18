@@ -19,7 +19,6 @@ SimpleCommand::~SimpleCommand() {
 void SimpleCommand::insertArgument( std::string * argument ) {
   // simply add the argument to the vector
   //implement env var expansion
-  std::string complete;
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
@@ -33,7 +32,6 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       }
       i++;
     }
-    argument->assign(complete);
     _arguments.push_back(argument);
   } else if (argument->at(0) == '~' && argument->size() == 1) {
     std::string s (strdup(getenv("HOME")));

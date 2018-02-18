@@ -20,7 +20,7 @@
 #include <sys/prctl.h>
 
 #include "read-line.c"
-#include "y.tab.h"
+#include "y.tab.c"
 
 
 static  void yyunput (int c,char *buf_ptr  );

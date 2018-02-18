@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include <sys/prctl.h>
 
-#include "read-line.h"
+#include "read-line.c"
 #include "y.tab.h"
 
 

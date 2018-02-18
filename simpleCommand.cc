@@ -29,7 +29,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));
         std::string var (getenv(varName.c_str()));
         argument->assign(argument->substr(0,argument->find('{')) + var + 
-          argument->substr(argument->find("}" +1)));
+          argument->substr(argument->find("}") +1));
       }
       i++;
     }

@@ -51,7 +51,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     _arguments.push_back(argument);
   } else if (argument->at(0) == '~' && argument->size() == 1) {
     std::string s (strdup(getenv("HOME")));
-    _arguments.push_back(*s);
+    _arguments.push_back(&s);
   }else if(argument->at(0) == '~') {
     argument->assign(argument->substr("/homes/" + argument->substr(1))); //get rid of ~
     //printf("%s\n", s);

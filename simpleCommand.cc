@@ -65,14 +65,10 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     }
     argument->assign(complete);
     _arguments.push_back((char *) argument->c_str());
-  }
-
-  //implement tilde expansion
-  else if (argument->at(0) == '~' && argument->size() == 1) {
+  } else if (argument->at(0) == '~' && argument->size() == 1) {
     _arguments.push_back(strdup(getenv("HOME")));
     //printf("%s\n", _arguments[ _numOfArguments ]);
-  }
-  else if(argument->at(0) == '~') {
+  }else if(argument->at(0) == '~') {
     char * s = argument->substr(1)->c_str(); //get rid of ~
     //printf("%s\n", s);
     const char * homes = "/homes/";
@@ -81,9 +77,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     complete.append(s);
     //printf("%s\n",complete);
     _arguments.push_back(complete);
-  }
-  //default without expansion
-  else {
+  }else {
     _arguments.push_back(argument);
     //printf("%s\n", argument);
   }

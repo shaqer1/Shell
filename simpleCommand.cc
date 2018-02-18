@@ -26,10 +26,13 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     int j = 0;
     while (argument->at(i) != '\0') {
       if (argument->at(i) == '$') {
-        char * varName = (char *)calloc(2048, sizeof(char));
-        i += 2;
+        i = argument.find('}');
+        std::string varName = argument.substr(argument.find('{') +1, i);
+        argument = argument.substr(0,argument.find('{')) + varName + 
+          argument.substr(argument.find("}" +1));
+
         //printf("varname <= ");
-        while (argument->at(i) != '}') {
+        /*while (argument->at(i) != '}') {
           varName[j] = argument->at(i);
           //printf("%c ", argument[i]);
           j++;
@@ -41,7 +44,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
           complete.append(getenv(varName));
         }
         j = 0;
-        free(varName);
+        free(varName);*/
       }
       else {
         char * others = (char *)calloc(2048, sizeof(char));
@@ -60,7 +63,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       }
       i++;
     }
-    argument = *complete;
+    argument->assign(complete);
     _arguments.push_back((char *) argument->c_str());
   }
 

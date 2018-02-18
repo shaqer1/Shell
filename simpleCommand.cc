@@ -20,7 +20,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   // simply add the argument to the vector
   //implement env var expansion
   char * complete = (char *)calloc(2048, sizeof(char));
-  if (strchr(argument, '$')) {
+  if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
     int j = 0;

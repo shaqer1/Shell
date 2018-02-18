@@ -19,6 +19,8 @@
 #include <fcntl.h>
 #include <sys/prctl.h>
 
+#include "read-line.h"
+#include "y.tab.h"
 
 
 static  void yyunput (int c,char *buf_ptr  );

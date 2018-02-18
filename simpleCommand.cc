@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 #include <iostream>
-
+#include <string.h>
 #include "simpleCommand.hh"
 
 SimpleCommand::SimpleCommand() {
@@ -24,13 +24,13 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     //printf("%s\n", argument);
     int i = 0;
     int j = 0;
-    while (argument.at(i) != '\0') {
-      if (argument.at(i) == '$') {
+    while (argument->at(i) != '\0') {
+      if (argument->at(i) == '$') {
         char * varName = (char *)calloc(2048, sizeof(char));
         i += 2;
         //printf("varname <= ");
-        while (argument.at(i) != '}') {
-          varName[j] = argument.at(i);
+        while (argument->at(i) != '}') {
+          varName[j] = argument->at(i);
           //printf("%c ", argument[i]);
           j++;
           i++;
@@ -46,8 +46,8 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       else {
         char * others = (char *)calloc(2048, sizeof(char));
         //printf("others <= ");
-        while (argument.at(i) != '\0' && argument.at(i) != '$') {
-          others[j] = argument.at(i);
+        while (argument->at(i) != '\0' && argument->at(i) != '$') {
+          others[j] = argument->at(i);
           //printf("%c ", argument[i]);
           j++;
           i++;
@@ -65,12 +65,12 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   }
 
   //implement tilde expansion
-  else if (argument.at(0) == '~' && argument.size() == 1) {
+  else if (argument->at(0) == '~' && argument->size() == 1) {
     _arguments.push_back(strdup(getenv("HOME")));
     //printf("%s\n", _arguments[ _numOfArguments ]);
   }
-  else if(argument[0] == '~') {
-    char * s = argument.substr (1)->c_str(); //get rid of ~
+  else if(argument->at(0) == '~') {
+    char * s = argument->substr (1)->c_str(); //get rid of ~
     //printf("%s\n", s);
     const char * homes = "/homes/";
     char * complete = (char *) calloc((strlen(s) + 7), sizeof(char));

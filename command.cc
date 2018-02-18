@@ -114,7 +114,8 @@ extern char ** environ;
 extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer );
 extern FILE * yyin;
 extern int YY_BUF_SIZE;
-//extern void yy_create_buffer();
+extern YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
+
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {

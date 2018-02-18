@@ -19,7 +19,7 @@ SimpleCommand::~SimpleCommand() {
 void SimpleCommand::insertArgument( std::string * argument ) {
   // simply add the argument to the vector
   //implement env var expansion
-  char * complete = (char *)calloc(2048, sizeof(char));
+  std::string complete;
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
@@ -38,7 +38,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
         varName[j] = '\0';
         //printf("\n  varName: %s\n", varName);
         if (getenv(varName)) {
-          strcat(complete, getenv(varName));
+          complete.append(getenv(varName));
         }
         j = 0;
         free(varName);
@@ -53,15 +53,15 @@ void SimpleCommand::insertArgument( std::string * argument ) {
           i++;
         }
         //printf("\n  others: %s\n", others);
-        strcat(complete, others);
+        complete.apped(others);
         j = 0;
         free(others);
         i--;
       }
       i++;
     }
-    std::string argument = std::string(strdup(complete));
-    _arguments.push_back(argument);
+    argument = complete;
+    _arguments.push_back(argument->c_str());
   }
 
   //implement tilde expansion

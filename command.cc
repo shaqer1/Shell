@@ -112,6 +112,9 @@ for (;;) {
  */
 extern char ** environ;
 extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer );
+extern FILE * yyin;
+extern int YY_BUF_SIZE;
+//extern void yy_create_buffer();
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {

@@ -18,11 +18,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/prctl.h>
-#include <unistd.h>
 
 
 
 static  void yyunput (int c,char *buf_ptr  );
+extern char* shelldir;
 
 void myunputc(int c) {
   unput(c);

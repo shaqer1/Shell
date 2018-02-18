@@ -23,7 +23,6 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "command.hh"
-#include "lex.yy.h"
 #include "shell.hh"
 #include <stdlib.h>
 

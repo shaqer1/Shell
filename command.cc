@@ -14,6 +14,7 @@
 #include <iostream>
 #include <signal.h>
 #include <string.h>
+#include <pwd.h>
 #include <sys/types.h>
 #include <wait.h>
 #include <sys/stat.h>
@@ -22,6 +23,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "command.hh"
+#include "lex.yy.h"
 #include "shell.hh"
 #include <stdlib.h>
 
@@ -189,10 +191,10 @@ void Command::execute() {
 	  close(fdout);
 
       if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
-            FILE * myin = fopen(_simpleCommands[i]->_arguments[1], "r");
+            FILE * myin = fopen(_simpleCommands[i]->_arguments[1]->c_str(), "r");
             if (myin == NULL) {
                 clear();
-                prompt();
+                Shell::prompt();
                 return;
             }
             yyin = myin;
@@ -202,7 +204,7 @@ void Command::execute() {
             yyparse();
             yypop_buffer_state();
             yyparse();
-            prompt();
+            Shell::prompt();
             return;
         }
 

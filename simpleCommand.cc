@@ -23,7 +23,6 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
-    int j = 0;
     while (argument->at(i) != '\0') {
       if (argument->at(i) == '$') {
         i = argument->find('}');
@@ -51,7 +50,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     argument->assign(complete);
     _arguments.push_back(argument);
   } else if (argument->at(0) == '~' && argument->size() == 1) {
-    _arguments.push_back(strdup(getenv("HOME")));
+    _arguments.push_back(std::string s (strdup(getenv("HOME"))));
     //printf("%s\n", _arguments[ _numOfArguments ]);
   }else if(argument->at(0) == '~') {
     char * s = argument->substr(1)->c_str(); //get rid of ~

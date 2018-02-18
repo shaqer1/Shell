@@ -46,21 +46,6 @@ void SimpleCommand::insertArgument( std::string * argument ) {
         j = 0;
         free(varName);*/
       }
-      else {
-        char * others = (char *)calloc(2048, sizeof(char));
-        //printf("others <= ");
-        while (argument->at(i) != '\0' && argument->at(i) != '$') {
-          others[j] = argument->at(i);
-          //printf("%c ", argument[i]);
-          j++;
-          i++;
-        }
-        //printf("\n  others: %s\n", others);
-        complete.append(others);
-        j = 0;
-        free(others);
-        i--;
-      }
       i++;
     }
     argument->assign(complete);

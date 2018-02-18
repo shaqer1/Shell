@@ -113,7 +113,7 @@ for (;;) {
 extern char ** environ;
 extern FILE * yyin;
 extern int YY_BUF_SIZE;
-extern int yy_create_buffer (FILE *file,int size  );
+extern YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
 extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer );
 extern void yyparse();
 

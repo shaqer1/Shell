@@ -80,8 +80,8 @@ void expandWildcardsIfNecessary(std::string *s)
 	*r=0;// match end of line and add null char
 	// 2. compile regular expression. See lab3-src/regular.cc
 	regex_t re;
-	char * expbuf = regcomp(&re, r, REG_EXTENDED|REG_NOSUB );
-	if (expbuf==NULL) {
+	int expbuf = regcomp(&re, r, REG_EXTENDED|REG_NOSUB );
+	if (expbuf==0) {
 		perror("compile");
 		return;
 	}
@@ -95,13 +95,14 @@ void expandWildcardsIfNecessary(std::string *s)
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
-	char ** array = (char**) malloc(maxEntries*sizeof(char*);
+	char ** array = (char**) malloc(maxEntries*sizeof(char*));
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
-		if (regexec(ent->d_name, expbuf ) ==0 ) {
+		regmatch_t match;
+		if (regexec(&re, ent->d_name, 1, match, expbuf, 0 ) ==0 ) {
 			if (nEntries == maxEntries) {
 				maxEntries *=2;
-				array = realloc( array, maxEntries*sizeof(char*));
+				array = (char **) realloc( array, maxEntries*sizeof(char*));
 				assert(array!=NULL);
 			}
 			array[nEntries]= strdup(ent->d_name);

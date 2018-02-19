@@ -21,7 +21,6 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/prctl.h>
-#include <assert.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include <fcntl.h>
@@ -119,6 +118,7 @@ extern char * yytext;
 extern int YY_BUF_SIZE;
 extern int yy_create_buffer (FILE *file,int size  );
 extern void yypush_buffer_state (int new_buffer );
+extern BEGIN (int i );
 
 void Command::execute() {
     // Don't do anything if there are no simple commands

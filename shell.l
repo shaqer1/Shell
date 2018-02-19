@@ -77,8 +77,7 @@ void myunputc(int c) {
 
 $([^\n\`]*) {
 		// subshell
-		char * command[strlen(yytext) - 2];
-		command = strdup(yytext + 2); 	// drop the  `
+		char * command = strdup(yytext + 2); 	// drop the  `
 		command[ strlen(command) - 1] = '\0';
 
 		// store defaultin and out
@@ -108,7 +107,11 @@ $([^\n\`]*) {
 			dup2(parentpipe[0], 0);
 			dup2(childpipe[1], 1);
 
-			execvp("/proc/self/exe", command);
+			char *argv[2];
+			argv[0] = command;
+			argv[1] = NULL;
+
+			execvp("/proc/self/exe", argv);
 			perror("subshell");
 			_exit(0);
 		} else if (ret > 0) {

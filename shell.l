@@ -24,9 +24,7 @@
 #include <regex.h>     
 #include <assert.h>
 
-#include "read_line.c"
-
-extern "C" char * read_line();
+#include "read-line.c"
 
 int mygetc(FILE * f) {
        static char *p;

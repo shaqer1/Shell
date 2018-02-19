@@ -149,6 +149,15 @@ void expandWildcardsIfNecessary(std::string *s)
 
 %%
 
+"source": {
+	yyin = fopen(yytext , "r");
+    if(yyin == 0){
+        printf("Cannot open file %s\n", yytext);
+    }
+    yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
+    BEGIN(INITIAL);
+}
+
 \n 	{
 		return NEWLINE;
 	}	

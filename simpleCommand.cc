@@ -19,7 +19,7 @@ SimpleCommand::~SimpleCommand() {
 void SimpleCommand::insertArgument( std::string * argument ) {
   // simply add the argument to the vector
   //implement env var expansion
-  if(argument->size()){
+  if(argument->size() == 0){
     return;
   }
   if (strchr(argument->c_str(), '$')) {

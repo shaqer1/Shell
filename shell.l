@@ -165,7 +165,7 @@ void myunputc(int c) {
 
 "\"[^\n]*\"" {
 //printf("%s\n", "quotes");
-	yytext = (char []) yytext + 1; //drop the first quote
+	yytext = yytext + 1; //drop the first quote
     yytext[ strlen(yytext) - 1] = '\0'; // drop the last quote
     yylval.string_val = strdup(yytext);
     return WORD;

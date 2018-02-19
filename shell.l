@@ -34,8 +34,7 @@ void myunputc(int c) {
 
 \n 	{
 		return NEWLINE;
-	}
-	
+	}	
 
 "|" 	{
 		return PIPE;
@@ -72,7 +71,7 @@ void myunputc(int c) {
 }
 
 
-$([ ^\n]*) {
+$([^\n\`]*) {
 		// subshell
 		char * command = strdup(yytext + 2); 	// drop the  `
 		command[ strlen(command) - 1] = '\0';

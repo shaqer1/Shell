@@ -75,7 +75,7 @@ void myunputc(int c) {
 }
 
 
-\`[^\n\`]*\` {
+([^\n\`]*) {
 		// subshell
 		char * command = strdup(yytext + 1); 	// drop the  `
 		command[ strlen(command) - 1] = '\0';

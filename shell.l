@@ -146,36 +146,7 @@ void myunputc(int c) {
 		}
 	}
 
-#| [^ \t\n]*\\[^\t\n]* {
-//printf("%s\n", "escapes");
-	int n = strlen(yytext);
-	int i = 0;
-	int j = 0;
-	char * build = (char *) malloc(sizeof(char)*n);
-	for (i = 0; i < n; i++) {
-		if(yytext[i] == '\\' && i != n-1) {
-			++i;	//rid escape
-			//printf("if: yytext[%d] = %c\n", i, yytext[i]);
-			build[j++] = yytext[i];
-			//printf("if: build[%d] = %c\n", j, build[j]);
-		}else if(yytext[i] == "\"" && i != n-1) {
-			++i;	//rid escape
-			//printf("if: yytext[%d] = %c\n", i, yytext[i]);
-			build[j++] = yytext[i];
-			//printf("if: build[%d] = %c\n", j, build[j]);
-		}
-		else {
-			//printf("else: yytext[%d] = %c\n", i, yytext[i]);
-			//printf("else: build[%d] = %c\n", j, build[j]);
-			build[j++] = yytext[i];
-		}
-	}
-	build[j] = '\0';
-	//printf("build[%d] = %s\n", j, build);
-	yylval.string_val = build;
-	return WORD;
-}
- |#
+
 [^ \t\n&<>\|]*\\[^ \t\n]* {
 		//escape
 		char * newArg = (char*)malloc(strlen(yytext) + 1);

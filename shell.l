@@ -147,7 +147,7 @@ void expandWildcardsIfNecessary(std::string *s)
 
 %%
 
-"source" {
+"source [^ \t\n\>\|][^ \t\n\>\|]*" {
 	yyin = fopen(yytext , "r");
     if(yyin == 0){
         printf("Cannot open file %s\n", yytext);

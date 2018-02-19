@@ -30,7 +30,6 @@
 #include <stdlib.h>
 
 
-
 Command::Command() {
     // Initialize a new vector of Simple Commands
     _simpleCommands = std::vector<SimpleCommand *>();
@@ -113,11 +112,11 @@ for (;;) {
     }
  */
 /*extern char ** environ;
-extern FILE * yyin;
 extern int YY_BUF_SIZE;
 extern YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
 extern void yypush_buffer_state (YY_BUFFER_STATE new_buffer );
 extern void yyparse();*/
+extern FILE * yyin;
 
 void Command::execute() {
     // Don't do anything if there are no simple commands

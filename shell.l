@@ -32,7 +32,7 @@ void expandWildcardsIfNecessary(char * arg)
 {
 // Return if arg does not contain ‘*’ or ‘?’
 	if (arg has neither ‘*’ nor ‘?’ (use strchr) ) {
-		Command::_currentSimpleCommand->insertArgument(arg);
+		Shell::_currentSimpleCommand->insertArgument(arg);
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -72,7 +72,7 @@ void expandWildcardsIfNecessary(char * arg)
 		// Check if name matches
 		if (regexec(ent->d_name, expbuf ) ==0 ) {
 		// Add argument1
-			Command::_currentSimpleCommand->insertArgument(strdup(ent->d_name));
+			Shell::_currentSimpleCommand->insertArgument(strdup(ent->d_name));
 		}
 	}
 	closedir(dir);

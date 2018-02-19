@@ -21,7 +21,7 @@
 #include <string.h>
 #include <sys/prctl.h>
 #include "shell.hh"
-
+#include <regex.h>
 
 
 static  void yyunput (int c,char *buf_ptr  );
@@ -96,7 +96,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		// Check if name matches
 		if (regexec(ent->d_name, expbuf ) ==0 ) {
 		// Add argument1
-			Shell::_currentSimpleCommand->insertArgument(strdup(ent->d_name));
+			Command::_currentSimpleCommand->insertArgument(strdup(ent->d_name));
 		}
 	}
 	closedir(dir);

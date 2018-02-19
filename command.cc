@@ -117,7 +117,7 @@ extern void yyparse();*/
 extern FILE * yyin;
 extern char * yytext;
 extern int YY_BUF_SIZE;
-extern YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
+extern int yy_create_buffer (FILE *file,int size  );
 
 void Command::execute() {
     // Don't do anything if there are no simple commands

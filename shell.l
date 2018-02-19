@@ -23,6 +23,7 @@
 #include "shell.hh"
 #include <regex.h>     
 #include <assert.h>
+#include "read-line.h"
 
 //extern "C" char * read_line();
 

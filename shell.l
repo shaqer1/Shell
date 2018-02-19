@@ -19,7 +19,6 @@
 #include <fcntl.h>
 #include <sys/prctl.h>
 
-#include "y.tab.cc"
 
 
 static  void yyunput (int c,char *buf_ptr  );

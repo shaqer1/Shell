@@ -146,7 +146,7 @@ void myunputc(int c) {
 		}
 	}
 
-[^ \t\n]*\\[^\t\n]* {
+#| [^ \t\n]*\\[^\t\n]* {
 //printf("%s\n", "escapes");
 	int n = strlen(yytext);
 	int i = 0;
@@ -174,6 +174,22 @@ void myunputc(int c) {
 	//printf("build[%d] = %s\n", j, build);
 	yylval.string_val = build;
 	return WORD;
+}
+ |#
+[^ \t\n&<>\|]*\\[^ \t\n]* {
+		//escape
+		char * newArg = (char*)malloc(strlen(yytext) + 1);
+		int x = 0;
+		for (int i = 0; i < strlen(yytext); i++) {
+			if (yytext[i] == '\\') 
+				i++;
+			newArg[x] = yytext[i];
+			x++;
+		
+		}
+		newArg[x] = '\0'; 
+		yylval.string_val = strdup(newArg);
+    	return WORD;
 }
 
 "\"[^\n]*\"" {

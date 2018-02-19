@@ -148,9 +148,11 @@ void expandWildcardsIfNecessary(std::string *s)
 %%
 
 source[ ^\t\n][ ^\t\n]*.* {
-	yyin = fopen(yytext , "r");
+	std::string  s (yytext);
+	s.substr(s.find(" ") + 1, s.size()-s.find(" "));
+	yyin = fopen(s.c_str() , "r");
     if(yyin == 0){
-        printf("Cannot open file %s\n", yytext);
+        printf("Cannot open file %s\n", s.c_str());
         exit(1);
     }
     yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));

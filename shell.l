@@ -95,7 +95,7 @@ void myunputc(int c) {
 		int ret = fork();
 		if (ret == 0) {
 			write(parentpipe[1], command, strlen(command));
-			write(parentpipe[1], "\nexit1\n", 6);
+			write(parentpipe[1], "\nexit\n", 6);
 
 			close(parentpipe[1]);
 			close(childpipe[0]);

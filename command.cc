@@ -119,6 +119,7 @@ extern int YY_BUF_SIZE;
 extern int yy_create_buffer (FILE *file,int size  );
 extern void yypush_buffer_state (int new_buffer );
 extern int BEGIN (int i );
+extern int INITIAL;
 
 void Command::execute() {
     // Don't do anything if there are no simple commands

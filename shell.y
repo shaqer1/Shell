@@ -15,7 +15,7 @@
 {
 #include <string>
 
-extern "C" void expandWildcardsIfNecessary(char * c);
+extern "C" void expandWildcardsIfNecessary(std::string s);
 
 #if __cplusplus > 199711L
 #define register      // Deprecated in C++11 so remove the keyword

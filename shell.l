@@ -107,7 +107,7 @@ $([^\n\`]*) {
 			dup2(parentpipe[0], 0);
 			dup2(childpipe[1], 1);
 
-			execvp("/proc/self/exe", *command);
+			execvp("/proc/self/exe", &command);
 			perror("subshell");
 			_exit(0);
 		} else if (ret > 0) {

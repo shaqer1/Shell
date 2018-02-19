@@ -149,7 +149,7 @@ void expandWildcardsIfNecessary(std::string *s)
 
 source[ ^\t\n][ ^\t\n]*.* {
 	std::string  s (yytext);
-	s.substr(s.find(" ") + 1, s.size()-s.find(" "));
+	s.assign(s.substr(s.find(" ") + 1, s.size()-s.find(" ")));
 	yyin = fopen(s.c_str() , "r");
     if(yyin == 0){
         printf("Cannot open file %s\n", s.c_str());

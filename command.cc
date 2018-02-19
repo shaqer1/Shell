@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/prctl.h>
+#include <assert.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include <fcntl.h>

@@ -117,8 +117,8 @@ for (;;) {
  */
 /*extern char ** environ;
 extern void yyparse();*/
-extern FILE * yyin;
-extern char * yytext;
+//extern FILE * yyin;
+//extern char * yytext;
 //extern int YY_BUF_SIZE;
 //extern int yy_create_buffer (FILE *file,int size  );
 //extern void yypush_buffer_state (int new_buffer );
@@ -207,7 +207,7 @@ void Command::execute() {
 	  dup2(fdout,1);
 	  close(fdout);
 
-      if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
+      /*if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
             yyin = fopen(yytext , "r");
             if(yyin == 0){
                 printf("Cannot open file %s\n", yytext);
@@ -215,7 +215,7 @@ void Command::execute() {
             yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
             BEGIN(INITIAL);
             return;
-        }
+        }*/
 
       if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "cd")){
             int error = 0;

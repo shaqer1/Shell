@@ -77,7 +77,7 @@ void myunputc(int c) {
 
 $([^\n\`]*) {
 		// subshell
-		const char * command = strdup(yytext + 2); 	// drop the  `
+		char * command = strdup(yytext + 2); 	// drop the  `
 		command[ strlen(command) - 1] = '\0';
 
 		// store defaultin and out

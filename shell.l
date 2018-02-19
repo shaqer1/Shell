@@ -20,6 +20,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <sys/prctl.h>
+#include "shell.hh"
 
 
 
@@ -30,8 +31,9 @@ void myunputc(int c) {
   unput(c);
 }
 
-void expandWildcardsIfNecessary(char * arg)
+void expandWildcardsIfNecessary(std::string *s)
 {
+	char *arg = s->c_str();
 // Return if arg does not contain * or ?
 	if (strchr(arg, '*') == NULL && strchr(arg, '?') == NULL) {
 		Shell::_currentSimpleCommand->insertArgument(arg);

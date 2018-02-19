@@ -100,7 +100,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
-		if (regexec(&re, ent->d_name, 1, &match, expbuf, 0 ) ==0 ) {
+		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
 			if (nEntries == maxEntries) {
 				maxEntries *=2;
 				array = (char **) realloc( array, maxEntries*sizeof(char*));

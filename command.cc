@@ -131,6 +131,7 @@ void Command::execute() {
     
     if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit") || !strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
       if (!strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
+            printf("here");
             _Exit(0);
       }  
       printf("\nGood Bye!!\n\n");

@@ -171,7 +171,7 @@ void myunputc(int c) {
 	return WORD;
 }
 
-\\"[^\n]*\" {
+"\"[^\n]*\"" {
 //printf("%s\n", "quotes");
 	char * ret = strdup(yytext + 1); // rm first quote
 	printf("rm1st: %s\n", ret);

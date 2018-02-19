@@ -34,7 +34,8 @@ void myunputc(int c) {
 
 \n 	{
 		return NEWLINE;
-	}	
+	}
+	
 
 "|" 	{
 		return PIPE;
@@ -70,9 +71,6 @@ void myunputc(int c) {
   /* Discard spaces and tabs */
 }
 
-[ \n] {
-  /* Discard spaces and tabs */
-}
 
 $([^\n\`]*) {
 		// subshell

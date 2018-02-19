@@ -9,6 +9,7 @@
  */
 
 #include <cstdio>
+#include <cstring>
 #include <cstdlib>
 #include <unistd.h>
 #include <iostream>
@@ -19,6 +20,7 @@
 #include <wait.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <sys/prctl.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include <fcntl.h>

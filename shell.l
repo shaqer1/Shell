@@ -80,7 +80,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	*r=0;// match end of line and add null char
 	// 2. compile regular expression. See lab3-src/regular.cc
 	regex_t re;
-	char * expbuf = regcomp(re, r, REG_EXTENDED|REG_NOSUB );
+	char * expbuf = regcomp(&re, r, REG_EXTENDED|REG_NOSUB );
 	if (expbuf==NULL) {
 		perror("compile");
 		return;

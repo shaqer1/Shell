@@ -24,7 +24,7 @@
 #include <regex.h>     
 #include <assert.h>
 
-#| int mygetc(FILE * f) {
+/* int mygetc(FILE * f) {
        static char *p;
        char ch;
 
@@ -46,7 +46,7 @@
 }
 
 #undef getc
-#define getc(f) mygetc(f) |#
+#define getc(f) mygetc(f) */
 
 static  void yyunput (int c,char *buf_ptr  );
 

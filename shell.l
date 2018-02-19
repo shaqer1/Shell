@@ -47,24 +47,24 @@ void expandWildcardsIfNecessary(char * arg)
 	char * reg = (char*)malloc(2*strlen(arg)+10);
 	char * a = arg;
 	char * r = reg;
-	*r = ‘^’; 
+	*r = '^';
 	r++;
 	// match beginning of line
 	while (*a) {
-		if (*a == ‘*’) { 
-			*r=‘.’; 
+		if (*a == '*') { 
+			*r='.'; 
 			r++; 
-			*r=‘*’; 
+			*r='*'; 
 			r++; 
 		}
-		else if (*a == ‘?’) { 
-			*r=‘.’; 
+		else if (*a == '?') { 
+			*r='.'; 
 			r++;
 		}
-		else if (*a == ‘.’) { 
-			*r=‘\\’; 
+		else if (*a == '.') { 
+			*r='\\'; 
 			r++; 
-			*r=‘.’; 
+			*r='.'; 
 			r++;
 		}
 		else { 
@@ -73,20 +73,20 @@ void expandWildcardsIfNecessary(char * arg)
 		}
 		a++;
 	}
-	*r=‘$’; 
+	*r='$'; 
 	r++; 
 	*r=0;// match end of line and add null char
 	// 2. compile regular expression. See lab3-src/regular.cc
 	char * expbuf = regcomp( &reg, r, REG_EXTENDED|REG_NOSUB );
 	if (expbuf==NULL) {
-		perror(“compile”);
+		perror("compile");
 		return;
 	}
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
-	DIR * dir = opendir(“.”);
+	DIR * dir = opendir(".");
 	if (dir == NULL) {
-		perror(“opendir”);
+		perror("opendir");
 		return;
 	}
 	struct dirent * ent;

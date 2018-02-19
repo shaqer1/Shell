@@ -19,7 +19,6 @@
 #include <fcntl.h>
 #include <sys/prctl.h>
 
-#include "read-line.c"
 #include "y.tab.cc"
 
 
@@ -140,7 +139,7 @@ void myunputc(int c) {
 			int i;
 			for (i = index; i > -1 ; i--) {
 				if (buffer[i] == '\n') buffer[i] = ' ';
-				yyunput(buffer[i]);
+				yyunput(buffer[i], buffer);
 			}
 		} else {
 			perror("fork");

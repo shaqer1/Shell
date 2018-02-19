@@ -92,14 +92,29 @@ void expandWildcardsIfNecessary(std::string *s)
 		return;
 	}
 	struct dirent * ent;
+	int maxEntries = 20;
+	int nEntries = 0;
+	char ** array = (char**) malloc(maxEntries*sizeof(char*);
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		if (regexec(ent->d_name, expbuf ) ==0 ) {
-		// Add argument1
-			Command::_currentSimpleCommand->insertArgument(strdup(ent->d_name));
+			if (nEntries == maxEntries) {
+				maxEntries *=2;
+				array = realloc( array, maxEntries*sizeof(char*));
+				assert(array!=NULL);
+			}
+			array[nEntries]= strdup(ent->d_name);
+			nEntries++;
 		}
 	}
 	closedir(dir);
+	sortArrayStrings(array, nEntries);
+	// Add arguments
+	for (int i = 0; i < nEntries; i++) {
+		Command::_currentSimpleCommand->insertArgument(array[i]));
+	}
+	free(array);
+
 
 }
 

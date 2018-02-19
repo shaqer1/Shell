@@ -158,6 +158,11 @@ void myunputc(int c) {
 			//printf("if: yytext[%d] = %c\n", i, yytext[i]);
 			build[j++] = yytext[i];
 			//printf("if: build[%d] = %c\n", j, build[j]);
+		}else if(yytext[i] == "\"" && i != n-1) {
+			++i;	//rid escape
+			//printf("if: yytext[%d] = %c\n", i, yytext[i]);
+			build[j++] = yytext[i];
+			//printf("if: build[%d] = %c\n", j, build[j]);
 		}
 		else {
 			//printf("else: yytext[%d] = %c\n", i, yytext[i]);

@@ -109,7 +109,7 @@ void myunputc(int c) {
 			dup2(parentpipe[0], 0);
 			dup2(childpipe[1], 1);
 
-			execv(shelldir, NULL);
+			execv("../shell", NULL);
 			perror("subshell");
 			_exit(0);
 		} else if (ret > 0) {
@@ -140,7 +140,7 @@ void myunputc(int c) {
 			int i;
 			for (i = index; i > -1 ; i--) {
 				if (buffer[i] == '\n') buffer[i] = ' ';
-				unput(buffer[i]);
+				yyunput(buffer[i]);
 			}
 		} else {
 			perror("fork");

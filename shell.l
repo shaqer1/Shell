@@ -33,7 +33,7 @@ void myunputc(int c) {
 
 void expandWildcardsIfNecessary(std::string *s)
 {
-	char *arg = s->c_str();
+	char *arg = (char *) s->c_str();
 // Return if arg does not contain * or ?
 	if (strchr(arg, '*') == NULL && strchr(arg, '?') == NULL) {
 		Shell::_currentSimpleCommand->insertArgument(arg);

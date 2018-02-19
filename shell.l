@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <dirent.h>
+#include <string.h>
 #include <sys/prctl.h>
 
 
@@ -32,7 +33,7 @@ void myunputc(int c) {
 void expandWildcardsIfNecessary(char * arg)
 {
 // Return if arg does not contain * or ?
-	if (arg has neither ‘*’ nor ‘?’ (use strchr) ) {
+	if (strchr(arg, '*') == NULL && strchr(arg, '?') == NULL) {
 		Shell::_currentSimpleCommand->insertArgument(arg);
 		return;
 	}

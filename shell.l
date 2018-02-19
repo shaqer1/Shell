@@ -36,7 +36,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	char *arg = (char *) s->c_str();
 // Return if arg does not contain * or ?
 	if (strchr(arg, '*') == NULL && strchr(arg, '?') == NULL) {
-		Shell::_currentSimpleCommand->insertArgument(arg);
+		Command::_currentSimpleCommand->insertArgument(arg);
 		return;
 	}
 	// 1. Convert wildcard to regular expression

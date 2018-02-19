@@ -23,7 +23,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "command.hh"
-//#include "lex.yy.cc"
+#include "y.tab.hh"
 #include "shell.hh"
 #include <stdlib.h>
 
@@ -200,20 +200,12 @@ void Command::execute() {
 	  close(fdout);
 
       if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
-            FILE * myin = fopen(_simpleCommands[i]->_arguments[1]->c_str(), "r");
-            if (myin == NULL) {
-                clear();
-                Shell::prompt();
-                return;
+            yyin = fopen(yytext , "r");
+            if(yyin == 0){
+                printf("Cannot open file %s\n", yytext);
             }
-            /*yyin = myin;
-            clear();
-            fflush(stdout);
             yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
-            yyparse();
-            yypop_buffer_state();
-            yyparse();
-            Shell::prompt();*/
+            BEGIN(INITIAL);
             return;
         }
 

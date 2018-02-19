@@ -23,9 +23,10 @@
 #include "shell.hh"
 #include <regex.h>     
 #include <assert.h>
-#include "read-line.h"
 
-//extern "C" char * read_line();
+#include "read_line.c"
+
+extern "C" char * read_line();
 
 int mygetc(FILE * f) {
        static char *p;

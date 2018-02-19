@@ -147,8 +147,8 @@ void expandWildcardsIfNecessary(std::string *s)
 
 %%
 
-"source" {
-	yyin = fopen("./shell-in" , "r");
+"source [^ \t\n]" {
+	yyin = fopen(yytext , "r");
     if(yyin == 0){
         printf("Cannot open file %s\n", yytext);
         exit(1);

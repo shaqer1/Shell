@@ -52,7 +52,7 @@ int main() {
     perror("sigactionZombie");
     exit(-1);
   }
-  yyin = fopen(".shellrc", "r");
+  FILE * yyin = fopen(".shellrc", "r");
   if (yyin > 0) {
     Command::_currentSimpleCommand = new SimpleCommand();
     Command::_currentSimpleCommand->insertArgument( new std::string("source") );

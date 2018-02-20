@@ -55,8 +55,8 @@ int main() {
   yyin = fopen(".shellrc", "r");
   if (yyin > 0) {
     Command::_currentSimpleCommand = new SimpleCommand();
-    Command::_currentSimpleCommand->insertArgument( "source" );
-    Command::_currentSimpleCommand->insertArgument( ".shellrc" );
+    Command::_currentSimpleCommand->insertArgument( new std::string("source") );
+    Command::_currentSimpleCommand->insertArgument( new std::string(".shellrc") );
     Shell::_currentCommand.execute();
   }
   yyin = NULL;

@@ -146,22 +146,11 @@ void expandWildcardsIfNecessary(std::string *s)
 %}
 
 %%
-%{
-int source = 0;
-%}
-<<EOF>> {
-	if(source){
-		yypop_buffer_state();
-		source =0;
-	}else{
-		yyterminate();
-	}
-}
+
 
 source[ ^\t\n][ ^\t\n]*.* {
 	std::string  s (yytext);
 	s.assign(s.substr(s.find(" ") + 1, s.size()-s.find(" ")));
-	source = 1;
 	yyin = fopen(s.c_str() , "r");
     if(yyin == 0){
         printf("Cannot open file %s\n", s.c_str());
@@ -169,6 +158,7 @@ source[ ^\t\n][ ^\t\n]*.* {
     }
     yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
     BEGIN(INITIAL);
+	yypop_buffer_state();
 }
 
 \n 	{

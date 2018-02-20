@@ -292,21 +292,12 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 
 
+
+
 [^ \t\n\>\|][^ \t\n\>\|]*  {
   /* Assume that file names have only alpha chars */
   yylval.cpp_string = new std::string(yytext);
   return WORD;
-}
-
-[^ \t\n]*\"[^\t\n]* {
-	printf("%s\n", "quotes");
-	/*char * ret = strdup(yytext + 1); // rm first quote
-	//printf("rm1st: %s\n", ret);
-	int n = strlen(ret);
-	ret[n-1] = '\0'; // rm last quote
-	//printf("rm->%d: %s\n", n-1, ret);
-	yylval.string_val = ret;*/
-	return WORD;
 }
 
 %%

@@ -146,18 +146,6 @@ void expandWildcardsIfNecessary(std::string *s)
 %}
 
 %%
-%{
-int source = 0;
-%}
-<<EOF>> {
-	if(source){
-		printf("here");
-		yypop_buffer_state();
-		source =0;
-	}else{
-		yyterminate();
-	}
-}
 
 source[ ^\t\n][ ^\t\n]*.* {
 	std::string  s (yytext);

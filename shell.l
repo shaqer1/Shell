@@ -151,6 +151,7 @@ int source = 0;
 %}
 <<EOF>> {
 	if(source){
+		printf("here")
 		yypop_buffer_state();
 		source =0;
 	}else{

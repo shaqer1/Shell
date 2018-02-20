@@ -14,6 +14,7 @@
 %code requires 
 {
 #include <string>
+#include "y.tab.hh"
 
 extern "C" void expandWildcardsIfNecessary(std::string *s);
 

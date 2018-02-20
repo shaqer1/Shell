@@ -6,7 +6,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/wait.h>
-#include <y.tab.hh>
+#include "y.tab.hh"
 
 int yyparse(void);
 

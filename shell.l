@@ -274,7 +274,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 	}
 
 
-[^ \t\n&<>\|]*\\[^ \t\n]* {
+[^ \t\n]*\\[^ \t\n]* {
 		//escape
 		char * newArg = (char*)malloc(strlen(yytext) + 1);
 		int x = 0;

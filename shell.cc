@@ -52,10 +52,17 @@ int main() {
     perror("sigactionZombie");
     exit(-1);
   }
-  
+  yyin = fopen(".shellrc", "r");
+  if (yyin > 0) {
+    Command::_currentSimpleCommand = new SimpleCommand();
+    Command::_currentSimpleCommand->insertArgument( "source" );
+    Command::_currentSimpleCommand->insertArgument( ".shellrc" );
+    Shell::_currentCommand.execute();
+  }
+  yyin = NULL;
     Shell::prompt();
     yyparse();
-  
+
 }
 
 Command Shell::_currentCommand;

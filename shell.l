@@ -177,20 +177,17 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 \$\([^\n]*\) {
 		// subshell
-		char * command = strdup(yytext + 2); 	// drop the  `
+		char * command = strdup(yytext + 2);
 		command[ strlen(command) - 1] = '\0';
 
-		// store defaultin and out
 		int defaultin = dup(0);
 		int defaultout = dup(1);
 
-		// creat pipes
 		int childpout[2];
 		int parentpin[2];
 		pipe(childpout);
 		pipe(parentpin);
 
-		// buffer
 		int max = 5;
 		int index = 0;
 		char * buffer = (char *) calloc(0, max * sizeof(char));
@@ -215,7 +212,6 @@ source[ ^\t\n][ ^\t\n]*.* {
 			perror("subshell");
 			_exit(0);
 		} else if (ret > 0) {
-			//wait till child finish
 			
 			close(parentpin[0]);
 			close(parentpin[1]);

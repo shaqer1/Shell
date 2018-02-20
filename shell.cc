@@ -54,7 +54,7 @@ int main() {
   }
   FILE * yyin = fopen(".shellrc", "r");
   if (yyin > 0) {
-    Command::_simpleCommands = new Command();
+    Command::Command();
     Command::_currentSimpleCommand = new SimpleCommand();
     Command::_currentSimpleCommand->insertArgument( new std::string("source") );
     Command::_currentSimpleCommand->insertArgument( new std::string(".shellrc") );

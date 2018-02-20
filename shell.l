@@ -169,7 +169,8 @@ source[ ^\t\n][ ^\t\n]*.* {
         exit(1);
     }
     yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
-    BEGIN(INITIAL);
+    yyparse();
+    yypop_buffer_state();
 }
 
 \n 	{

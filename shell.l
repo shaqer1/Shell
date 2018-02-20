@@ -146,9 +146,9 @@ void expandWildcardsIfNecessary(std::string *s)
 %}
 
 %%
-
+%{
 int source = 0;
-
+%}
 <<EOF>> {
 	if(source){
 		yypop_buffer_state();

@@ -297,7 +297,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 	int n = strlen(ret);
 	ret[n-1] = '\0'; // rm last quote
 	//printf("rm->%d: %s\n", n-1, ret);
-	yylval.string_val = ret;
+	yylval.cpp_string = ret;
 	return WORD;
 }
 

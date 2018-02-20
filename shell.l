@@ -288,8 +288,11 @@ source[ ^\t\n][ ^\t\n]*.* {
 		newArg[x] = '\0'; 
 		std::string s (strdup(newArg));
 		yylval.cpp_string = &s; */
-		yylval.cpp_string->erase(std::remove(yylval.cpp_string->begin(), yylval.cpp_string->end()
-			, '\\'), yylval.cpp_string->end());
+		//yylval.cpp_string->erase(std::remove(yylval.cpp_string->begin(), yylval.cpp_string->end(), '\\'), yylval.cpp_string->end());
+    	yylval.cpp_string->replace(yylval.cpp_string->begin(), yylval.cpp_string->begin() +1
+    		, "");
+    	yylval.cpp_string->replace(yylval.cpp_string->end()-1, yylval.cpp_string->end()
+    		, "");
     	return WORD;
 }
 

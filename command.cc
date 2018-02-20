@@ -242,9 +242,11 @@ void Command::execute() {
 	}
 	
 	dup2(tmpin,0);
-        dup2(tmpout,1);
+    dup2(tmpout,1);
+    dup2(tmperr, 2);
 	close(tmpin);
-        close(tmpout);
+    close(tmpout);
+    close(tmperr);
 	if(!_background){
 	  waitpid(ret,NULL,0);
 	}

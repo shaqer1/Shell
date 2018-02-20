@@ -14,7 +14,6 @@
 %code requires 
 {
 #include <string>
-#include "y.tab.hh"
 
 extern "C" void expandWildcardsIfNecessary(std::string *s);
 
@@ -173,17 +172,6 @@ yyerror(const char * s)
 #if 0
 main()
 {
-  
-  yin = fopen(".shellrc", "r");
-    if (yyin > 0) {
-        yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-        yyparse();
-        yyin = stdin;
-        yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-        yyparse();
-    } else{
-        yyin = NULL;
-        yyparse();
-    }
+  yyparse();
 }
 #endif

@@ -101,29 +101,6 @@ void Command::print() {
             _background?"YES":"NO");
 	    printf( "\n\n" );
 }
-/*
-for (;;) {
-		
-		char s[ 20 ];
-		printf( "prompt>");
-		fflush( stdout );
-		fgets( s, 20, stdin );
-
-		if ( !strcmp( s, "exit\n" ) ) {
-			printf( "Bye!\n");
-			exit( 1 );
-		}
-    }
- */
-/*extern char ** environ;
-extern void yyparse();*/
-//extern FILE * yyin;
-//extern char * yytext;
-//extern int YY_BUF_SIZE;
-//extern int yy_create_buffer (FILE *file,int size  );
-//extern void yypush_buffer_state (int new_buffer );
-//extern int BEGIN (int i );
-//extern int INITIAL;
 
 void Command::execute() {
     // Don't do anything if there are no simple commands
@@ -195,27 +172,13 @@ void Command::execute() {
 	    dup2(fderr, 2);
 	    close(fderr);
 	  }else {
-	    // Not last
-	    //simple command
-	    //create pipe
 	    int fdpipe[2];
 	    pipe(fdpipe);
 	    fdout=fdpipe[1];
 	    fdin=fdpipe[0];
-	  }// if/else
-	  // Redirect output
+	  }
 	  dup2(fdout,1);
 	  close(fdout);
-
-      /*if ( !strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "source") ) {
-            yyin = fopen(yytext , "r");
-            if(yyin == 0){
-                printf("Cannot open file %s\n", yytext);
-            }
-            yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
-            BEGIN(INITIAL);
-            return;
-        }*/
 
       if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "cd")){
             int error = 0;
@@ -223,37 +186,28 @@ void Command::execute() {
                 error = chdir(_simpleCommands[i]->_arguments[1]->c_str());
             }
             else {
-                //chdir($HOME);
                 chdir(getenv("HOME"));
             }
             if (error == -1) {
                 std::string s = "cd: can't cd to " + *_simpleCommands[i]->_arguments[1];
                 perror(s.c_str());
-                //error should go to error file
-                //perror(_simpleCommands[i]->_arguments[1]->c_str());
             }
             continue;
-        }
-        //implement set environment variable
-        else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "setenv")) {
+        } else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "setenv")) {
             if(_simpleCommands[i]->_arguments.size() != 3) {
                 printf("Usage: setenv arg1 arg2 \n");
                 continue;
             }
             setenv(_simpleCommands[i]->_arguments[1]->c_str(), _simpleCommands[i]->_arguments[2]->c_str(), 1); //the one is for overwriting
             continue;
-        }
-        //implement unsetting an evironment variable
-        else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "unsetenv")) {
+        } else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "unsetenv")) {
             if(_simpleCommands[i]->_arguments.size() != 2) {
                 printf("Usage: unsetenv arg1 \n");
                 continue;
             }
             unsetenv(_simpleCommands[i]->_arguments[1]->c_str());
             continue;
-        }
-        //implement printing of environment variables
-        else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "printenv")) {
+        } else if (!strcmp(_simpleCommands[i]->_arguments[0]->c_str(), "printenv")) {
             ret = fork();
             if (ret == 0) {
                 char **p = environ;
@@ -269,8 +223,6 @@ void Command::execute() {
             }
             continue;
         }
-
-	  // ret = fork();
 	  ret = fork();
 	  //printf("%d",ret);
 	  if(ret == 0){

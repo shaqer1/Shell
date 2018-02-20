@@ -291,13 +291,13 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 [^ \t\n]*\"[^\t\n]* {
-//printf("%s\n", "quotes");
-	char * ret = strdup(yytext + 1); // rm first quote
+	printf("%s\n", "quotes");
+	/*char * ret = strdup(yytext + 1); // rm first quote
 	//printf("rm1st: %s\n", ret);
 	int n = strlen(ret);
 	ret[n-1] = '\0'; // rm last quote
 	//printf("rm->%d: %s\n", n-1, ret);
-	yylval.string_val = ret;
+	yylval.string_val = ret;*/
 	return WORD;
 }
 

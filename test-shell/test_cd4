@@ -8,6 +8,7 @@ diff <(/bin/bash <<< "$input_str" 2> /dev/null) <(../shell <<< "$input_str" 2> e
 ret=$?
 if [ $ret -ne 0 ]
 then
+    echo "died here"
     exit -1
 fi
 

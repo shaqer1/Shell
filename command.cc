@@ -228,7 +228,7 @@ void Command::execute() {
             }
             if (error == -1) {
                 std::string s = "cd: no such file or directory: " + *_simpleCommands[i]->_arguments[1];
-                perror(c);
+                perror(s);
                 //error should go to error file
                 //perror(_simpleCommands[i]->_arguments[1]->c_str());
             }

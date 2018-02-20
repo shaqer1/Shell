@@ -287,7 +287,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 		}
 		newArg[x] = '\0'; 
 		std::string s (strdup(newArg));
-		yylval.cpp_string = *s;
+		yylval.cpp_string = &s;
     	return WORD;
 }
 

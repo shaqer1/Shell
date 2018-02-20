@@ -24,30 +24,6 @@
 #include <regex.h>     
 #include <assert.h>
 
-/* int mygetc(FILE * f) {
-       static char *p;
-       char ch;
-
-       if(!isatty(0)) {
-               //stdin is not a tty. call real getc
-               return getc(f);
-       }
-
-       //stdin is a tty. call our read_line
-       if (p == NULL || *p == 0) {
-               char * s  = read_line();
-               p = s;
-       }
-
-       ch = *p;
-       p++;
-
-       return ch;
-}
-
-#undef getc
-#define getc(f) mygetc(f) */
-
 static  void yyunput (int c,char *buf_ptr  );
 
 void myunputc(int c) {
@@ -209,10 +185,10 @@ source[ ^\t\n][ ^\t\n]*.* {
 		int defaultout = dup(1);
 
 		// creat pipes
-		int childpipe[2];
-		int parentpipe[2];
-		pipe(childpipe);
-		pipe(parentpipe);
+		int childpout[2];
+		int parentpin[2];
+		pipe(childpout);
+		pipe(parentpin);
 
 		// buffer
 		int max = 5;
@@ -222,14 +198,14 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 		int ret = fork();
 		if (ret == 0) {
-			write(parentpipe[1], command, strlen(command));
-			write(parentpipe[1], "\nexit1\n", 7);
+			write(parentpin[1], command, strlen(command));
+			write(parentpin[1], "\nexit1\n", 7);
 
-			close(parentpipe[1]);
-			close(childpipe[0]);
+			close(parentpin[1]);
+			close(childpout[0]);
 
-			dup2(parentpipe[0], 0);
-			dup2(childpipe[1], 1);
+			dup2(parentpin[0], 0);
+			dup2(childpout[1], 1);
 
 			char *argv[2];
 			argv[0] = command;
@@ -241,13 +217,13 @@ source[ ^\t\n][ ^\t\n]*.* {
 		} else if (ret > 0) {
 			//wait till child finish
 			
-			close(parentpipe[0]);
-			close(parentpipe[1]);
-			close(childpipe[1]);
+			close(parentpin[0]);
+			close(parentpin[1]);
+			close(childpout[1]);
 
 			waitpid(ret, NULL, 0);
 
-			while(read(childpipe[0], &c, 1) > 0) {
+			while(read(childpout[0], &c, 1) > 0) {
 				buffer[index] = c;
 				if(index + 1 > max) {
 					max *= 2;
@@ -257,7 +233,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 			}
 			buffer[index] = '\0';
 			
-			close(childpipe[0]);
+			close(childpout[0]);
 			dup2(defaultin, 0);
 			dup2(defaultout, 1);
 			close(defaultin);

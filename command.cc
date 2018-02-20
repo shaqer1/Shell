@@ -133,7 +133,7 @@ void Command::execute() {
       // Use default input
       fdin=dup(tmpin);
     }
-    int ret;
+    int ret = -1;
     int fdout,fderr;
     // Print contents of Command data structure
     //print();

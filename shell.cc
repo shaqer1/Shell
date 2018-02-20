@@ -53,7 +53,7 @@ int main() {
     exit(-1);
   }
   FILE * yyin = fopen(".shellrc", "r");
-  if (yyin > 0) {
+  /*if (yyin > 0) {
     //Command::_simpleCommands = new Command();
     Shell::_currentCommand.insertSimpleCommand( Command::_currentSimpleCommand );
     Command::_currentSimpleCommand = new SimpleCommand();
@@ -61,7 +61,7 @@ int main() {
     Command::_currentSimpleCommand->insertArgument( new std::string(".shellrc") );
     Shell::_currentCommand.execute();
   }
-  yyin = NULL;
+  yyin = NULL;*/
     Shell::prompt();
     yyparse();
 

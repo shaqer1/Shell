@@ -276,7 +276,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 [^ \t\n]*\\[^ \t\n]* {
 		//escape
-		char * newArg = (char*)malloc(strlen(yytext) + 1);
+		/* char * newArg = (char*)malloc(strlen(yytext) + 1);
 		int x = 0;
 		for (int i = 0; i < strlen(yytext); i++) {
 			if (yytext[i] == '\\') 
@@ -287,7 +287,9 @@ source[ ^\t\n][ ^\t\n]*.* {
 		}
 		newArg[x] = '\0'; 
 		std::string s (strdup(newArg));
-		yylval.cpp_string = &s;
+		yylval.cpp_string = &s; */
+		yylval.cpp_string.erase(std::remove(yylval.cpp_string.begin(), yylval.cpp_string.end()
+			, '\\'), yylval.cpp_string.end());
     	return WORD;
 }
 

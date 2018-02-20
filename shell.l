@@ -292,13 +292,13 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 
 \"[^\n]*\" {
-	printf("%s\n", "quotes");
+	//printf("%s\n", "quotes");
 	char * ret = strdup(yytext + 1); // rm first quote
 	//printf("rm1st: %s\n", ret);
 	int n = strlen(ret);
 	ret[n-1] = '\0'; // rm last quote
 	//printf("rm->%d: %s\n", n-1, ret);
-	yylval.string_val = ret;
+	yylval.cpp_string = new std::string(strdup(ret));
 	return WORD;
 }
 

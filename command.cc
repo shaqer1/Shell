@@ -227,7 +227,7 @@ void Command::execute() {
                 chdir(getenv("HOME"));
             }
             if (error == -1) {
-                std::string s = "cd: no such file or directory: " + *_simpleCommands[i]->_arguments[1];
+                std::string s = "cd: " + *_simpleCommands[i]->_arguments[1];
                 perror(s.c_str());
                 //error should go to error file
                 //perror(_simpleCommands[i]->_arguments[1]->c_str());

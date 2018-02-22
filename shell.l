@@ -47,7 +47,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	// Allocate enough space for regular expression
 	std::string str;
 	str.append("^");
-	str.append(s);
+	str.append(s->c_str());
 	size_t i=0;
 	while(i<str.size()){
 		if((i = str.find("*", i)) != std::string::npos){

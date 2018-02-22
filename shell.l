@@ -45,37 +45,22 @@ void expandWildcardsIfNecessary(std::string *s)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	char * reg = (char*)malloc(2*strlen(arg)+10);
-	char * a = arg;
-	char * r = reg;
-	*r = '^';
-	r++;
-	// match beginning of line
-	while (*a) {
-		if (*a == '*') { 
-			*r='.'; 
-			r++; 
-			*r='*'; 
-			r++; 
-		}
-		else if (*a == '?') { 
-			*r='.'; 
-			r++;
-		}
-		else if (*a == '.') { 
-			*r='\\'; 
-			r++; 
-			*r='.'; 
-			r++;
-		}
-		else { 
-			*r=*a; 
-			r++;
-		}
-		a++;
+	std::string str = s;
+	size_t i;
+	while((i = s->find("*")) != std::string::npos){
+		s->replace(i , 1, ".*")
 	}
-	*r='$'; 
-	r++; 
+	while((i = s->find("?")) != std::string::npos){
+		s->replace(i , 1, ".")
+	}
+	while((i = s->find(".")) != std::string::npos){
+		s->replace(i , 1, "\\.")
+	}
+	while((i = s->find("*")) != std::string::npos){
+		s->replace(i , 1, ".*")
+	}
+	// match beginning of line
+	
 	*r=0;// match end of line and add null char
 	// 2. compile regular expression. See lab3-src/regular.cc
 	regex_t re;

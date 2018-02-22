@@ -46,8 +46,8 @@ void expandWildcardsIfNecessary(std::string *s)
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
 	std::string str = "^" + *s;
-	size_t i= -1;
-	while((i = str.find("*", i+1)) != std::string::npos){
+	size_t i= -2;
+	while((i = str.find("*", i+2)) != std::string::npos){
 		str.replace(i , 1, ".*");
 	}
 	while((i = str.find("?")) != std::string::npos){

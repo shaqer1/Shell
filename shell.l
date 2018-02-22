@@ -45,19 +45,26 @@ void expandWildcardsIfNecessary(std::string *s)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	std::string str = "^" + *s;
-	size_t i= -2;
-	while((i = str.find("*", i+2)) != std::string::npos){
-		str.replace(i , 1, ".*");
-	}
-	while((i = str.find("?")) != std::string::npos){
-		str.replace(i , 1, ".");
-	}
-	while((i = str.find(".")) != std::string::npos){
-		str.replace(i , 1, "\\.");
-	}
-	while((i = str.find("*")) != std::string::npos){
-		str.replace(i , 1, ".*");
+	std::string str = "^" + s->c_str();
+	size_t i=0;
+	while(i<str.size()){
+		if((i = str.find("*", i)) != std::string::npos){
+			str.replace(i , 1, ".*");
+			i+=2;
+		}
+		if((i = str.find("?", i)) != std::string::npos){
+			str.replace(i , 1, ".");
+			i++;
+		}
+		if((i = str.find(".", i)) != std::string::npos){
+			str.replace(i , 1, "\\.");
+			i+=2;
+		}
+		if((i = str.find("*",i)) != std::string::npos){
+			str.replace(i , 1, ".*");
+			i+=2;
+		}
+
 	}
 	str.append("$");
 	// match beginning of line

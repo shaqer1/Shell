@@ -45,7 +45,9 @@ void expandWildcardsIfNecessary(std::string *s)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	std::string str = "^" + &s;
+	std::string str;
+	str.append("^");
+	str.append(s);
 	size_t i=0;
 	while(i<str.size()){
 		if((i = str.find("*", i)) != std::string::npos){

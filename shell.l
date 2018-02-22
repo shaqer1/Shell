@@ -63,7 +63,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	// match beginning of line
 	// 2. compile regular expression. See lab3-src/regular.cc
 	regex_t re;
-	int expbuf = regcomp(&re, r, REG_EXTENDED|REG_NOSUB );
+	int expbuf = regcomp(&re, str.c_str(), REG_EXTENDED|REG_NOSUB );
 	if (expbuf==0) {
 		perror("compile");
 		return;

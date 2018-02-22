@@ -99,8 +99,6 @@ void expandWildcardsIfNecessary(std::string *s)
 		// Command::_currentSimpleCommand->insertArgument(array[i]));
 	}
 	free(array);
-
-
 }
 
 %}

@@ -9,10 +9,10 @@
 
 static std::string last_arg;
 static int assign = 1;
-static int execCode = 0;
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
+  execCode = 0;
 }
 
 SimpleCommand::~SimpleCommand() {

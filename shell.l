@@ -88,7 +88,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
-	char ** array = (char**) malloc(maxEntries*sizeof(char*));
+	std::string array[maxEntries];
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		regmatch_t match;

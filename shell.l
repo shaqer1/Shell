@@ -93,16 +93,14 @@ void expandWildcardsIfNecessary(std::string *s)
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
-			char * c = strdup(ent->d_name);
-			printf("%s\n", array[nEntries]);
-			array[nEntries++].assign(c);
-			printf("%s\n",ent->d_name);
+			array.push_back(strdup(ent->name));
+			//nEntries++;
 		}
 	}
 	closedir(dir);
 	std::sort(array.begin(), array.end());
 	// Add arguments
-	for (int i = 0; i < nEntries; i++) {
+	for (int i = 0; i < array.size(); i++) {
 		Command::_currentSimpleCommand->insertArgument(&array[i]);
 	}
 }

@@ -5,6 +5,7 @@
 #include <string.h>
 #include "simpleCommand.hh"
 #include <limits.h>
+#include <unistd.h>
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
@@ -21,6 +22,10 @@ int checkEnvVar(std::string *c){
   if(strcmp(c->c_str(), "SHELL") == 0){
     char * resolved_path = (char *) malloc(PATH_MAX);
     c->assign(realpath("/proc/self/exe", resolved_path));
+    return 0;
+  }if(strcmp(c->c_str(), "$") == 0){
+    char * resolved_path = (char *) malloc(PATH_MAX);
+    c->assign(getpid());
     return 0;
   }
   return -1;

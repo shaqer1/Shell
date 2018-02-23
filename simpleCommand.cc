@@ -25,7 +25,7 @@ int checkEnvVar(std::string *c){
     return 0;
   }if(strcmp(c->c_str(), "$") == 0){
     char * resolved_path = (char *) malloc(PATH_MAX);
-    c->assign(getpid());
+    c->assign(std::to_string(getpid()));
     return 0;
   }
   return -1;

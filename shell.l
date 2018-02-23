@@ -31,7 +31,7 @@ void myunputc(int c) {
   unput(c);
 }
 
-int comparePtrToString(std::string* a, std::string* b) { return a->compare(*b); }
+bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
 void expandWildcardsIfNecessary(std::string *s)
 {

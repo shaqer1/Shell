@@ -7,7 +7,7 @@
 #include <limits.h>
 #include <unistd.h>
 
-static std:string last_arg;
+static std::string last_arg;
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();

@@ -41,7 +41,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     return;
   }
   assign = _arguments.size() > 0;
-  if(last_arg == NULL){
+  if(last_arg.size() ==0){
     last_arg = *argument;
   }
   if (strchr(argument->c_str(), '$')) {

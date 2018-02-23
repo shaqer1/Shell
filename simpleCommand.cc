@@ -34,7 +34,7 @@ int checkEnvVar(std::string *c){
     c->assign(last_arg);
     return 0;
   }else if(strcmp(c->c_str(), "?") == 0){
-    c->assign(std::to_string(execCode));
+    c->assign(std::to_string(SimpleCommand::execCode));
     return 0;
   }
   return -1;

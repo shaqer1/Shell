@@ -9,6 +9,7 @@
 
 static std::string last_arg;
 static int assign = 1;
+static int execCode = 0;
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
@@ -26,11 +27,14 @@ int checkEnvVar(std::string *c){
     char * resolved_path = (char *) malloc(PATH_MAX);
     c->assign(realpath("/proc/self/exe", resolved_path));
     return 0;
-  }if(strcmp(c->c_str(), "$") == 0){
+  }else if(strcmp(c->c_str(), "$") == 0){
     c->assign(std::to_string(getpid()));
     return 0;
-  }if(strcmp(c->c_str(), "_") == 0){
+  }else if(strcmp(c->c_str(), "_") == 0){
     c->assign(last_arg);
+    return 0;
+  }else if(strcmp(c->c_str(), "?") == 0){
+    c->assign(std::to_string(execCode));
     return 0;
   }
   return -1;

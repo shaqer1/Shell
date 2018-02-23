@@ -106,7 +106,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	//sortArrayStrings(array, nEntries);
 	// Add arguments
 	for (int i = 0; i < nEntries; i++) {
-		// Command::_currentSimpleCommand->insertArgument(array[i]));
+		Command::_currentSimpleCommand->insertArgument(array[i]));
 	}
 	free(array);
 }

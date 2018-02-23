@@ -20,7 +20,7 @@ SimpleCommand::~SimpleCommand() {
 int checkEnvVar(std::string *c){
   if(strcmp(c->c_str(), "SHELL") == 0){
     char * resolved_path = (char *) malloc(PATH_MAX);
-    c->assign(realpath("./shell", resolved_path));
+    c->assign(realpath("/proc/self/exe", resolved_path));
     return 0;
   }
   return -1;

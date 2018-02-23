@@ -93,8 +93,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
-			array[nEntries] = std::string (ent->d_name);
-			nEntries++;
+			array[nEntries++].assign(ent->d_name);
 		}
 	}
 	closedir(dir);

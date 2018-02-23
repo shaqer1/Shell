@@ -8,6 +8,7 @@
 #include <unistd.h>
 
 static std::string last_arg;
+static int assign = 1;
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
@@ -39,6 +40,9 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   if(argument->size() == 0){
     return;
   }
+  if(_arguments.size() > 0){
+    assign = 1;
+  }
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
@@ -69,6 +73,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     _arguments.push_back(argument);
     last_arg = *argument;
   }
+
 }
 
 // Print out the simple command

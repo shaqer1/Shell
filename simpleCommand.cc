@@ -7,6 +7,8 @@
 #include <limits.h>
 #include <unistd.h>
 
+static std:string last_arg;
+
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
 }
@@ -25,6 +27,9 @@ int checkEnvVar(std::string *c){
     return 0;
   }if(strcmp(c->c_str(), "$") == 0){
     c->assign(std::to_string(getpid()));
+    return 0;
+  }if(strcmp(c->c_str(), "_") == 0){
+    c->assign(last_arg);
     return 0;
   }
   return -1;
@@ -62,6 +67,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     _arguments.push_back(argument);
   }else {
     _arguments.push_back(argument);
+    last_arg = *argument;
   }
 }
 

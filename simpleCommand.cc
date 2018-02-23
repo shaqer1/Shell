@@ -33,7 +33,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
           exit(0);
         }
         std::string var (c);
-        argument->assign(argument->substr(1,argument->find('{')-1) + var + 
+        argument->assign(argument->substr(0,argument->find('$')) + var + 
           argument->substr(argument->find("}") +1));
       }
       i++;

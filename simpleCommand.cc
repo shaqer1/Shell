@@ -19,7 +19,8 @@ SimpleCommand::~SimpleCommand() {
 
 void checkEnvVar(std::string c){
   if(strcmp(c.c_str(), "SHELL") == 0){
-    c.assign(realpath("./shell"));
+    char * resolved_path = (char *) malloc(PATH_MAX);
+    c.assign(realpath("./shell", resolved_path));
   }
 }
 

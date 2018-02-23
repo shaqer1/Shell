@@ -23,6 +23,7 @@ int checkEnvVar(std::string *c){
     c->assign(realpath("./shell", resolved_path));
     return 0;
   }
+  return -1;
 }
 
 void SimpleCommand::insertArgument( std::string * argument ) {
@@ -36,16 +37,13 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       if (argument->at(i) == '$') {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));
-        if (checkEnvVar(&varName)){
-          char * c = getenv(varName.c_str());
-          if(c == NULL){
-            perror("invalid var");
-            exit(0);
-          }
-          std::string var (c);
-        }else{
-          std::string var (varName);
+        int res = checkEnvVar(&varName);
+        char * c =  res == -1 ? getenv(varName.c_str()) : (char *) varName->c_str();
+        if(c == NULL){
+          perror("invalid var");
+          exit(0);
         }
+        std::string var (c);
         argument->assign(argument->substr(0,argument->find('$')) + var + 
           argument->substr(argument->find("}") +1));
       }

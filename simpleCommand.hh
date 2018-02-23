@@ -11,7 +11,7 @@ struct SimpleCommand {
 
   SimpleCommand();
   ~SimpleCommand();
-  static int execCode = 0;
+  static int execCode;
   void insertArgument( std::string * argument );
   void print();
 };

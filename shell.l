@@ -94,7 +94,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
 			//array[nEntries++].assign(ent->d_name);
-			printf("%s\n",ent->name);
+			printf("%s\n",ent->d_name);
 		}
 	}
 	closedir(dir);

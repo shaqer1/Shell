@@ -31,7 +31,7 @@ void myunputc(int c) {
   unput(c);
 }
 
-int comparePtrToNode(std::string* a, std::string* b) { return a->compare(*b); }
+int comparePtrToString(std::string* a, std::string* b) { return a->compare(*b); }
 
 void expandWildcardsIfNecessary(std::string *s)
 {

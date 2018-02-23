@@ -93,7 +93,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
-			array[nEntries++] = (strdup(ent->d_name));
+			array[nEntries++].assign(*strdup(ent->d_name));
 			printf("%s\n",ent->d_name);
 		}
 	}

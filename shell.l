@@ -94,7 +94,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
 			char * c = strdup(ent->d_name);
-			printf("%s\n", array[nEntries]);
+			printf("%s\n", *array[nEntries]);
 			array[nEntries++].assign(c);
 			printf("%s\n",ent->d_name);
 		}

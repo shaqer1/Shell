@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include "simpleCommand.hh"
+#include <limits.h>
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
@@ -13,6 +14,12 @@ SimpleCommand::~SimpleCommand() {
   // iterate over all the arguments and delete them
   for (auto & arg : _arguments) {
     delete arg;
+  }
+}
+
+void checkEnvVar(std::string c){
+  if(strcmp(c.c_str(), "SHELL") == 0){
+    c.assign(realpath("./shell"));
   }
 }
 
@@ -27,6 +34,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       if (argument->at(i) == '$') {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));
+        checkEnvVar(varName);
         char * c = getenv(varName.c_str());
         if(c == NULL){
           perror("invalid var");

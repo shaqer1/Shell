@@ -98,13 +98,15 @@ void expandWildcardsIfNecessary(std::string *s)
 		}
 	}
 	closedir(dir);
-	std::sort(array.begin(), array.end(), std::string::compare);
-	
+	std::sort(array.begin(), array.end(), comparePtrToString);
+
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 }
+
+bool comparePtrToNode(std::string* a, std::string* b) { return a->compare(b); }
 
 %}
 

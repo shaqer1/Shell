@@ -83,7 +83,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	}
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
-	DIR * dir = opendir(".");
+	DIR * dir = opendir(str->c_str());
 	if (dir == NULL) {
 		perror("opendir");
 		return;
@@ -94,7 +94,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
-		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
+		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {
 			array.push_back(new std::string (strdup(ent->d_name)));
 			//nEntries++;
 		}

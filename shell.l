@@ -88,7 +88,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	}
 	struct dirent * ent;
 	int nEntries = 0;
-	std::vector<std::string> array;
+	std::vector<std::string *> array;
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
@@ -101,7 +101,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	std::sort(array.begin(), array.end());
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
-		Command::_currentSimpleCommand->insertArgument(&array[i]);
+		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 }
 

@@ -83,7 +83,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	}
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
-	DIR * dir = opendir(str->c_str());
+	DIR * dir = opendir(str.c_str());
 	if (dir == NULL) {
 		perror("opendir");
 		return;

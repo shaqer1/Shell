@@ -23,6 +23,7 @@
 #include "shell.hh"
 #include <regex.h>     
 #include <assert.h>
+#include <algorithm>
 
 static void yyunput (int c,char *buf_ptr  );
 

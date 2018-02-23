@@ -87,25 +87,18 @@ void expandWildcardsIfNecessary(std::string *s)
 		return;
 	}
 	struct dirent * ent;
-	int maxEntries = 20;
 	int nEntries = 0;
-	std::string array[maxEntries];
+	std::vector<std::string> array;
 	while ( (ent = readdir(dir))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
-			if (nEntries == maxEntries) {
-				maxEntries *=2;
-				array = new std::string[maxEntries];
-				//(char **) realloc( array, maxEntries*sizeof(char*));
-				assert(array!=NULL);
-			}
 			array[nEntries]= ent->d_name;
 			nEntries++;
 		}
 	}
 	closedir(dir);
-	sortArrayStrings(array, nEntries);
+	std::sort(array.begin, array.end());
 	// Add arguments
 	for (int i = 0; i < nEntries; i++) {
 		Command::_currentSimpleCommand->insertArgument(array[i]));

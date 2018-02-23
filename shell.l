@@ -98,7 +98,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		}
 	}
 	closedir(dir);
-	std::sort(array.begin, array.end());
+	std::sort(array.begin(), array.end());
 	// Add arguments
 	for (int i = 0; i < nEntries; i++) {
 		Command::_currentSimpleCommand->insertArgument(array[i]));

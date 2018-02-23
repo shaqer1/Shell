@@ -101,7 +101,7 @@ void expandWildcardsIfNecessary(std::string *s)
 	std::sort(array.begin(), array.end());
 	// Add arguments
 	for (int i = 0; i < nEntries; i++) {
-		Command::_currentSimpleCommand->insertArgument(*array[i]));
+		Command::_currentSimpleCommand->insertArgument(&array[i]));
 	}
 }
 

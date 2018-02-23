@@ -40,9 +40,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
   if(argument->size() == 0){
     return;
   }
-  if(_arguments.size() > 0){
-    assign = 1;
-  }
+  assign = _arguments.size() > 0;
   if (strchr(argument->c_str(), '$')) {
     //printf("%s\n", argument);
     int i = 0;
@@ -71,7 +69,9 @@ void SimpleCommand::insertArgument( std::string * argument ) {
     _arguments.push_back(argument);
   }else {
     _arguments.push_back(argument);
-    last_arg = *argument;
+    if(assign){
+      last_arg = *argument;      
+    }
   }
 
 }

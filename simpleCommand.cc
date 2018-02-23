@@ -17,10 +17,10 @@ SimpleCommand::~SimpleCommand() {
   }
 }
 
-void checkEnvVar(std::string c){
+void checkEnvVar(std::string *c){
   if(strcmp(c.c_str(), "SHELL") == 0){
     char * resolved_path = (char *) malloc(PATH_MAX);
-    c.assign(realpath("./shell", resolved_path));
+    c->assign(realpath("./shell", resolved_path));
   }
 }
 
@@ -35,7 +35,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
       if (argument->at(i) == '$') {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));
-        checkEnvVar(varName);
+        checkEnvVar(&varName);
         char * c = getenv(varName.c_str());
         if(c == NULL){
           perror("invalid var");

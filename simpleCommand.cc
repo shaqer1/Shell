@@ -38,7 +38,7 @@ void SimpleCommand::insertArgument( std::string * argument ) {
         i = argument->find('}');
         std::string varName = argument->substr(argument->find('{') +1, i - (argument->find('{') +1));
         int res = checkEnvVar(&varName);
-        char * c =  res == -1 ? getenv(varName.c_str()) : (char *) varName->c_str();
+        char * c =  res == -1 ? getenv(varName.c_str()) : (char *) varName.c_str();
         if(c == NULL){
           perror("invalid var");
           exit(0);

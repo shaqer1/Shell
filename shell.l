@@ -95,7 +95,7 @@ void expandWildcardsIfNecessary(std::string *s)
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) ==0 ) {
 			std::string *s;
 			s->assign(strdup(ent->d_name));
-			array.push_back(*s);
+			array.push_back(&s);
 			//nEntries++;
 		}
 	}

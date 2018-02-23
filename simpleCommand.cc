@@ -24,7 +24,6 @@ int checkEnvVar(std::string *c){
     c->assign(realpath("/proc/self/exe", resolved_path));
     return 0;
   }if(strcmp(c->c_str(), "$") == 0){
-    char * resolved_path = (char *) malloc(PATH_MAX);
     c->assign(std::to_string(getpid()));
     return 0;
   }

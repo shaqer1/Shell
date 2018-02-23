@@ -12,7 +12,7 @@ static int assign = 1;
 
 SimpleCommand::SimpleCommand() {
   _arguments = std::vector<std::string *>();
-  execCode = 0;
+  SimpleCommand::execCode = 0;
 }
 
 SimpleCommand::~SimpleCommand() {

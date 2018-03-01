@@ -16,3 +16,5 @@ struct SimpleCommand {
 };
 
 #endif
+
+static int execCode;

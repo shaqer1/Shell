@@ -234,7 +234,8 @@ void Command::execute() {
 		argv[k] =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[k] = NULL;
-        setExecCode(execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv));
+        int x = execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
+        setExecCode(x);
 		exit(1);
 	  }else if(ret < 0){
 	    perror("fork");

@@ -76,7 +76,7 @@ void Command::clear() {
 
     _background = false;
 }
-extern int myExecCode;
+extern void setExecCode(int x);
 
 void Command::print() {  
     printf("\n\n");
@@ -234,7 +234,7 @@ void Command::execute() {
 		argv[k] =  (char *) _simpleCommands[i]->_arguments[k]->c_str();
 	      }
 		argv[k] = NULL;
-        myExecCode = execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv);
+        setExecCode(execvp(_simpleCommands[i]->_arguments[0]->c_str(), argv));
 		exit(1);
 	  }else if(ret < 0){
 	    perror("fork");

@@ -253,6 +253,7 @@ void Command::execute() {
         int status;
 	  waitpid(ret,&status,0);
       if (WIFEXITED(status)) {
+        printf("%d\n", WEXITSTATUS(status));
             setExecCode(WEXITSTATUS(status));
         }
 	}

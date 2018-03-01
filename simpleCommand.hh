@@ -17,4 +17,4 @@ struct SimpleCommand {
 
 #endif
 
-static int execCode;
+int execCode;

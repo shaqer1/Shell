@@ -76,7 +76,7 @@ void Command::clear() {
 
     _background = false;
 }
-extern int execCode;
+extern int myExecCode;
 
 void Command::print() {  
     printf("\n\n");

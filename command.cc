@@ -250,7 +250,11 @@ void Command::execute() {
     close(tmpout);
     close(tmperr);
 	if(!_background){
-	  waitpid(ret,NULL,0);
+        int status;
+	  waitpid(ret,&status,0);
+      if (WIFEXITED(status)) {
+            setExecCode(WEXITSTATUS(status));
+        }
 	}
     // and call exec
 

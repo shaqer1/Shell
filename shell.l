@@ -50,7 +50,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
-		expandWildcardsIfNecessary(prefix + "/" + component, suffix);
+		expandWildcardsIfNecessary(prefix + string("/") + component, suffix);
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -60,7 +60,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	std::string str = component;
+	std::string str (component->c_str());
 	str.append("^");
 	str.append(prefix->c_str());
 	size_t i=0;

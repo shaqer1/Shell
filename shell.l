@@ -43,7 +43,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	int pos = suffix->find("/");
 	std::string * component;
 	if(pos != std::string::npos){
-		component = &suffix->substr(0,pos);
+		component = new std::string(suffix->substr(0,pos));
 	}else{
 		component = suffix;
 		suffix->assign("");

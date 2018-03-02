@@ -97,7 +97,7 @@ argument_list argument
 
 argument:
   WORD {
-    if (strchr(&1, '*') == NULL && (strchr(&1, '?') == NULL || strcmp(&1, "${?}") == 0)){
+    if (strchr($!, '*') == NULL && (strchr($1, '?') == NULL || strcmp($1, "${?}") == 0)){
       Command::_currentSimpleCommand->insertArgument($1);
     }else{
       expandWildcards(NULL, $1);

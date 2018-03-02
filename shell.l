@@ -23,7 +23,6 @@
 #include "shell.hh"
 #include <regex.h>     
 #include <assert.h>
-#include <string.h>
 #include <algorithm>
 
 static void yyunput (int c,char *buf_ptr  );
@@ -37,7 +36,7 @@ bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) 
 void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 {
 // Return if arg does not contain * or ?
-	if (suffix != NULL && suffix.size() ==0){
+	if (suffix != NULL && suffix->size() ==0){
 		Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}

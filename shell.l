@@ -37,7 +37,7 @@ void expandWildcardsIfNecessary(std::string *s)
 {
 	char *arg = (char *) s->c_str();
 // Return if arg does not contain * or ?
-	if (strchr(arg, '*') == NULL && (strchr(arg, '?') == NULL || strcmp(arg, '${?}') == 0)){
+	if (strchr(arg, '*') == NULL && (strchr(arg, '?') == NULL || strcmp(arg, "${?}") == 0)){
 		Command::_currentSimpleCommand->insertArgument(s);
 		return;
 	}

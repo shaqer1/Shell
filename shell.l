@@ -113,7 +113,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {
-			expandWildcardsIfNecessary(prefix + "/" + ent->d_name, suffix);
+			expandWildcardsIfNecessary(prefix + "/" + ent->d_name, suffix);//TODO like 53
 			//array.push_back(new std::string (strdup(ent->d_name)));
 			//nEntries++;
 		}

@@ -97,10 +97,10 @@ argument_list argument
 
 argument:
   WORD {
-    if (strchr($1, '*') == NULL && (strchr($1->c_str(), '?') == NULL || strcmp($1->c_str(), "${?}") == 0)){
+    if (strchr($1, '*') == NULL && (strchr($1, '?') == NULL || strcmp($1->c_str(), "${?}") == 0)){
       Command::_currentSimpleCommand->insertArgument($1);
     }else{
-      expandWildcards(NULL, $1);
+      expandWildcardsIfNecessary(NULL, $1);
     }
   }
   ;

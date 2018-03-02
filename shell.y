@@ -97,9 +97,11 @@ argument_list argument
 
 argument:
   WORD {
-    //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    expandWildcardsIfNecessary($1, NULL);
-    //Command::_currentSimpleCommand->insertArgument( $1 );
+    if (strchr(arg, '*') == NULL && (strchr(arg, '?') == NULL || strcmp(arg, "${?}") == 0)){
+      Command::_currentSimpleCommand->insertArgument($1);
+    }else{
+      expandWildcards(NULL, $1);
+    }
   }
   ;
 

@@ -37,7 +37,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 {
 	char *arg = (char *) prefix->c_str();
 // Return if arg does not contain * or ?
-	if (strchr(arg, '*') == NULL && (strchr(arg, '?') == NULL || strcmp(arg, "${?}") == 0)){
+	if (suffix != NULL && suffix.size() ==0){
 		Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}

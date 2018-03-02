@@ -98,7 +98,7 @@ argument_list argument
 argument:
   WORD {
     //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    expandWildcardsIfNecessary(NULL, $1);
+    expandWildcardsIfNecessary($1, NULL);
     //Command::_currentSimpleCommand->insertArgument( $1 );
   }
   ;

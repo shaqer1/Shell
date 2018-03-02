@@ -33,14 +33,15 @@ void myunputc(int c) {
 
 bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
-void expandWildcardsIfNecessary(std::string *prefix, std::string *s)
+void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 {
-	char *arg = (char *) s->c_str();
+	char *arg = (char *) prefix->c_str();
 // Return if arg does not contain * or ?
 	if (strchr(arg, '*') == NULL && (strchr(arg, '?') == NULL || strcmp(arg, "${?}") == 0)){
-		Command::_currentSimpleCommand->insertArgument(s);
+		Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}
+	
 	// 1. Convert wildcard to regular expression
 	// Convert “*” -> “.*”
 	//“?” -> “.”
@@ -50,7 +51,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *s)
 	// Allocate enough space for regular expression
 	std::string str;
 	str.append("^");
-	str.append(s->c_str());
+	str.append(prefix->c_str());
 	size_t i=0;
 	while(i<str.size()){
 		if((i = str.find("*", i)) != std::string::npos){

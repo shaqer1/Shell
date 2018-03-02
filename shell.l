@@ -40,7 +40,19 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 		Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}
-	
+	int pos = suffix->find("/");
+	std::string * component;
+	if(pos != std::string::npos){
+		component = suffix->substr(0,pos);
+	}else{
+		component = suffix;
+		suffix->assign("");
+	}
+
+	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
+		expandWildcardsIfNecessary(prefix + "/" + component, suffix);
+		return;
+	}
 	// 1. Convert wildcard to regular expression
 	// Convert “*” -> “.*”
 	//“?” -> “.”
@@ -48,7 +60,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	std::string str;
+	std::string str = component;
 	str.append("^");
 	str.append(prefix->c_str());
 	size_t i=0;
@@ -83,30 +95,39 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	}
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
-	DIR * dir = opendir(".");
-	if (dir == NULL) {
+	
+	if(prefix.size() == 0){
+		dir = ".";
+	}else{
+		dir = prefix;
+	}
+	DIR * d = opendir(dir);
+	if (d == NULL) {
 		perror("opendir");
 		return;
 	}
 	struct dirent * ent;
 	int nEntries = 0;
 	std::vector<std::string *> array;
-	while ( (ent = readdir(dir))!= NULL) {
+	while ( (ent = readdir(d))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {
-			array.push_back(new std::string (strdup(ent->d_name)));
+			expandWildcardsIfNecessary(prefix + "/" + ent->d_name, suffix);
+			//array.push_back(new std::string (strdup(ent->d_name)));
 			//nEntries++;
 		}
 	}
-	closedir(dir);
-	std::sort(array.begin(), array.end(), comparePtrToString);
+	closedir(d);
+	//std::sort(array.begin(), array.end(), comparePtrToString);
 
 	// Add arguments
+	/*
 	for (int i = 0; i < array.size(); i++) {
 		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
+	*/
 }
 
 

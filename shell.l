@@ -43,7 +43,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	int pos = suffix->find("/");
 	std::string * component;
 	if(pos != std::string::npos){
-		component = suffix->substr(0,pos);
+		component = *suffix->substr(0,pos);
 	}else{
 		component = suffix;
 		suffix->assign("");
@@ -95,11 +95,11 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	}
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
-	
-	if(prefix.size() == 0){
+	char * dir;
+	if(prefix->size() == 0){
 		dir = ".";
 	}else{
-		dir = prefix;
+		dir = (char *) prefix->c_str();
 	}
 	DIR * d = opendir(dir);
 	if (d == NULL) {

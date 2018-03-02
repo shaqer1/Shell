@@ -35,7 +35,6 @@ bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) 
 
 void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 {
-	char *arg = (char *) prefix->c_str();
 // Return if arg does not contain * or ?
 	if (suffix != NULL && suffix.size() ==0){
 		Command::_currentSimpleCommand->insertArgument(prefix);

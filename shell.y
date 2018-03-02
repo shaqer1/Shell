@@ -14,7 +14,7 @@
 %code requires 
 {
 #include <string>
-
+#include <string.h>
 extern "C" void expandWildcardsIfNecessary(std::string *prefix, std::string *s);
 
 #if __cplusplus > 199711L

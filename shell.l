@@ -33,7 +33,7 @@ void myunputc(int c) {
 
 bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
-void expandWildcardsIfNecessary(std::string *s)
+void expandWildcardsIfNecessary(std::string *prefix, std::string *s)
 {
 	char *arg = (char *) s->c_str();
 // Return if arg does not contain * or ?

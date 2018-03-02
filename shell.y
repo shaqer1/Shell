@@ -15,7 +15,7 @@
 {
 #include <string>
 
-extern "C" void expandWildcardsIfNecessary(std::string *s);
+extern "C" void expandWildcardsIfNecessary(std::string *prefix, std::string *s);
 
 #if __cplusplus > 199711L
 #define register      // Deprecated in C++11 so remove the keyword
@@ -98,7 +98,7 @@ argument_list argument
 argument:
   WORD {
     //printf("   Yacc: insert argument \"%s\"\n", $1->c_str());
-    expandWildcardsIfNecessary($1);
+    expandWildcardsIfNecessary(NULL, $1);
     //Command::_currentSimpleCommand->insertArgument( $1 );
   }
   ;

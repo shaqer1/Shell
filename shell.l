@@ -104,6 +104,7 @@ void expandWildcardsIfNecessary(std::string *s)
 
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
+		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 }

@@ -77,7 +77,7 @@ void Command::clear() {
     _background = false;
 }
 extern void setExecCode(int x);
-
+extern void setBGPIDCode(int x);
 void Command::print() {  
     printf("\n\n");
     printf("              COMMAND TABLE                \n");
@@ -256,7 +256,9 @@ void Command::execute() {
         //printf("%d\n", WEXITSTATUS(status));
             setExecCode(WEXITSTATUS(status));
         }
-	}
+	}else{
+        setBGPIDCode(ret);
+    }
     // and call exec
 
     // Clear to prepare for next command

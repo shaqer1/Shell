@@ -10,9 +10,14 @@
 static std::string last_arg;
 static int assign = 1;
 static int myExecCode = 0;
+static int myBGPIDCode = 0;
 
 void setExecCode(int x){
 	myExecCode = x;
+}
+
+void setBGPIDCode(int x){
+	myBGPIDCode = x;
 }
 
 SimpleCommand::SimpleCommand() {
@@ -40,6 +45,9 @@ int checkEnvVar(std::string *c){
     return 0;
   }else if(strcmp(c->c_str(), "?") == 0){
     c->assign(std::to_string(myExecCode));
+    return 0;
+  }else if(strcmp(c->c_str(), "!") == 0){
+    c->assign(std::to_string(myBGPIDCode));
     return 0;
   }
   return -1;

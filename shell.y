@@ -97,7 +97,7 @@ argument_list argument
 
 argument:
   WORD {
-    if (strchr($1, '*') == NULL && (strchr($1, '?') == NULL || strcmp($1->c_str(), "${?}") == 0)){
+    if ($1->find('*') == std::string::npos && ($1->find('?') == std::string::npos || strcmp($1, "${?}") == 0)){
       Command::_currentSimpleCommand->insertArgument($1);
     }else{
       expandWildcardsIfNecessary(NULL, $1);

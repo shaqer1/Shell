@@ -97,7 +97,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	// that match the regular expression
 	char * dir;
 	if(prefix->size() == 0){
-		//dir = ".";
+		dir = (char *) ".";
 	}else{
 		dir = (char *) prefix->c_str();
 	}

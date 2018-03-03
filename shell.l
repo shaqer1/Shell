@@ -46,7 +46,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	}
 }
 
-void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> array)
+void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> * array)
 {
 // Return if arg does not contain * or ?
 	if (suffix != NULL && suffix->size() ==0){

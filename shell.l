@@ -35,22 +35,22 @@ void myunputc(int c) {
 bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
 void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
-	std::vector<std::string *> * array;
+	std::vector<std::string *> array;
 	//here
 	expandWildcards(prefix, suffix, array);
-	std::sort(array->begin(), array->end(), comparePtrToString);
+	std::sort(array.begin(), array.end(), comparePtrToString);
 	// Add arguments
-	for (int i = 0; i < array->size(); i++) {
-		if(*array[i]->compare(".")!=0 && *array[i]->compare(".."))
+	for (int i = 0; i < array.size(); i++) {
+		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 }
 
-void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> * array)
+void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)
 {
 // Return if arg does not contain * or ?
 	if (suffix != NULL && suffix->size() ==0){
-		array->push_back(prefix);
+		array.push_back(prefix);
 		//Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}

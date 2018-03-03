@@ -80,8 +80,8 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// Allocate enough space for regular expression
 	std::string str;
 	str.append("^");
-	str.append(component->c_str());
 	str.append(prefix->c_str());
+	str.append(component->c_str());
 	size_t i=0;
 	while(i<str.size()){
 		if((i = str.find("*", i)) != std::string::npos){

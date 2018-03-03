@@ -24,6 +24,7 @@
 #include <regex.h>     
 #include <assert.h>
 #include <algorithm>
+#include <vector>
 
 static void yyunput (int c,char *buf_ptr  );
 

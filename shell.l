@@ -80,7 +80,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// Allocate enough space for regular expression
 	std::string str;
 	str.append("^");
-	str.append(prefix->c_str());
+	//str.append(prefix->c_str());
 	str.append(component->c_str());
 	size_t i=0;
 	while(i<str.size()){
@@ -126,16 +126,14 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		return;
 	}
 	struct dirent * ent;
-	int nEntries = 0;
 	while ( (ent = readdir(d))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
-		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {
+		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {//+ *(new std::string("/"))
 			expandWildcards(
 				new std::string(
-					*prefix /*+ *(new std::string("/"))*/ + *(new std::string(ent->d_name)))
+					*prefix + *(new std::string(ent->d_name)))
 					, suffix, array);//TODO like 53
-			//nEntries++;
 		}
 	}
 	closedir(d);

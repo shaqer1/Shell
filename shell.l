@@ -41,7 +41,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	std::sort(array.begin(), array.end(), comparePtrToString);
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
-		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
+		//if(array[i]->compare(".")!=0 && array[i]->compare(".."))
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 }
@@ -129,7 +129,9 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	while ( (ent = readdir(d))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
-		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {//+ *(new std::string("/"))
+		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 && 
+				strcmp(ent->d_name,".") !=0 && strcmp(ent->d_name,"..") != 0
+				) {//+ *(new std::string("/"))
 			expandWildcards(
 				new std::string(
 					*prefix + *(new std::string(ent->d_name)))

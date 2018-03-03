@@ -58,7 +58,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	std::string * component;
 	if(pos != std::string::npos){
 		component = new std::string(suffix->substr(0,pos));
-		suffix.assign(suffix->substr(pos+1));
+		suffix->assign(suffix->substr(pos+1));
 	}else{
 		component = new std::string(suffix->c_str());
 		suffix = new std::string("");

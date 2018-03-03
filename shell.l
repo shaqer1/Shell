@@ -48,6 +48,9 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 		component = suffix;
 		suffix->assign("");
 	}
+	if(prefix == NULL){
+		prefix = new std::string("");
+	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
 		expandWildcardsIfNecessary(new std::string(*prefix + *(new std::string("/")) + *component), suffix);

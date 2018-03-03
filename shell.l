@@ -63,8 +63,9 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	// Also add ^ at the beginning and $ at the end to match
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
-	std::string str (component->c_str());
+	std::string str;
 	str.append("^");
+	str.apend(component->c_str());
 	str.append(prefix->c_str());
 	size_t i=0;
 	while(i<str.size()){

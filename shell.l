@@ -50,7 +50,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 {
 // Return if arg does not contain * or ?
 	if (suffix != NULL && suffix->size() ==0){
-		array.push_back(prefix);
+		array->push_back(prefix);
 		//Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}

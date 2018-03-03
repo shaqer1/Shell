@@ -38,7 +38,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	std::vector<std::string *> * array;
 	//here
 	expandWildcards(prefix, suffix, array);
-	std::sort(array.begin(), array.end(), comparePtrToString);
+	std::sort(array->begin(), array->end(), comparePtrToString);
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
 		if(array[i]->compare(".")!=0 && array[i]->compare(".."))

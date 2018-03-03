@@ -65,7 +65,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	// Allocate enough space for regular expression
 	std::string str;
 	str.append("^");
-	str.apend(component->c_str());
+	str.append(component->c_str());
 	str.append(prefix->c_str());
 	size_t i=0;
 	while(i<str.size()){

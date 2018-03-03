@@ -46,7 +46,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 		component = new std::string(suffix->substr(0,pos));
 	}else{
 		component = suffix;
-		suffix->assign("");
+		suffix = ("");
 	}
 	if(prefix == NULL){
 		prefix = new std::string("");

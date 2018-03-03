@@ -35,9 +35,9 @@ void myunputc(int c) {
 bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
 void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
-	std::vector<std::string *> array;
+	std::vector<std::string *> * array;
 	//here
-	expandWildcards(prefix, suffix, &array);
+	expandWildcards(prefix, suffix, array);
 	std::sort(array.begin(), array.end(), comparePtrToString);
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {

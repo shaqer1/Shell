@@ -33,11 +33,24 @@ void myunputc(int c) {
 
 bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) < 0; }
 
-void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
+void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
+	std::vector<std::string *> array;
+	//here
+	expandWildcards(prefix, suffix, array);
+	std::sort(array.begin(), array.end(), comparePtrToString);
+	// Add arguments
+	for (int i = 0; i < array.size(); i++) {
+		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
+			Command::_currentSimpleCommand->insertArgument(array[i]);
+	}
+}
+
+void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> array)
 {
 // Return if arg does not contain * or ?
 	if (suffix != NULL && suffix->size() ==0){
-		Command::_currentSimpleCommand->insertArgument(prefix);
+		array.push_back(prefix);
+		//Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}
 	int pos = suffix->find("/");
@@ -53,7 +66,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
-		expandWildcardsIfNecessary(new std::string(*prefix + *(new std::string("/")) + *component), suffix);
+		expandWildcards(new std::string(*prefix + *(new std::string("/")) + *component), suffix, array);
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -112,31 +125,18 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix)
 	}
 	struct dirent * ent;
 	int nEntries = 0;
-	std::vector<std::string *> array;
 	while ( (ent = readdir(d))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 ) {
-			expandWildcardsIfNecessary(
+			expandWildcards(
 				new std::string(
 					*prefix /*+ *(new std::string("/"))*/ + *(new std::string(ent->d_name)))
-					, suffix);//TODO like 53
-			//array.push_back(new std::string (strdup(ent->d_name)));
+					, suffix, array);//TODO like 53
 			//nEntries++;
 		}
 	}
 	closedir(d);
-
-	//here
-	//std::sort(array.begin(), array.end(), comparePtrToString);
-
-	// Add arguments
-	/*
-	for (int i = 0; i < array.size(); i++) {
-		if(array[i]->compare(".")!=0 && array[i]->compare(".."))
-		Command::_currentSimpleCommand->insertArgument(array[i]);
-	}
-	*/
 }
 
 

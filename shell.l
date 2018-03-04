@@ -79,7 +79,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
 	int showDots = 0;
-	if(component->compare(".*") > 0){
+	if(component->compare(".*") >= 0){
 		showDots = 1;
 	}
 	std::string str;

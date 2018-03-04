@@ -69,7 +69,11 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
-		expandWildcards(new std::string(*prefix + *(new std::string("/")) + *component), suffix, array);
+		std::string * strWithSlash;
+		if(prefix.size() != 0){
+			strWithSlash = *prefix + *(new std::string("/"));
+		}
+		expandWildcards(new std::string( + *component), suffix, array);
 		return;
 	}
 	// 1. Convert wildcard to regular expression

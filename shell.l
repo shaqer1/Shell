@@ -55,7 +55,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		return;
 	}
 	int pos = suffix->find("/");
-	pos = (pos == 0 && suffix->find("/",pos) != std::string::npos)?suffix->find("/",pos):pos;
+	pos = (pos == 0 && suffix->find("/",pos+1) != std::string::npos)?suffix->find("/",pos+1):pos;
 	std::string * component;
 	if(pos != std::string::npos){
 		component = new std::string(suffix->substr(0,pos));

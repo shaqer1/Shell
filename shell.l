@@ -70,9 +70,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
 		std::string * strWithSlash;
-		if(prefix->size() != 0){
-			strWithSlash = new std::string(*prefix + *(new std::string("/")));
-		}
+		strWithSlash = (prefix->size() != 0)?new std::string(*prefix + *(new std::string("/"))):new std::string("");
 		expandWildcards(new std::string(*strWithSlash + *component), suffix, array);
 		return;
 	}

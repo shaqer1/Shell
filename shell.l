@@ -84,20 +84,17 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	str.append(component->c_str());
 	size_t i=0;
 	while(i<str.size()){
-		if((i = str.find("*", i)) != std::string::npos){
+		if(str.find("*", i) != std::string::npos){
+			i = str.find("*", i);
 			str.replace(i , 1, ".*");
 			i+=2;
-		}
-		if((i = str.find("?", i)) != std::string::npos){
+		}if(str.find("?", i) != std::string::npos){
+			i = str.find("?", i);
 			str.replace(i , 1, ".");
 			i++;
-		}
-		if((i = str.find(".", i)) != std::string::npos){
+		}if(str.find(".", i) != std::string::npos){
+			i = str.find(".", i);
 			str.replace(i , 1, "\\.");
-			i+=2;
-		}
-		if((i = str.find("*",i)) != std::string::npos){
-			str.replace(i , 1, ".*");
 			i+=2;
 		}
 

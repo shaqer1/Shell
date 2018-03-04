@@ -132,9 +132,9 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	while ( (ent = readdir(d))!= NULL) {
 		// Check if name matches
 		regmatch_t match;
-		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 && !(showDots &&
-				strcmp(ent->d_name,".") ==0 && strcmp(ent->d_name,"..") == 0
-				)) {//+ *(new std::string("/"))
+		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 && (showDots ||
+				(strcmp(ent->d_name,".") !=0 && strcmp(ent->d_name,"..") != 0)
+				) {//+ *(new std::string("/"))
 			expandWildcards(
 				new std::string(
 					*prefix + *(new std::string(ent->d_name)))

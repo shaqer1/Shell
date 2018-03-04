@@ -58,7 +58,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	pos = (pos == 0 && suffix->find("/",pos+1) != std::string::npos)?suffix->find("/",pos+1):pos;
 	std::string * component;
 	if(pos != std::string::npos){
-		component = new std::string(suffix->substr(0,pos));
+		component = new std::string(suffix->substr(0,pos+1));
 		suffix->assign(suffix->substr(pos+1));
 	}else{
 		component = new std::string(suffix->c_str());
@@ -69,9 +69,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
-		std::string * strWithSlash;
-		strWithSlash = (prefix->size() != 0)?new std::string(*prefix + *(new std::string("/"))):new std::string("");
-		expandWildcards(new std::string(*strWithSlash + *component), suffix, array);
+		expandWildcards(new std::string(*prefix + *component), suffix, array);
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -142,7 +140,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 				(*ent->d_name != '.'))) {//+ *(new std::string("/"))   strcmp(ent->d_name,".") !=0 && strcmp(ent->d_name,"..") != 0
 			expandWildcards(
 				new std::string(
-					*prefix + *(new std::string("/")) + *(new std::string(ent->d_name)))
+					*prefix + *(new std::string(ent->d_name)))
 					, suffix, array);//TODO like 53
 		}
 	}

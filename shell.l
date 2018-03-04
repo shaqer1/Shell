@@ -92,8 +92,8 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	while(i<str.size()){
 		if(str.find(".", i) != std::string::npos){
 			i = str.find(".", i);
-			str.replace(i , 1, "\.");
-			//i++;
+			str.replace(i , 1, "\\.");
+			i++;
 			//i+=2;
 		} else
 		if(str.find("*", i) != std::string::npos){

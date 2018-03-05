@@ -144,7 +144,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 			}
 			expandWildcards(
 				new std::string(
-					*prefix + *(new std::string((prefix->size()==0)?"":"/")) + *(new std::string(ent->d_name)))
+					*prefix + *(new std::string((prefix->size()==-1)?"":"/")) + *(new std::string(ent->d_name)))
 					, suffix, array);//TODO like 53
 		}
 	}

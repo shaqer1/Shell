@@ -30,15 +30,15 @@ int MAXHIST = 50;
 // This history does not change. 
 // Yours have to be updated.
 int history_index = 0;
-char * history [] = {
+/*char * history [] = {
   "ls -al | grep x", 
   "ps -e",
   "cat read-line-example.c",
   "vi hello.c",
   "make",
   "ls -al | grep xxx | grep yyy"
-};
-int history_length = sizeof(history)/sizeof(char *);
+};*//*
+int history_length = sizeof(history)/sizeof(char *);*/
 
 void read_line_print_usage()
 {

@@ -45,8 +45,9 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	if(array.size() == 0){
-		prefix->append("/");
-		char * c = strcat(c, suffix->c_str());
+		//prefix->append("/");
+		const char * c = suffix->c_str();
+		const char * d = prefix->c_str();
 		Command::_currentSimpleCommand->insertArgument(new std::string(c));
 	}
 }

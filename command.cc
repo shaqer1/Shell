@@ -259,7 +259,7 @@ void Command::execute() {
 	}else{
         setBGPIDCode(ret);
         printf("[%d] exited.\n", ret);
-        Shell::prompt();
+        //Shell::prompt();
     }
     // and call exec
 

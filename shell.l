@@ -43,6 +43,9 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	for (int i = 0; i < array.size(); i++) {
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
+	if(array.size() == 0){
+		Command::_currentSimpleCommand->insertArgument(suffix);
+	}
 }
 
 void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)

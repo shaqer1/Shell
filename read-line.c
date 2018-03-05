@@ -244,7 +244,7 @@ char * read_line() {
       curpos++;
     }
     }
-    else if (ch==10) {
+    else if (ch==13) {
     // <Enter> was typed. Return line
 
     // Set History

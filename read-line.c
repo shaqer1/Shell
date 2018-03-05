@@ -244,7 +244,7 @@ char * read_line() {
         curpos++;
       }
     }
-    /*else if (ch==13) {
+    else if (ch == 10 || ch == 13) {
     // <Enter> was typed. Return line
 
     // Set History
@@ -258,10 +258,13 @@ char * read_line() {
     //history_index = history_length;
 
     // Print newline
+    ch = 10;
+    write(1, &ch, 1);
+    ch = 13;
     write(1, &ch, 1);
 
     break;
-    }*/
+    }
     else if (ch == 31) {
       // ctrl-?
       read_line_print_usage();

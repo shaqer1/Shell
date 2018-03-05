@@ -48,7 +48,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 		//prefix->append("/");
 		//const char * c = suffix->c_str();
 		//const char * d = prefix->c_str();
-		Command::_currentSimpleCommand->insertArgument(*str);
+		Command::_currentSimpleCommand->insertArgument(&str);
 	}
 }
 

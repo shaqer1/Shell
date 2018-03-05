@@ -159,7 +159,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 }
 
 
-extern “C” char * read_line();
+extern "C" char * read_line();
 
 
 int mygetc(FILE * f) {

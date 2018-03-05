@@ -22,6 +22,9 @@ char line_buffer[MAX_BUFFER_LINE];
 // Buffer where line is stored
 int line_length;
 char line_buffer[MAX_BUFFER_LINE];
+char ** history;
+int history_length = 0;
+int MAXHIST = 50;
 
 // Simple history array
 // This history does not change. 

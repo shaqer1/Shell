@@ -416,6 +416,7 @@ char * read_line() {
         if (history[history_index] != NULL) {
               // Erase old line
             // Print backspaces
+          printf("up");
             int i = 0;
             for (i = 0; i < line_length; i++) {
               ch = 8;

@@ -182,69 +182,69 @@ char * read_line() {
     if (ch>=32 && ch!=127 && ch != 27) {
       // It is a printable character.  
 
-    if (curpos != line_length) {
-      char tmpc;
-      int i;
-      //line_length++;
-      for (i = line_length-1; i >= curpos; i--) {
-        tmpc = line_buffer[i];
-        line_buffer[i] = line_buffer[i - 1];
-        line_buffer[i + 1] = tmpc;
+      if (curpos != line_length) {
+        char tmpc;
+        int i;
+        //line_length++;
+        for (i = line_length-1; i >= curpos; i--) {
+          tmpc = line_buffer[i];
+          line_buffer[i] = line_buffer[i - 1];
+          line_buffer[i + 1] = tmpc;
+        }
+        line_buffer[curpos] = ch;
+        int j = line_length - curpos;
+        for (i = 0; i < j; i++) {
+          char k = 27;
+          char l = 91;
+          char m = 67;
+          write(1, &k, 1);
+          write(1, &l, 1);
+          write(1, &m, 1);
+        }
+        for (i = 0; i < line_length; i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+        for (i = 0; i < line_length; i++) {
+          ch = ' ';
+          write(1, &ch, 1);
+        }
+        for (i = 0; i < line_length; i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+        line_length++;
+        curpos++;
+        write(1, line_buffer, line_length);
+        for (i = 0; i < line_length; i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+        line_buffer[line_length] = '\0';
+        for (i = 0; i < curpos; i++) {
+          char k = 27;
+          char l = 91;
+          char m = 67;
+          write(1, &k, 1);
+          write(1, &l, 1);
+          write(1, &m, 1);
+        }
+        
       }
-      line_buffer[curpos] = ch;
-      int j = line_length - curpos;
-      for (i = 0; i < j; i++) {
-        char k = 27;
-        char l = 91;
-        char m = 67;
-        write(1, &k, 1);
-        write(1, &l, 1);
-        write(1, &m, 1);
-      }
-      for (i = 0; i < line_length; i++) {
-        ch = 8;
+      else {
+        // Do echo
         write(1, &ch, 1);
-      }
-      for (i = 0; i < line_length; i++) {
-        ch = ' ';
-        write(1, &ch, 1);
-      }
-      for (i = 0; i < line_length; i++) {
-        ch = 8;
-        write(1, &ch, 1);
-      }
-      line_length++;
-      curpos++;
-      write(1, line_buffer, line_length);
-      for (i = 0; i < line_length; i++) {
-        ch = 8;
-        write(1, &ch, 1);
-      }
-      line_buffer[line_length] = '\0';
-      for (i = 0; i < curpos; i++) {
-        char k = 27;
-        char l = 91;
-        char m = 67;
-        write(1, &k, 1);
-        write(1, &l, 1);
-        write(1, &m, 1);
-      }
-      
-    }
-    else {
-      // Do echo
-      write(1, &ch, 1);
 
-      // If max number of character reached return.
-      if (line_length == MAX_BUFFER_LINE - 2) break;
+        // If max number of character reached return.
+        if (line_length == MAX_BUFFER_LINE - 2) break;
 
-      // add char to buffer.
-      line_buffer[line_length] = ch;
-      line_length++;
-      curpos++;
+        // add char to buffer.
+        line_buffer[line_length] = ch;
+        line_length++;
+        curpos++;
+      }
     }
-    }
-    else if (ch==13) {
+    /*else if (ch==13) {
     // <Enter> was typed. Return line
 
     // Set History
@@ -261,7 +261,7 @@ char * read_line() {
     write(1, &ch, 1);
 
     break;
-    }
+    }*/
     else if (ch == 31) {
       // ctrl-?
       read_line_print_usage();

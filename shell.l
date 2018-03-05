@@ -36,6 +36,7 @@ bool comparePtrToString(std::string* a, std::string* b) { return a->compare(*b) 
 
 void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	std::vector<std::string *> array;
+	std::string str (suffix->c_str);
 	//here
 	expandWildcards(prefix, suffix, array);
 	std::sort(array.begin(), array.end(), comparePtrToString);
@@ -44,8 +45,8 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	if(array.size() == 0){
-		prefix->append(suffix->c_str());
-		Command::_currentSimpleCommand->insertArgument(prefix);
+		//prefix->append(suffix->c_str());
+		Command::_currentSimpleCommand->insertArgument(str);
 	}
 }
 

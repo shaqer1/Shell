@@ -177,19 +177,6 @@ yyerror(const char * s)
 #if 0
 main()
 {
-  yyin = fopen(".shellrc", "r");
-  if (yyin > 0) {
-    yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-    yyparse();
-    yyin = stdin;
-    //Command::_currentCommand.clear();
-    Shell::prompt();
-    yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-    yyparse();
-  } else {
-    yyin = NULL;
-    shell::prompt();
-    yyparse();
-  }
+  yyparse();
 }
 #endif

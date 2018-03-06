@@ -50,6 +50,24 @@ void read_line_print_usage()
   write(1, usage, strlen(usage));
 }
 
+
+void clear(){
+  for (i = 0; i < line_length; i++) {
+    ch = 8;
+    write(1, &ch, 1);
+  }
+
+  for (i = 0; i < line_length; i++) {
+    ch = ' ';
+    write(1, &ch, 1);
+  }
+
+  for (i = 0; i < line_length; i++) {
+    ch = 8;
+    write(1, &ch, 1);
+  }
+}
+
 /* 
  * Input a line with some basic editing.
  */
@@ -87,28 +105,15 @@ char * read_line() {
         
         int j = line_length - cursorPos;
         for (i = 0; i < j; i++) {
-          char k = 27;
-          char l = 91;
-          char m = 67;
-          write(1, &k, 1);
-          write(1, &l, 1);
-          write(1, &m, 1);
+          char esc = 27;
+          char brac = 91;
+          char C = 67;
+          write(1, &esc, 1);
+          write(1, &brac, 1);
+          write(1, &C, 1);
         }
 
-        for (i = 0; i < line_length; i++) {
-          ch = 8;
-          write(1, &ch, 1);
-        }
-
-        for (i = 0; i < line_length; i++) {
-          ch = ' ';
-          write(1, &ch, 1);
-        }
-
-        for (i = 0; i < line_length; i++) {
-          ch = 8;
-          write(1, &ch, 1);
-        }
+        clear();
 
         line_length++;
         cursorPos++;
@@ -301,9 +306,9 @@ char * read_line() {
 
         //left
         if (ch1 == 91 && ch2 == 68 && cursorPos != 0) {
-        ch = 8;
-        write(1, &ch, 1);
-        --cursorPos;
+          ch = 8;
+          write(1, &ch, 1);
+          --cursorPos;
         } else if (ch1 == 91 && ch2 == 67 && cursorPos != line_length) {//right
             ch = line_buffer[cursorPos];
             write(1, &ch, 1);

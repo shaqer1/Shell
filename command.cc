@@ -108,9 +108,7 @@ void Command::print() {
 
 extern "C" void bgHandler(int sig){
   while(waitpid(-1, NULL, WNOHANG) >0){
-    if(_background){
         printf("%d\n", getpid());
-    }
   }
 }
 
@@ -252,12 +250,14 @@ void Command::execute() {
 	    perror("fork");
 	    exit(1);
 	  }else if (ret > 0){
-        struct sigaction sa3;
-        sa3.sa_handler = bgHandler;
-        int error =0;
-        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
-          perror("child");
-          exit(-1);
+        if(_background){
+            struct sigaction sa3;
+            sa3.sa_handler = bgHandler;
+            int error =0;
+            if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
+              perror("child");
+              exit(-1);
+            }
         }
       }
 	}

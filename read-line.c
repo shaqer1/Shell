@@ -197,14 +197,14 @@ char * read_line() {
 
       line_length--;
       write(1, line_buffer, line_length);
-      for (i = 0; i < line_length; i++) {
+      for (int i = 0; i < line_length; i++) {
         ch = 8;
         write(1, &ch, 1);
       }
 
       line_buffer[line_length] = '\0';
       cursorPos--;
-      for (i = 0; i < cursorPos; i++) {
+      for (int i = 0; i < cursorPos; i++) {
         char esc = 27;
         char brac = 91;
         char C = 67;

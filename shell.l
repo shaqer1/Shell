@@ -205,6 +205,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 
 \n 	{
 		Shell::prompt();
+		return NEWLINE;
 	}	
 
 "|" 	{

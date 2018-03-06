@@ -118,7 +118,7 @@ char * read_line() {
         line_length++;
         cursorPos++;
         write(1, line_buffer, line_length);
-        for (i = 0; i < line_length; i++) {
+        for (int i = 0; i < line_length; i++) {
           ch = 8;
           write(1, &ch, 1);
         }

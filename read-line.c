@@ -308,7 +308,7 @@ char * read_line() {
             write(1, &ch, 1);
             ++cursorPos;
         } else if (ch1 == 91 && ch2 == 65) {//up
-          if (history_index > 0 && history[history_index-1] != NULL) {//null everytime history is not preserved
+          if (history_index > 0 && history[history_index-1] != NULL) {
                 // Erase old line
               // Print backspaces
               int i = 0;
@@ -331,15 +331,16 @@ char * read_line() {
               //history_index--;
               strcpy(line_buffer, history[history_index-1]);
               line_length = strlen(line_buffer);
-              history_index = (history_index + 1) % history_length;
+              //history_index = (history_index + 1) % history_length;
+              history_index--;
               cursorPos = line_length;
               // print line
               write(1, line_buffer, line_length);
           }
         } else if (ch1 == 91 && ch2 == 66) {
-          printf("down");
+          //printf("down");
           // Down arrow. Print next line in history.
-          if (history_index > 0 && history[history_index-1] != NULL) {
+          if (history_index > 0 && history[history_index] != NULL) {
             // delete old line
             // Print backspaces
             int i = 0;
@@ -359,9 +360,10 @@ char * read_line() {
             }
 
             // Copy from history
-            strcpy(line_buffer, history[history_index-1]);
+            strcpy(line_buffer, history[history_index]);
             line_length = strlen(line_buffer);
-            history_index = (history_index - 1) % history_length;
+            //history_index = (history_index - 1) % history_length;
+            history_index++;
             cursorPos = line_length;
             // print line
             write(1, line_buffer, line_length);

@@ -95,7 +95,7 @@ char * read_line() {
       if (cursorPos != line_length) {
         char temp;
 
-        for (i = line_length-1; i >= cursorPos; i--) {
+        for (int i = line_length-1; i >= cursorPos; i--) {
           temp = line_buffer[i];
           line_buffer[i] = line_buffer[i - 1];
           line_buffer[i + 1] = temp;

@@ -52,6 +52,7 @@ void read_line_print_usage()
 
 
 void clear( char ch){
+  int i;
   for (i = 0; i < line_length; i++) {
     ch = 8;
     write(1, &ch, 1);
@@ -93,7 +94,6 @@ char * read_line() {
 
       if (cursorPos != line_length) {
         char temp;
-        int i;
 
         for (i = line_length-1; i >= cursorPos; i--) {
           temp = line_buffer[i];
@@ -177,7 +177,6 @@ char * read_line() {
     }
     else if (ch == 8 || ch == 127 && line_length != 0 && cursorPos != 0) {
       // <backspace> was typed. Remove previous char read.
-      int i;
       for (i = cursorPos; i < line_length; i++) {
         char temp = line_buffer[i];
         line_buffer[i] = line_buffer[i + 1];
@@ -194,20 +193,7 @@ char * read_line() {
         write(1, &C, 1);
       }
 
-      for (i = 0; i < line_length; i++) {
-        ch = 8;
-        write(1, &ch, 1);
-      }
-
-      for (i = 0; i < line_length; i++) {
-        ch = ' ';
-        write(1, &ch, 1);
-      }
-
-      for (i = 0; i < line_length; i++) {
-        ch = 8;
-        write(1, &ch, 1);
-      }
+      clear(ch);
 
       line_length--;
       write(1, line_buffer, line_length);

@@ -59,7 +59,7 @@ char * read_line() {
 
   line_length = 0;
   cursorPos = 0;
-  if(history != NULL){
+  if(history == NULL){
     history = (char **)calloc(MAX_HISTORY, sizeof(char*));
   }
 

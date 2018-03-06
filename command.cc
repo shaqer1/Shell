@@ -108,7 +108,7 @@ void Command::print() {
 
 extern "C" void bgHandler(int sig){
   while(waitpid(-1, NULL, WNOHANG) >0){
-    printf("%d\n", getpid());
+    //printf("%d\n", getpid());
     
   }
 }

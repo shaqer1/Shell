@@ -36,6 +36,13 @@
 extern char ** history;
 extern int history_length;
 
+void bgHandler(int sig){
+    if(_background){
+      while(waitpid(-1, NULL, WNOHANG) >0){
+            printf("[%d] exited\n", getpid());
+      }
+    }
+}
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -115,14 +122,6 @@ void Command::print() {
             _errFile?_errFile->c_str():"default",
             _background?"YES":"NO");
 	    printf( "\n\n" );
-}
-
-void bgHandler(int sig){
-    if(_background){
-      while(waitpid(-1, NULL, WNOHANG) >0){
-            printf("[%d] exited\n", getpid());
-      }
-    }
 }
 
 void Command::execute() {

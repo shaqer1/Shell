@@ -371,7 +371,7 @@ char * read_line() {
             // print line
             write(1, line_buffer, line_length);
           }
-        } else if (ch1 == 79 && ch2 == 72) { //Home 126
+        } else if (ch1 == 91 && ch2 == 72) { //Home 126
           char ch3;
           read(0, &ch3, 1);
           int i;
@@ -380,7 +380,7 @@ char * read_line() {
             write(1, &ch, 1);
           }
           cursorPos = 0;
-        } else if (ch1 == 91 && ch2 == 52) { //End 126
+        } else if (ch1 == 91 && ch2 == 70) { //End 126
           char ch3;
           read(0, &ch3, 1);
           int i;

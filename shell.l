@@ -204,9 +204,11 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 \n 	{
+		if (yytext->compare("\n") == 0){
+			Shell::prompt();			
+		}
 		return NEWLINE;
-		Shell::prompt();
-	}	
+	}
 
 "|" 	{
 		return PIPE;

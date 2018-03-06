@@ -51,7 +51,7 @@ void read_line_print_usage()
 }
 
 
-void clear(){
+void clear( char ch){
   for (i = 0; i < line_length; i++) {
     ch = 8;
     write(1, &ch, 1);
@@ -113,7 +113,7 @@ char * read_line() {
           write(1, &C, 1);
         }
 
-        clear();
+        clear(ch);
 
         line_length++;
         cursorPos++;

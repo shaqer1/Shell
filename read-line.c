@@ -328,10 +328,10 @@ char * read_line() {
               }
 
               //history
-              history_index--;
-              strcpy(line_buffer, history[history_index]);
+              //history_index--;
+              strcpy(line_buffer, history[history_index-1]);
               line_length = strlen(line_buffer);
-              //history_index = (history_index + 1) % history_length;
+              history_index = (history_index + 1) % history_length;
               cursorPos = line_length;
               // print line
               write(1, line_buffer, line_length);
@@ -358,7 +358,7 @@ char * read_line() {
             }
 
             // Copy from history
-            strcpy(line_buffer, history[history_index]);
+            strcpy(line_buffer, history[history_index-1]);
             line_length = strlen(line_buffer);
             history_index = (history_index - 1) % history_length;
             cursorPos = line_length;

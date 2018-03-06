@@ -204,8 +204,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 \n 	{
-	std::string  s (yytext);
-		if (s.compare("\n") == 0){
+		if (yylval.cpp_string == NULL){
 			Shell::prompt();			
 		}
 		return NEWLINE;

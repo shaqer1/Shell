@@ -204,7 +204,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 \n 	{
-		if (yylval.cpp_string == NULL){
+		if (*yylval.cpp_string == NULL){
 			Shell::prompt();			
 		}
 		return NEWLINE;

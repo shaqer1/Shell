@@ -125,7 +125,7 @@ char * read_line() {
 
         line_buffer[line_length] = '\0';
         
-        for (i = 0; i < cursorPos; i++) {
+        for (int i = 0; i < cursorPos; i++) {
           char esc = 27;
           char brac = 91;
           char C = 67;

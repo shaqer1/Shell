@@ -153,6 +153,7 @@ char * read_line() {
       history[history_length] = strdup(line_buffer);
       //printf("%s\n", line_buffer);
       history_length++;
+      history[history_length] = strdup("");
       history_index = history_length;
 
       // Print newline

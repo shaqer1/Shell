@@ -254,6 +254,7 @@ char * read_line() {
       history = (char **)realloc(history, MAXHIST * sizeof(char*));
     }
     history[history_length] = strdup(line_buffer);
+    printf("%s\n", line_buffer);
     history_length++;
     //history_index = history_length;
 

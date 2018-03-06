@@ -52,7 +52,7 @@ int main() {
     perror("sigactionZombie");
     exit(-1);
   }
-  yyin = fopen(".shellrc", "r");
+  /*yyin = fopen(".shellrc", "r");
   if (yyin > 0) {
     yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
     yyparse();
@@ -65,7 +65,7 @@ int main() {
     yyin = NULL;
     Command::_currentCommand.prompt();
     yyparse();
-  }
+  }*/
     Shell::prompt();
     yyparse();
 

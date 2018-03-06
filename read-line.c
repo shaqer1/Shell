@@ -333,6 +333,7 @@ char * read_line() {
               line_length = strlen(line_buffer);
               //history_index = (history_index + 1) % history_length;
               history_index--;
+              printf("%d\n",history_index);
               cursorPos = line_length;
               // print line
               write(1, line_buffer, line_length);
@@ -364,6 +365,7 @@ char * read_line() {
             line_length = strlen(line_buffer);
             //history_index = (history_index - 1) % history_length;
             history_index++;
+            printf("%d\n",history_index);
             cursorPos = line_length;
             // print line
             write(1, line_buffer, line_length);

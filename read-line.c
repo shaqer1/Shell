@@ -59,9 +59,8 @@ char * read_line() {
 
   line_length = 0;
   cursorPos = 0;
-  if(history == NULL){
-    history = (char **)calloc(MAX_HISTORY, sizeof(char*));
-  }
+
+  history = (char **)calloc(MAX_HISTORY, sizeof(char*));
 
   // Read one line until enter is typed
   while (1) {
@@ -308,7 +307,7 @@ char * read_line() {
             write(1, &ch, 1);
             ++cursorPos;
         } else if (ch1 == 91 && ch2 == 65) {//up
-          if (history[history_index] != NULL) {//null everytime history is not preserved
+          if (history_index > 0 && history[history_index-1] != NULL) {//null everytime history is not preserved
                 // Erase old line
               // Print backspaces
               int i = 0;
@@ -338,7 +337,7 @@ char * read_line() {
           }
         } else if (ch1 == 91 && ch2 == 66) {
           // Down arrow. Print next line in history.
-          if (history[history_index] != NULL) {
+          if (history_index > 0 && history[history_index-1] != NULL) {
             // delete old line
             // Print backspaces
             int i = 0;

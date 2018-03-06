@@ -204,7 +204,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 		yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
 		yyparse();
 		yyin = stdin;
-		Shell::clear();
+		Command::_currentSimpleCommand->clear();
 		Shell::prompt();
 		yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
 		yyparse();

@@ -204,6 +204,7 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 \n 	{
+	printf("%d",yytext->compare("\n"));
 		if (yytext->compare("\n") == 0){
 			Shell::prompt();			
 		}

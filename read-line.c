@@ -341,7 +341,7 @@ char * read_line() {
         } else if (ch1 == 91 && ch2 == 66) {
           //printf("down");
           // Down arrow. Print next line in history.
-          if (history_index >= 0 && history[history_index] != NULL) {
+          if (history_index >= 0 && history[history_index+1] != NULL) {
             // delete old line
             // Print backspaces
             int i = 0;
@@ -361,7 +361,7 @@ char * read_line() {
             }
 
             // Copy from history
-            strcpy(line_buffer, history[history_index]);
+            strcpy(line_buffer, history[history_index+1]);
             line_length = strlen(line_buffer);
             //history_index = (history_index - 1) % history_length;
             history_index++;

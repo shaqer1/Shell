@@ -177,7 +177,7 @@ char * read_line() {
     }
     else if (ch == 8 || ch == 127 && line_length != 0 && cursorPos != 0) {
       // <backspace> was typed. Remove previous char read.
-      for (i = cursorPos; i < line_length; i++) {
+      for (int i = cursorPos; i < line_length; i++) {
         char temp = line_buffer[i];
         line_buffer[i] = line_buffer[i + 1];
         line_buffer[i - 1] = temp;

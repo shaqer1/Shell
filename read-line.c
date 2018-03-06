@@ -184,7 +184,7 @@ char * read_line() {
       }
 
       int j = line_length - cursorPos;
-      for (i = 0; i < j; i++) {
+      for (int i = 0; i < j; i++) {
         char esc = 27;
         char brac = 91;
         char C = 67;

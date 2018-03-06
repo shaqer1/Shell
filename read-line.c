@@ -59,8 +59,9 @@ char * read_line() {
 
   line_length = 0;
   cursorPos = 0;
-
-  //history = (char **)calloc(MAX_HISTORY, sizeof(char*));
+  if(history == NULL){
+    history = (char **)calloc(MAX_HISTORY, sizeof(char*));
+  }
 
   // Read one line until enter is typed
   while (1) {

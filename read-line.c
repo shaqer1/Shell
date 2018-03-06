@@ -379,8 +379,6 @@ char * read_line() {
           }
           cursorPos = 0;
         } else if (ch1 == 91 && ch2 == 70) { //End 126
-          char ch3;
-          read(0, &ch3, 1);
           int i;
           int j = line_length - cursorPos;
           for (i = 0; i < j; i++) {

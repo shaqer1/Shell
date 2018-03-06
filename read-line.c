@@ -337,6 +337,7 @@ char * read_line() {
               write(1, line_buffer, line_length);
           }
         } else if (ch1 == 91 && ch2 == 66) {
+          printf("down");
           // Down arrow. Print next line in history.
           if (history_index > 0 && history[history_index-1] != NULL) {
             // delete old line

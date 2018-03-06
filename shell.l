@@ -199,26 +199,12 @@ source[ ^\t\n][ ^\t\n]*.* {
         exit(1);
     }
     yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE));
-    yyin = fopen("~/.shellrc", "r");
-	if (yyin > 0) {
-		yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-		yyparse();
-		yyin = stdin;
-		//Command.clear();
-		Shell::prompt();
-		yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-		yyparse();
-	} else {
-		yyin = NULL;
-		Shell::prompt();
-		yyparse();
-	}
-    //yyparse();
+    yyparse();
     yypop_buffer_state();
 }
 
 \n 	{
-		return NEWLINE;
+		Shell::prompt();
 	}	
 
 "|" 	{

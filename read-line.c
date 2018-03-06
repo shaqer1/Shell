@@ -256,7 +256,7 @@ char * read_line() {
     history[history_length] = strdup(line_buffer);
     //printf("%s\n", line_buffer);
     history_length++;
-    //history_index = history_length;
+    history_index = history_length;
 
     // Print newline
     ch = 10;
@@ -414,7 +414,7 @@ char * read_line() {
         // Up arrow. Print next line in history.
         //printf("up: hi=%d\n", history_index);
         //printf("hist[hist-index]: %s\n", history[history_index]);
-          printf("%d:%d\n",history_index, history_length);
+          //printf("%d:%d\n",history_index, history_length);
         if (history[history_index] != NULL) {
               // Erase old line
             // Print backspaces

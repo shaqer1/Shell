@@ -146,7 +146,7 @@ char * read_line() {
         line_length++;
         cursorPos++;
       }
-    } else if (ch == 10 || ch == 13 && strcmp(line_buffer, "\0") != 0) {
+    } else if (ch == 10 || ch == 13) {
       // <Enter> was typed. Return line
 
       // Set History

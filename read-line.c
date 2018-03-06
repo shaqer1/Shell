@@ -414,8 +414,8 @@ char * read_line() {
         // Up arrow. Print next line in history.
         //printf("up: hi=%d\n", history_index);
         //printf("hist[hist-index]: %s\n", history[history_index]);
-          printf("up");
         if (history[history_index] != NULL) {
+          printf("up");
               // Erase old line
             // Print backspaces
             int i = 0;

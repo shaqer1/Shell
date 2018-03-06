@@ -33,6 +33,9 @@
 #include "shell.hh"
 #include <stdlib.h>
 
+extern char ** history;
+extern int history_length;
+
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -258,7 +261,7 @@ void Command::execute() {
         }
 	}else{
         setBGPIDCode(ret);
-        printf("[%d] exited.\n", ret);
+        //printf("[%d] exited.\n", ret); TODO : wher to print
         //Shell::prompt();
     }
     // and call exec

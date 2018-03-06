@@ -106,6 +106,11 @@ void Command::print() {
 	    printf( "\n\n" );
 }
 
+extern "C" void bgHandler(int sig){
+  while(waitpid(-1, NULL, WNOHANG) >0);
+  printf("%d\n", getpid());
+}
+
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -243,9 +248,18 @@ void Command::execute() {
 	  }else if(ret < 0){
 	    perror("fork");
 	    exit(1);
-	  }
+	  }else if (ret > 0){
+        struct sigaction sa3;
+        sa3.sa_handler = bgHandler;
+        int error =0;
+        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
+          perror("child");
+          exit(-1);
+        }
+      }
 	}
-	
+
+
 	dup2(tmpin,0);
     dup2(tmpout,1);
     dup2(tmperr, 2);
@@ -255,6 +269,7 @@ void Command::execute() {
 	if(!_background){
         int status;
 	  waitpid(ret,&status,0);
+
       if (WIFEXITED(status)) {
         //printf("%d\n", WEXITSTATUS(status));
             setExecCode(WEXITSTATUS(status));

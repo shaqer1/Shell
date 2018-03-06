@@ -22,7 +22,7 @@ char line_buffer[MAX_BUFFER_LINE];
 // Buffer where line is stored
 int line_length;
 char line_buffer[MAX_BUFFER_LINE];
-char ** history;
+static char ** history;
 int history_length = 0;
 int MAXHIST = 50;
 
@@ -414,8 +414,8 @@ char * read_line() {
         // Up arrow. Print next line in history.
         //printf("up: hi=%d\n", history_index);
         //printf("hist[hist-index]: %s\n", history[history_index]);
-          printf("%d:%d\n",history[history_index], history[history_length-1]);
-        if (history[history_index] != NULL) {
+          //printf("%d:%d\n",history[history_index], history[history_length-1]);
+        if (history[history_index] != NULL) {//null everytime history is not preserved
               // Erase old line
             // Print backspaces
             int i = 0;

@@ -45,6 +45,17 @@ Command::Command() {
     _inFile = NULL;
     _errFile = NULL;
     _background = false;
+
+
+        struct sigaction sa3;
+        sa3.sa_handler = bgHandler;
+        sigemptyset(&sa3.SIGCHILD);
+        sa3.sa_flags = SA_RESTART;
+        int error =0;
+        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
+            perror("child");
+            exit(-1);
+        }
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {
@@ -106,10 +117,12 @@ void Command::print() {
 	    printf( "\n\n" );
 }
 
-extern "C" void bgHandler(int sig){
-  while(waitpid(-1, NULL, WNOHANG) >0){
-        printf("[%d] exited\n", getpid());
-  }
+void bgHandler(int sig){
+    if(_background){
+      while(waitpid(-1, NULL, WNOHANG) >0){
+            printf("[%d] exited\n", getpid());
+      }
+    }
 }
 
 void Command::execute() {
@@ -251,15 +264,6 @@ void Command::execute() {
 	    exit(1);
 	  }else if (ret > 0){
         printf("%d\n",ret);
-        if(_background){
-            struct sigaction sa3;
-            sa3.sa_handler = bgHandler;
-            int error =0;
-            if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
-              perror("child");
-              exit(-1);
-            }
-        }
       }
 	}
 

@@ -204,8 +204,8 @@ source[ ^\t\n][ ^\t\n]*.* {
 }
 
 \n 	{
-	printf("%d",yytext->compare("\n"));
-		if (yytext->compare("\n") == 0){
+	std::string  s (yytext);
+		if (s.compare("\n") == 0){
 			Shell::prompt();			
 		}
 		return NEWLINE;

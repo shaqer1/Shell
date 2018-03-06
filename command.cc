@@ -56,7 +56,7 @@ Command::Command() {
 
         struct sigaction sa3;
         sa3.sa_handler = bgHandler;
-        sigemptyset(&sa3.SIGCHILD);
+        sigemptyset(&sa3.sa_mask);
         sa3.sa_flags = SA_RESTART;
         int error =0;
         if ((error = sigaction(SIGCHLD, &sa3, NULL))) {

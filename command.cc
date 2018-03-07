@@ -32,6 +32,8 @@
 #include "y.tab.hh"
 #include "shell.hh"
 #include <stdlib.h>
+#include "read-line.c"
+
 
 extern char ** history;
 extern int history_length;

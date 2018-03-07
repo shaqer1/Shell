@@ -36,11 +36,11 @@
 extern char ** history;
 extern int history_length;
 
-void bgHandler(int sig){
+/*void bgHandler(int sig){
       while(waitpid(-1, NULL, SIGCHILD) >0){
             printf("[%d] exited\n", getpid());
       }
-}
+}*/
 
 Command::Command() {
     // Initialize a new vector of Simple Commands

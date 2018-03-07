@@ -139,6 +139,7 @@ void Command::execute() {
       if (strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
         printf("\nGood Bye!!\n\n");
       }  
+      free(history);
       exit(0);
     }
 

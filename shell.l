@@ -58,7 +58,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string *> & array)
 {
 // Return if arg does not contain * or ?
-	if (suffix != NULL && suffix.size() ==0){
+	if (suffix.size() ==0){
 		array.push_back(prefix);
 		//Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
@@ -73,7 +73,7 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 		component = std::string(suffix.c_str());
 		suffix = std::string("");
 	}
-	if(prefix == NULL){
+	if(prefix.empty()){
 		prefix = std::string("");
 	}
 
@@ -150,13 +150,13 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 && (showDots ||
 				(*ent->d_name != '.'))) {//+ *(new std::string("/"))   strcmp(ent->d_name,".") !=0 && strcmp(ent->d_name,"..") != 0
 			//TODO: if suffix not empty check if directory
-			if(suffix.size()>0 && ent.d_type != DT_DIR){
+			if(suffix.size()>0 && ent->d_type != DT_DIR){
 				continue;
 			}
 			std::string param = prefix + (prefix.size()==0 || prefix.compare("/")==0)?"":"/") + ent->d_name;
 					
 			expandWildcards(param , suffix, array);//TODO like 53
-			if (suffix != NULL && suffix.size() ==0){
+			if (suffix.size() ==0){
 				//delete param;
 			}
 		}

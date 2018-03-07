@@ -40,6 +40,18 @@ int history_index = 0;
 };*//*
 int history_length = sizeof(history)/sizeof(char *);*/
 
+void free_fields(char ** options)
+{
+    for(int i = 0; i < 256; i++)
+        free(options[i]);
+    free(options);
+}
+
+void freeData(){
+  free_fields(history);
+}
+
+
 void read_line_print_usage()
 {
   char * usage = "\n"
@@ -223,11 +235,15 @@ char * read_line() {
       char temp = line_buffer[cursorPos];
       if (temp) {
         int i;
-        for (i = cursorPos + 1; i < line_length; i++) {
+        /*for (i = cursorPos + 1; i < line_length; i++) {
           temp = line_buffer[i];
           line_buffer[i] = line_buffer[i + 1];
           line_buffer[i - 1] = temp;
+        }*/
+        for (i = cursorPos; i < line_length - 1; i++){
+          line_buffer[i] = line_buffer[i + 1];          
         }
+        line_buffer[line_length - 1] = '\0';
 
         int j = line_length - cursorPos;
         for (i = 0; i < j; i++) {

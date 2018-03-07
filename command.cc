@@ -260,7 +260,7 @@ void Command::execute() {
 	    perror("fork");
 	    exit(1);
 	  }else if (ret > 0){
-        printf("%d\n",ret);
+        //printf("%d\n",ret);
       }
 	}
 

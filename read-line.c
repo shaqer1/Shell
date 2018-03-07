@@ -461,6 +461,7 @@ char * read_line() {
             // Remove one character
             line_length--;
         }
+      }
   }
 
   // Add eol and null char at the end of string
@@ -469,6 +470,5 @@ char * read_line() {
   line_buffer[line_length]=0;
 
   return line_buffer;
-}
 }
 

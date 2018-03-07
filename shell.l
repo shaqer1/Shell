@@ -52,7 +52,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	}
 	//delete prefix;
 	//delete suffix;
-	delete *array;
+	delete &array;
 }
 
 void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)

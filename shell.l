@@ -55,33 +55,32 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	//delete &array;
 }
 
-void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)
+void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string *> & array)
 {
 // Return if arg does not contain * or ?
-	if (suffix != NULL && suffix->size() ==0){
+	if (suffix != NULL && suffix.size() ==0){
 		array.push_back(prefix);
 		//Command::_currentSimpleCommand->insertArgument(prefix);
 		return;
 	}
-	int pos = suffix->find("/");
-	//pos = (pos == 0 && suffix->find("/",pos+1) != std::string::npos)?suffix->find("/",pos+1):pos;
-	std::string * component;
+	int pos = suffix.find("/");
+	//pos = (pos == 0 && suffix.find("/",pos+1) != std::string::npos)?suffix.find("/",pos+1):pos;
+	std::string component;
 	if(pos != std::string::npos){
-		component = new std::string(suffix->substr(0,pos));
-		suffix->assign(suffix->substr(pos+1));
+		component = std::string(suffix.substr(0,pos));
+		suffix.assign(suffix.substr(pos+1));
 	}else{
-		component = new std::string(suffix->c_str());
-		suffix = new std::string("");
+		component = std::string(suffix.c_str());
+		suffix = std::string("");
 	}
 	if(prefix == NULL){
-		prefix = new std::string("");
+		prefix = std::string("");
 	}
 
-	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){
-		expandWildcards(new std::string(*prefix 
-		+ *(new std::string((prefix->compare("/")==0)?"":"/")) 
-		+ *component), suffix, array);
-		delete component;
+	if(component.find("*") == std::string::npos && component.find("?") == std::string::npos){
+		expandWildcards(prefix 
+		+ std::string((prefix.compare("/")==0)?"":"/") 
+		+ component, suffix, array);
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -92,13 +91,13 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// the beginning ant the end of the word.
 	// Allocate enough space for regular expression
 	int showDots = 0;
-	if(component->compare(".*") == 0){
+	if(component.compare(".*") == 0){
 		showDots = 1;
 	}
 	std::string str;
 	str.append("^");
-	//str.append(prefix->c_str());
-	str.append(component->c_str());
+	//str.append(prefix.c_str());
+	str.append(component.c_str());
 	size_t i=0;
 	while(i<str.size()){//TODO: ?? test 7
 		if(str[i] == '.'){
@@ -134,10 +133,10 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// 3. List directory and add as arguments the entries
 	// that match the regular expression
 	char * dir;
-	if(prefix->size() == 0){
+	if(prefix.size() == 0){
 		dir = (char *) ".";
 	}else{
-		dir = (char *) prefix->c_str();
+		dir = (char *) prefix.c_str();
 	}
 	DIR * d = opendir(dir);
 	if (d == NULL) {
@@ -151,14 +150,13 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		if (regexec(&re, ent->d_name, 1, &match, 0 ) == 0 && (showDots ||
 				(*ent->d_name != '.'))) {//+ *(new std::string("/"))   strcmp(ent->d_name,".") !=0 && strcmp(ent->d_name,"..") != 0
 			//TODO: if suffix not empty check if directory
-			if(suffix->size()>0 && ent->d_type != DT_DIR){
+			if(suffix.size()>0 && ent.d_type != DT_DIR){
 				continue;
 			}
-			std::string * param =new std::string(
-					*prefix + *(new std::string((prefix->size()==0 || prefix->compare("/")==0)?"":"/")) + *(new std::string(ent->d_name)));
+			std::string param = prefix + (prefix.size()==0 || prefix.compare("/")==0)?"":"/") + ent->d_name;
 					
 			expandWildcards(param , suffix, array);//TODO like 53
-			if (suffix != NULL && suffix->size() ==0){
+			if (suffix != NULL && suffix.size() ==0){
 				//delete param;
 			}
 		}

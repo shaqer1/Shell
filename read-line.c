@@ -240,10 +240,10 @@ char * read_line() {
           line_buffer[i] = line_buffer[i + 1];
           line_buffer[i - 1] = temp;
         }*/
-        for (i = cursorPos; i < line_length - 1; i++){
+        /*for (i = cursorPos; i < line_length - 1; i++){
           line_buffer[i] = line_buffer[i + 1];          
         }
-        line_buffer[line_length - 1] = '\0';
+        line_buffer[line_length - 1] = '\0';*/
 
         /*int j = line_length - cursorPos;
         for (i = 0; i < j; i++) {
@@ -255,7 +255,7 @@ char * read_line() {
           write(1, &C, 1);
         }*/
 
-        for (i = 0; i < line_length; i++) {
+        /*for (i = 0; i < line_length; i++) {
           ch = 8;
           write(1, &ch, 1);
         }
@@ -277,7 +277,7 @@ char * read_line() {
           write(1, &ch, 1);
         }
 
-        line_buffer[line_length] = '\0';
+        line_buffer[line_length] = '\0';*/
         /*for (i = 0; i < j; i++) {
           char esc = 27;
           char brac = 91;
@@ -286,6 +286,38 @@ char * read_line() {
           write(1, &brac, 1);
           write(1, &C, 1);
         }*/
+        int i;
+
+        for (i = cursorPos; i < line_length - 1; i++)
+          line_buffer[i] = line_buffer[i + 1];
+        line_buffer[line_length - 1] = '\0';
+
+        for (i = 0; i < cursorPos; i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+        for (i = 0; i < line_length; i++) {
+          ch = ' ';
+          write(1, &ch, 1);
+        }
+
+        for (i = 0; i < line_length; i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+
+        //Write in the line buffer
+        for (i = 0; i < line_length - 1; i++)
+          write(1, &line_buffer[i], 1);
+
+        //Move back to the position
+        for (i = 0; i < (line_length - cursorPos - 1); i++) {
+          ch = 8;
+          write(1, &ch, 1);
+        }
+
+        // Remove one character
+        line_length--;
       }
     } else if (ch == 5) { //ctrl-e End //todo
       int i;

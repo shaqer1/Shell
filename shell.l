@@ -50,6 +50,8 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 		//const char * d = prefix->c_str();
 		Command::_currentSimpleCommand->insertArgument(new std::string(str));
 	}
+	delete prefix;
+	delete suffix;
 }
 
 void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)
@@ -78,6 +80,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		expandWildcards(new std::string(*prefix 
 		+ *(new std::string((prefix->compare("/")==0)?"":"/")) 
 		+ *component), suffix, array);
+		delete component;
 		return;
 	}
 	// 1. Convert wildcard to regular expression
@@ -156,6 +159,8 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		}
 	}
 	closedir(d);
+	delete component;
+	free(sReg);
 }
 
 

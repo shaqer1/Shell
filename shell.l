@@ -73,7 +73,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 		suffix = new std::string("");
 	}
 	if(prefix == NULL){
-		prefix->assign("");
+		prefix = new std::string("");
 	}
 
 	if(component->find("*") == std::string::npos && component->find("?") == std::string::npos){

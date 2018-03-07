@@ -428,8 +428,39 @@ char * read_line() {
             write(1, &C, 1);
           }
           cursorPos = line_length;
+        } else if (ch1 == 91 && ch2 == 51 && cursorPos != line_length) {
+
+            for (i = cursorPos; i < line_length - 1; i++)
+              line_buffer[i] = line_buffer[i + 1];
+            line_buffer[line_length - 1] = '\0';
+
+            for (i = 0; i < cursorPos; i++) {
+              ch = 8;
+              write(1, &ch, 1);
+            }
+            for (i = 0; i < line_length; i++) {
+              ch = ' ';
+              write(1, &ch, 1);
+            }
+
+            for (i = 0; i < line_length; i++) {
+              ch = 8;
+              write(1, &ch, 1);
+            }
+
+            //Write in the line buffer
+            for (i = 0; i < line_length - 1; i++)
+              write(1, &line_buffer[i], 1);
+
+            //Move back to the position
+            for (i = 0; i < (line_length - cursorPos - 1); i++) {
+              ch = 8;
+              write(1, &ch, 1);
+            }
+
+            // Remove one character
+            line_length--;
         }
-    }
   }
 
   // Add eol and null char at the end of string

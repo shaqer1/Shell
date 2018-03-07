@@ -32,12 +32,9 @@
 #include "y.tab.hh"
 #include "shell.hh"
 #include <stdlib.h>
-#include "read-line.c"
-
 
 extern char ** history;
 extern int history_length;
-extern void freeData();
 
 /*void bgHandler(int sig){
       while(waitpid(-1, NULL, SIGCHILD) >0){
@@ -142,8 +139,7 @@ void Command::execute() {
         || !strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
       if (strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
         printf("\nGood Bye!!\n\n");
-      }  
-      freeData();
+      }
       exit(0);
     }
 

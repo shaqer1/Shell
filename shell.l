@@ -160,7 +160,7 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	}
 	closedir(d);
 	delete component;
-	free(sReg);
+	//free(sReg);
 }
 
 

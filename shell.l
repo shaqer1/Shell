@@ -52,7 +52,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	}
 	//delete prefix;
 	//delete suffix;
-	delete &array;
+	//delete &array;
 }
 
 void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::string *> & array)
@@ -124,8 +124,9 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 	// match beginning of line
 	// 2. compile regular expression. See lab3-src/regular.cc
 	regex_t re;
-	//char * sReg = (char *) ;
-	int expbuf = regcomp(&re, str.c_str(), 0 );
+	char * sReg = (char *) str.c_str();
+	int expbuf = regcomp(&re, sReg, 0 );
+	free(sReg);
 	if (expbuf!=0) {
 		perror("compile");
 		return;

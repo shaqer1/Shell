@@ -429,7 +429,7 @@ char * read_line() {
           }
           cursorPos = line_length;
         } else if (ch1 == 91 && ch2 == 51 && cursorPos != line_length) {
-
+            int i;
             for (i = cursorPos; i < line_length - 1; i++)
               line_buffer[i] = line_buffer[i + 1];
             line_buffer[line_length - 1] = '\0';

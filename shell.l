@@ -152,10 +152,11 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 			if(suffix->size()>0 && ent->d_type != DT_DIR){
 				continue;
 			}
-			expandWildcards(
-				new std::string(
-					*prefix + *(new std::string((prefix->size()==0 || prefix->compare("/")==0)?"":"/")) + *(new std::string(ent->d_name)))
-					, suffix, array);//TODO like 53
+			std::string * param =new std::string(
+					*prefix + *(new std::string((prefix->size()==0 || prefix->compare("/")==0)?"":"/")) + *(new std::string(ent->d_name)));
+					
+			expandWildcards(param , suffix, array);//TODO like 53
+			delete param;
 		}
 	}
 	closedir(d);

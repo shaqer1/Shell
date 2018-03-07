@@ -141,7 +141,7 @@ void Command::execute() {
         printf("\nGood Bye!!\n\n");
       }
       //exit(0);
-      return(0);
+      return;
     }
 
     int tmpin=dup(0);

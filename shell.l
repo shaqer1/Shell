@@ -79,7 +79,7 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 
 	if(component.find("*") == std::string::npos && component.find("?") == std::string::npos){
 		expandWildcards(prefix 
-		+ std::string((prefix.compare("/")==0)?"":"/") 
+		+ (prefix.compare("/")==0)?"":"/"
 		+ component, suffix, array);
 		return;
 	}
@@ -153,7 +153,7 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 			if(suffix.size()>0 && ent->d_type != DT_DIR){
 				continue;
 			}
-			std::string param = prefix + (prefix.size()==0 || prefix.compare("/")==0)?"":"/") + ent->d_name;
+			std::string param = prefix + (prefix.size()==0 || prefix.compare("/")==0)?"":"/" + ent->d_name;
 					
 			expandWildcards(param , suffix, array);//TODO like 53
 			if (suffix.size() ==0){

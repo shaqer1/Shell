@@ -52,7 +52,7 @@ Command::Command() {
     _background = false;
 
 
-        struct sigaction sa3;
+       /* struct sigaction sa3;
         sa3.sa_handler = bgHandler;
         sigemptyset(&sa3.sa_mask);
         sa3.sa_flags = SA_RESTART;
@@ -60,7 +60,7 @@ Command::Command() {
         if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
             perror("child");
             exit(-1);
-        }
+        }*/
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {

@@ -245,7 +245,7 @@ char * read_line() {
         }
         line_buffer[line_length - 1] = '\0';
 
-        int j = line_length - cursorPos;
+        /*int j = line_length - cursorPos;
         for (i = 0; i < j; i++) {
           char esc = 27;
           char brac = 91;
@@ -253,7 +253,7 @@ char * read_line() {
           write(1, &esc, 1);
           write(1, &brac, 1);
           write(1, &C, 1);
-        }
+        }*/
 
         for (i = 0; i < line_length; i++) {
           ch = 8;
@@ -278,14 +278,14 @@ char * read_line() {
         }
 
         line_buffer[line_length] = '\0';
-        for (i = 0; i < j; i++) {
+        /*for (i = 0; i < j; i++) {
           char esc = 27;
           char brac = 91;
           char C = 67;
           write(1, &esc, 1);
           write(1, &brac, 1);
           write(1, &C, 1);
-        }
+        }*/
       }
     } else if (ch == 5) { //ctrl-e End //todo
       int i;

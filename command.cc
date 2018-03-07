@@ -122,6 +122,14 @@ void Command::print() {
 	    printf( "\n\n" );
 }
 
+void free_fields(char ** options)
+{
+    for(int i = 0; i < 256; i++)
+        free(options[i]);
+    free(options);
+}
+
+
 void Command::execute() {
     // Don't do anything if there are no simple commands
     if ( _simpleCommands.size() == 0 ) {
@@ -139,7 +147,7 @@ void Command::execute() {
       if (strcmp(_simpleCommands[0]->_arguments[0]->c_str(), "exit1")) {
         printf("\nGood Bye!!\n\n");
       }  
-      free(history);
+      free_fields(history);
       exit(0);
     }
 

@@ -286,7 +286,6 @@ char * read_line() {
           write(1, &brac, 1);
           write(1, &C, 1);
         }*/
-        int i;
 
         for (i = cursorPos; i < line_length - 1; i++)
           line_buffer[i] = line_buffer[i + 1];

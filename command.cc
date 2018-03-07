@@ -273,7 +273,7 @@ void Command::execute() {
     close(tmpout);
     close(tmperr);
 	if(!_background){
-        int status;
+        int status = 0;
 	  waitpid(ret,&status,0);
 
       if (WIFEXITED(status)) {

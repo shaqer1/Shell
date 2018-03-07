@@ -156,7 +156,9 @@ void expandWildcards(std::string *prefix, std::string *suffix, std::vector<std::
 					*prefix + *(new std::string((prefix->size()==0 || prefix->compare("/")==0)?"":"/")) + *(new std::string(ent->d_name)));
 					
 			expandWildcards(param , suffix, array);//TODO like 53
-			delete param;
+			if (suffix != NULL && suffix->size() ==0){
+				delete param;
+			}
 		}
 	}
 	closedir(d);

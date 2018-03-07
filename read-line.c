@@ -457,6 +457,8 @@ char * read_line() {
               ch = 8;
               write(1, &ch, 1);
             }
+            char ch3;
+            read(0, &ch1, 1);
 
             // Remove one character
             line_length--;

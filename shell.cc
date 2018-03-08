@@ -30,7 +30,7 @@ void Shell::prompt() {
       printf("%s>", getenv("PROMPT"));
     }
     else {
-      printf("%lc>", (wint_t) 2665);
+      printf("%lc>",  2665);
     }
     fflush(stdout);
   }

@@ -38,7 +38,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	std::vector<std::string> array;
 	std::string str (suffix->c_str());
 	//here
-	expandWildcards(*prefix, *suffix, array);
+	expandWildcards(*prefix, *suffix, &array);
 	std::sort(array.begin(), array.end(), comparePtrToString);
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
@@ -55,7 +55,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	//delete &array;
 }
 
-void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string> & array)
+void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string> * array)
 {
 // Return if arg does not contain * or ?
 	if (suffix.size() ==0){

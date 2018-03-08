@@ -30,7 +30,8 @@ void Shell::prompt() {
       printf("%s>", getenv("PROMPT"));
     }
     else {
-      printf("%lc>",  2665);
+      //printf("%lc>",  2665);
+      printf("myshell>");
     }
     fflush(stdout);
   }

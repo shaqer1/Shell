@@ -55,7 +55,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	//delete &array;
 }
 
-void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string> & array)
+void expandWildcards(std::string prefix, std::string suffix, std::vector<std::string> array)
 {
 // Return if arg does not contain * or ?
 	if (suffix.size() ==0){

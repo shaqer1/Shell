@@ -78,7 +78,7 @@ int main() {
   if (fd > 0) {
     yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
-    yyrestart();
+    yyrestart(fd);
     //yy_delete_buffer()
   } else {
     fd = NULL;

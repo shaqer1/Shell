@@ -49,7 +49,7 @@ void Shell::prompt() {
     else {
       //setlocale(LC_ALL, "");
       //printf("%lc>", (wint_t) 2665);
-      printf("myshell>");
+      printf("myshell♥>");
     }
     fflush(stdout);
   }

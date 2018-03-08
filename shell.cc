@@ -10,6 +10,7 @@
 
 int yyparse(void);
 int yyrestart(void);
+ 
 YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
 void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );
 extern "C" void disp( int sig ) {
@@ -28,7 +29,7 @@ void Shell::prompt() {
       printf("%s>", getenv("PROMPT"));
     }
     else {
-      printf("myshell>");
+      printf("%c>",'U+2665');
     }
     fflush(stdout);
   }

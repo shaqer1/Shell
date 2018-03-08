@@ -142,6 +142,7 @@ void Command::execute() {
       }
       exit(0);
     }
+    int executed = 0;
 
     int tmpin=dup(0);
     int tmpout=dup(1);
@@ -162,6 +163,7 @@ void Command::execute() {
     // Add execution here
     // For every simple command fork a new process
 	for (uint i = 0; i < _simpleCommands.size(); i++){
+        executed =1;
 	  dup2(fdin, 0);
 	  close(fdin);
 	  if (i == _simpleCommands.size()-1){
@@ -291,7 +293,9 @@ void Command::execute() {
     clear();
 
     // Print new prompt
-    Shell::prompt();
+    if(executed){
+        Shell::prompt();
+    }
 }
 
 SimpleCommand * Command::_currentSimpleCommand;

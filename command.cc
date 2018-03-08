@@ -37,7 +37,7 @@ extern char ** history;
 extern int history_length;
 
 void bgHandler(int sig){
-      while(waitpid(-1, NULL, SIGCHILD) >0){
+      while(waitpid(-1, NULL, WNOHANG) >0){
 	if(_background){
             printf("[%d] exited\n", getpid());
 

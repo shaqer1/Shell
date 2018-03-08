@@ -50,7 +50,7 @@ extern "C" void killZombies(int sig){
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
     if(!isatty(0) && pid != -1)
         printf("[%d] exited\n", pid);
-        Shell::prompt();
+        // Shell::prompt();
   }
 }
 

@@ -7,10 +7,25 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include "y.tab.hh"
-#include <wchar.h>
+//#include <wchar.h>
 
-/*int yyparse(void);
-int yyrestart(void);
+#ifndef YY_BUF_SIZE
+#ifdef __ia64__
+#define YY_BUF_SIZE 32768
+#else
+#define YY_BUF_SIZE 16384
+#endif /* __ia64__ */
+#endif
+#define YY_TYPEDEF_YY_BUFFER_STATE
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+
+
+
+int yyparse(void);
+YY_BUFFER_STATE yy_create_buffer(FILE * fd, int s);
+void yy_switch_to_buffer(YY_BUFFER_STATE buff);
+void yyrestart(FILE * fd);
+void yy_delete_buffer( YY_BUFFER_STATE buff);
  
 YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
 void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );*/
@@ -59,16 +74,17 @@ int main() {
     exit(-1);
   }
 
-  /*FILE * fd = fopen(".shellrc", "r");
+  FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
     yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
     yyrestart();
+    //yy_delete_buffer()
   } else {
-    fd = NULL;*/
+    fd = NULL;
     Shell::prompt();
     yyparse();
-  /*}*/
+  }
 
 }
 

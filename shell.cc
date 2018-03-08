@@ -46,7 +46,7 @@ extern "C" void disp( int sig ) {
 }
 
 extern "C" void killZombies(int sig){
-  while((pid = waitpid(-1, NULL, WNOHANG)) >0);
+  while(waitpid(-1, NULL, WNOHANG) >0);
 }
 
 extern "C" void bgHandler(int sig){

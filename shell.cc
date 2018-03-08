@@ -7,6 +7,7 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include "y.tab.hh"
+#include <wchar.h>
 
 /*int yyparse(void);
 int yyrestart(void);

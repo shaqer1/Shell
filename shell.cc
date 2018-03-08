@@ -81,7 +81,7 @@ int main() {
     YY_BUFFER_STATE y = yy_create_buffer(fd, YY_BUF_SIZE);
     yypush_buffer_state(y);
     yyparse();
-    yyrestart(fd);
+    yyrestart(stdin);
     fclose(fd);
     yyparse();
   } else {

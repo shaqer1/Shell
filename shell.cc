@@ -54,8 +54,8 @@ extern "C" void bgHandler(int sig){
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
     if(!isatty(0) && pid != -1)
         printf("[%d] exited\n", pid);
-  }
     Shell::prompt();
+  }
 }
 
 
@@ -97,8 +97,8 @@ int main() {
 
   struct sigaction sa3;
         sa3.sa_handler = bgHandler;
-        sigemptyset(&sa3.sa_mask);
-        sa3.sa_flags = 0;
+        //sigemptyset(&sa3.sa_mask);
+        //sa3.sa_flags = 0;
         error =0;
         if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
             perror("child");

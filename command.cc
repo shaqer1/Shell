@@ -107,7 +107,7 @@ void Command::print() {
 	    printf( "\n\n" );
 }
 
-extern "C" void bgHandler(int sig){
+void bgHandler(int sig){
     int pid;
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
     if(_background){

@@ -49,6 +49,16 @@ extern "C" void killZombies(int sig){
   while(waitpid(-1, NULL, WNOHANG) >0);
 }
 
+extern "C" void bgHandler(int sig){
+    pid_t pid;
+  while((pid = waitpid(-1, NULL, 0)) >0){
+    if(pid != -1)
+        printf("[%d] exited\n", pid);
+  }
+    Shell::prompt();
+}
+
+
 void Shell::prompt() {
   if(isatty(0)) {
     if (getenv("PROMPT")) {
@@ -84,6 +94,16 @@ int main() {
     perror("sigactionZombie");
     exit(-1);
   }
+
+  struct sigaction sa3;
+        sa3.sa_handler = bgHandler;
+        sigemptyset(&sa3.sa_mask);
+        sa3.sa_flags = SA_RESTART;
+        int error =0;
+        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
+            perror("child");
+            exit(-1);
+        }
 
   FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {

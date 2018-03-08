@@ -8,11 +8,11 @@
 #include <sys/wait.h>
 #include "y.tab.hh"
 
-int yyparse(void);
+/*int yyparse(void);
 int yyrestart(void);
  
 YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
-void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );
+void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );*/
 extern "C" void disp( int sig ) {
   putchar('\n');
   Shell::_currentCommand.clear();
@@ -58,9 +58,9 @@ int main() {
 
   FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
-    yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
+    /*yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
-    yyrestart();
+    yyrestart();*/
   } else {
     fd = NULL;
     Shell::prompt();

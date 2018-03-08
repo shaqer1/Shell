@@ -32,8 +32,8 @@ void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );*/
 
 
 extern "C" void disp( int sig ) {
-  //putchar('\n');
-  Shell::_currentCommand.clear();
+  putchar('\n');
+  //Shell::_currentCommand.clear();
   Shell::prompt();
 }
 

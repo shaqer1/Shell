@@ -260,7 +260,7 @@ void Command::execute() {
     close(tmpout);
     close(tmperr);
 	if(!_background){
-        int status = 0;
+        int status = -1;
 	  waitpid(ret,&status,0);
 
       if (WIFEXITED(status)) {
@@ -268,18 +268,7 @@ void Command::execute() {
             setExecCode(WEXITSTATUS(status));
         }
 	}else{
-        int status = 0, wpid =0;
         setBGPIDCode(ret);
-        while(1){
-         wpid = wait(&status);
-            if(wpid != ret) {
-                printf("[%d] exited\n", wpid);
-            }
-            else if(wpid == ret) {
-                // current child terminated
-                break;
-            }
-        }
         //printf("[%d] exited.\n", ret); TODO : wher to print
         //Shell::prompt();
     }

@@ -36,7 +36,15 @@
 extern char ** history;
 extern int history_length;
 
+extern "C" void bgHandler(int sig){
+    int pid;
+  while((pid = waitpid(-1, NULL, WNOHANG)) >0){
+	if(_background){
+            printf("[%d] exited\n", pid);
 
+	}
+  }
+}
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -57,16 +65,6 @@ Command::Command() {
             perror("child");
             exit(-1);
         }
-}
-
-extern "C" void bgHandler(int sig){
-    int pid;
-  while((pid = waitpid(-1, NULL, WNOHANG)) >0){
-    if(_background){
-            printf("[%d] exited\n", pid);
-
-    }
-  }
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {

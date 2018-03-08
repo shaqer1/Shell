@@ -42,7 +42,7 @@ void expandWildcardsIfNecessary(std::string *prefix, std::string *suffix){
 	std::sort(array.begin(), array.end(), comparePtrToString);
 	// Add arguments
 	for (int i = 0; i < array.size(); i++) {
-			Command::_currentSimpleCommand->insertArgument(array[i]);
+			Command::_currentSimpleCommand->insertArgument(new std::string(array[i]));
 	}
 	if(array.size() == 0){
 		//prefix->append("/");

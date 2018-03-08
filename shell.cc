@@ -51,7 +51,7 @@ extern "C" void killZombies(int sig){
 
 extern "C" void bgHandler(int sig){
     pid_t pid;
-  while((pid = waitpid(-1, NULL, 0)) >0){
+  while((pid = waitpid(-1, NULL, WNOHANG)) >0){
     if(pid != -1)
         printf("[%d] exited\n", pid);
   }
@@ -98,7 +98,7 @@ int main() {
   struct sigaction sa3;
         sa3.sa_handler = bgHandler;
         sigemptyset(&sa3.sa_mask);
-        sa3.sa_flags = SA_RESTART;
+        sa3.sa_flags = 0;
         error =0;
         if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
             perror("child");

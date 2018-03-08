@@ -52,7 +52,7 @@ extern "C" void killZombies(int sig){
 extern "C" void bgHandler(int sig){
     pid_t pid;
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
-    if(pid != -1)
+    if(!isatty(0) && pid != -1)
         printf("[%d] exited\n", pid);
   }
     Shell::prompt();

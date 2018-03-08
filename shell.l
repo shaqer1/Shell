@@ -155,13 +155,11 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 			}
 			std::string param = prefix + ((prefix.size()==0 || prefix.compare("/")==0)?"":"/") + ((char *)ent->d_name);
 					
-			expandWildcards(param , suffix, array);//TODO like 53
-			if (suffix.size() ==0){
-				//delete param;
-			}
+			expandWildcards(param , suffix, array);
 		}
 	}
 	closedir(d);
+	regfree(&re);
 	//delete component;
 }
 

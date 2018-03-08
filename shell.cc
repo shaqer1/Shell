@@ -23,7 +23,7 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 
 int yyparse(void);
 YY_BUFFER_STATE yy_create_buffer(FILE * fd, int s);
-void yy_switch_to_buffer(YY_BUFFER_STATE buff);
+void yypush_buffer_state(YY_BUFFER_STATE buff);
 void yyrestart(FILE * fd);
 void yy_delete_buffer( YY_BUFFER_STATE buff);
  
@@ -76,10 +76,10 @@ int main() {
 
   FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
-    yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
+    yypush_buffer_state(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
     yyrestart(fd);
-    //yy_delete_buffer()
+    yy_delete_buffer(fd);
   } else {
     fd = NULL;
     Shell::prompt();

@@ -35,6 +35,7 @@
 
 extern char ** history;
 extern int history_length;
+extern bool _background;
 
 void bgHandler(int sig){
     int pid;

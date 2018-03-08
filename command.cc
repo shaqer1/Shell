@@ -35,9 +35,8 @@
 
 extern char ** history;
 extern int history_length;
-extern bool _background;
 
-void bgHandler(int sig){
+extern "C" void bgHandler(int sig){
     int pid;
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
 	if(_background){

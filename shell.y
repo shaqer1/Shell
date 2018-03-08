@@ -17,7 +17,7 @@
 #include <string.h>
 #include <vector>
 extern "C" void expandWildcardsIfNecessary(std::string *prefix, std::string *s);
-extern "C" void expandWildcards(std::string *prefix, std::string *s, std::vector<std::string *> &array);
+extern "C" void expandWildcards(std::string prefix, std::string s, std::vector<std::string> array);
 
 
 #if __cplusplus > 199711L

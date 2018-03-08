@@ -82,7 +82,8 @@ int main() {
     yypush_buffer_state(y);
     yyparse();
     yyrestart(fd);
-    yy_delete_buffer(y);
+    fclose(fd);
+    yyparse();
   } else {
     fd = NULL;
     Shell::prompt();

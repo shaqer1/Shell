@@ -147,33 +147,27 @@ char * read_line() {
         }
         
       } else {
-        // Do echo
         write(1, &ch, 1);
 
-        // If max number of character reached return.
         if (line_length == MAX_BUFFER_LINE - 2) break;
 
-        // add char to buffer.
         line_buffer[line_length] = ch;
         line_length++;
         cursorPos++;
       }
     } else if (ch == 10 || ch == 13) {
-      // <Enter> was typed. Return line
+      //enter
 
-      // Set History
       line_buffer[line_length] = '\0';
       if (history_length == MAX_HISTORY) {
         MAX_HISTORY *= 2;
         history = (char **)realloc(history, MAX_HISTORY * sizeof(char*));
       }
       history[history_length] = strdup(line_buffer);
-      //printf("%s\n", line_buffer);
       history_length++;
       history[history_length] = (char * ) "";
       history_index = history_length;
 
-      // Print newline
       ch = 10;
       write(1, &ch, 1);
       ch = 13;
@@ -182,13 +176,13 @@ char * read_line() {
       break;
     }
     else if (ch == 31) {
-      // ctrl-?
+      //ctrl-?
       read_line_print_usage();
       line_buffer[0]=0;
       break;
     }
     else if (ch == 8 || ch == 127 && line_length != 0 && cursorPos != 0) {
-      // <backspace> was typed. Remove previous char read.
+      //<backspace>
       for (int i = cursorPos; i < line_length; i++) {
         char temp = line_buffer[i];
         line_buffer[i] = line_buffer[i + 1];
@@ -224,7 +218,7 @@ char * read_line() {
         write(1, &brac, 1);
         write(1, &C, 1);
       }
-    } else if (ch == 1) { //ctrl-a Home
+    } else if (ch == 1) {//ctrl-a Home
       int i;
       for (i = 0; i < cursorPos; i++) {
         ch = 8;
@@ -235,57 +229,6 @@ char * read_line() {
       char temp = line_buffer[cursorPos];
       if (temp) {
         int i;
-        /*for (i = cursorPos + 1; i < line_length; i++) {
-          temp = line_buffer[i];
-          line_buffer[i] = line_buffer[i + 1];
-          line_buffer[i - 1] = temp;
-        }*/
-        /*for (i = cursorPos; i < line_length - 1; i++){
-          line_buffer[i] = line_buffer[i + 1];          
-        }
-        line_buffer[line_length - 1] = '\0';*/
-
-        /*int j = line_length - cursorPos;
-        for (i = 0; i < j; i++) {
-          char esc = 27;
-          char brac = 91;
-          char C = 67;
-          write(1, &esc, 1);
-          write(1, &brac, 1);
-          write(1, &C, 1);
-        }*/
-
-        /*for (i = 0; i < line_length; i++) {
-          ch = 8;
-          write(1, &ch, 1);
-        }
-
-        for (i = 0; i < line_length; i++) {
-          ch = ' ';
-          write(1, &ch, 1);
-        }
-
-        for (i = 0; i < line_length; i++) {
-          ch = 8;
-          write(1, &ch, 1);
-        }
-
-        line_length--;
-        write(1, line_buffer, line_length);
-        for (i = 0; i < line_length; i++) {
-          ch = 8;
-          write(1, &ch, 1);
-        }
-
-        line_buffer[line_length] = '\0';*/
-        /*for (i = 0; i < j; i++) {
-          char esc = 27;
-          char brac = 91;
-          char C = 67;
-          write(1, &esc, 1);
-          write(1, &brac, 1);
-          write(1, &C, 1);
-        }*/
 
         for (i = cursorPos; i < line_length - 1; i++)
           line_buffer[i] = line_buffer[i + 1];
@@ -305,20 +248,17 @@ char * read_line() {
           write(1, &ch, 1);
         }
 
-        //Write in the line buffer
         for (i = 0; i < line_length - 1; i++)
           write(1, &line_buffer[i], 1);
 
-        //Move back to the position
         for (i = 0; i < (line_length - cursorPos - 1); i++) {
           ch = 8;
           write(1, &ch, 1);
         }
 
-        // Remove one character
         line_length--;
       }
-    } else if (ch == 5) { //ctrl-e End //todo
+    } else if (ch == 5) { //ctrl-e End 
       int i;
       int j = line_length - cursorPos;
       for (i = 0; i < j; i++) {
@@ -331,7 +271,7 @@ char * read_line() {
       }
       cursorPos = line_length;
     } else if (ch==27) {
-        // Escape sequence. Read two chars more
+        // Escape sequence
         char ch1; 
         char ch2;
         read(0, &ch1, 1);
@@ -348,65 +288,45 @@ char * read_line() {
             ++cursorPos;
         } else if (ch1 == 91 && ch2 == 65) {//up
           if (history_index > 0 && history[history_index-1] != NULL) {
-                // Erase old line
-              // Print backspaces
               int i = 0;
               for (i = 0; i < line_length; i++) {
                 ch = 8;
                 write(1, &ch, 1);
               }
-              // Print spaces on top
               for (i = 0; i < line_length; i++) {
                 ch = ' ';
                 write(1, &ch, 1);
               }
-              // Print backspaces
               for (i = 0; i < line_length; i++) {
                 ch = 8;
                 write(1, &ch, 1);
               }
-
-              //history
-              //history_index--;
               strcpy(line_buffer, history[history_index-1]);
               line_length = strlen(line_buffer);
-              //history_index = (history_index + 1) % history_length;
               history_index--;
-              //printf("%d\n",history_index);
               cursorPos = line_length;
-              // print line
               write(1, line_buffer, line_length);
           }
         } else if (ch1 == 91 && ch2 == 66) {
-          //printf("down");
-          // Down arrow. Print next line in history.
           if (history_index >= 0 && history_index <history_length && history[history_index+1] != NULL) {
-            // delete old line
-            // Print backspaces
             int i = 0;
             for (i = 0; i < line_length; i++) {
               ch = 8;
               write(1, &ch, 1);
             }
-           //  Print spaces on top
             for (i = 0; i < line_length; i++) {
               ch = ' ';
               write(1, &ch, 1);
             }
-           //  Print backspaces
             for (i = 0; i < line_length; i++) {
               ch = 8;
               write(1, &ch, 1);
             }
 
-            // Copy from history
             strcpy(line_buffer, history[history_index+1]);
             line_length = strlen(line_buffer);
-            //history_index = (history_index - 1) % history_length;
             history_index++;
-            //printf("%d\n",history_index);
             cursorPos = line_length;
-            // print line
             write(1, line_buffer, line_length);
           }
         } else if (ch1 == 91 && ch2 == 72) { //Home 126
@@ -428,45 +348,42 @@ char * read_line() {
             write(1, &C, 1);
           }
           cursorPos = line_length;
-        } else if (ch1 == 91 && ch2 == 51 && cursorPos != line_length) {
-            int i;
-            for (i = cursorPos; i < line_length - 1; i++)
-              line_buffer[i] = line_buffer[i + 1];
-            line_buffer[line_length - 1] = '\0';
-
-            for (i = 0; i < cursorPos; i++) {
-              ch = 8;
-              write(1, &ch, 1);
-            }
-            for (i = 0; i < line_length; i++) {
-              ch = ' ';
-              write(1, &ch, 1);
-            }
-
-            for (i = 0; i < line_length; i++) {
-              ch = 8;
-              write(1, &ch, 1);
-            }
-
-            //Write in the line buffer
-            for (i = 0; i < line_length - 1; i++)
-              write(1, &line_buffer[i], 1);
-
-            //Move back to the position
-            for (i = 0; i < (line_length - cursorPos - 1); i++) {
-              ch = 8;
-              write(1, &ch, 1);
-            }
+        } else if (ch1 == 91 && ch2 == 51){
             char ch3;
-            read(0, &ch1, 1);
+            read(0, &ch3, 1);
+            if(cursorPos != line_length) {
+              int i;
+              for (i = cursorPos; i < line_length - 1; i++)
+                line_buffer[i] = line_buffer[i + 1];
+              line_buffer[line_length - 1] = '\0';
 
-            // Remove one character
-            line_length--;
+              for (i = 0; i < cursorPos; i++) {
+                ch = 8;
+                write(1, &ch, 1);
+              }
+              for (i = 0; i < line_length; i++) {
+                ch = ' ';
+                write(1, &ch, 1);
+              }
+
+              for (i = 0; i < line_length; i++) {
+                ch = 8;
+                write(1, &ch, 1);
+              }
+
+              for (i = 0; i < line_length - 1; i++)
+                write(1, &line_buffer[i], 1);
+
+              for (i = 0; i < (line_length - cursorPos - 1); i++) {
+                ch = 8;
+                write(1, &ch, 1);
+              }
+
+              line_length--;
+            }
         }
       }
   }
-
-  // Add eol and null char at the end of string
   line_buffer[line_length]=10;
   line_length++;
   line_buffer[line_length]=0;

@@ -103,7 +103,7 @@ argument:
     if ($1->find('*') == std::string::npos && ($1->find('?') == std::string::npos || strcmp($1->c_str(), "${?}") == 0)){
       Command::_currentSimpleCommand->insertArgument($1);
     }else{
-      expandWildcardsIfNecessary(NULL, $1);
+      expandWildcardsIfNecessary("", $1);
     }
   }
   ;

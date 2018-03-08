@@ -56,16 +56,16 @@ int main() {
     exit(-1);
   }
 
-  FILE * fd = fopen(".shellrc", "r");
+  /*FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
-    /*yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
+    yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
-    yyrestart();*/
+    yyrestart();
   } else {
-    fd = NULL;
+    fd = NULL;*/
     Shell::prompt();
     yyparse();
-  }
+  /*}*/
 
 }
 

@@ -28,7 +28,7 @@ void yyrestart(FILE * fd);
 void yy_delete_buffer( YY_BUFFER_STATE buff);
  
 YY_BUFFER_STATE yy_create_buffer (FILE *file,int size  );
-void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );*/
+void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );
 extern "C" void disp( int sig ) {
   putchar('\n');
   Shell::_currentCommand.clear();

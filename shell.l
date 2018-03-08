@@ -125,7 +125,7 @@ void expandWildcards(std::string prefix, std::string suffix, std::vector<std::st
 	regex_t re;
 	char * sReg = (char *) str.c_str();
 	int expbuf = regcomp(&re, sReg, 0 );
-	free(sReg);
+	//free(sReg);
 	if (expbuf!=0) {
 		perror("compile");
 		return;

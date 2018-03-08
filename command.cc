@@ -268,14 +268,14 @@ void Command::execute() {
             setExecCode(WEXITSTATUS(status));
         }
 	}else{
-        int status = 0;
+        int status = 0, wpid =0;
         setBGPIDCode(ret);
         while(1){
          wpid = wait(&status);
             if(wpid != ret) {
                 printf("[%d] exited\n", wpid);
             }
-            else if(wpid == pid) {
+            else if(wpid == ret) {
                 // current child terminated
                 break;
             }

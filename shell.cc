@@ -76,10 +76,11 @@ int main() {
 
   FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
-    yypush_buffer_state(yy_create_buffer(fd, YY_BUF_SIZE));
+    YY_BUFFER_STATE y = yy_create_buffer(fd, YY_BUF_SIZE);
+    yypush_buffer_state(y);
     yyparse();
     yyrestart(fd);
-    yy_delete_buffer(fd);
+    yy_delete_buffer(y);
   } else {
     fd = NULL;
     Shell::prompt();

@@ -36,7 +36,13 @@
 extern char ** history;
 extern int history_length;
 
-
+extern "C" void bgHandler(int sig){
+    pid_t pid;
+  while((pid = waitpid(-1, NULL, 0)) >0){
+            printf("[%d] exited\n", pid);
+		Shell::prompt();
+  }
+}
 
 Command::Command() {
     // Initialize a new vector of Simple Commands
@@ -46,6 +52,17 @@ Command::Command() {
     _inFile = NULL;
     _errFile = NULL;
     _background = false;
+
+	struct sigaction sa3;
+        sa3.sa_handler = bgHandler;
+        sigemptyset(&sa3.sa_mask);
+        sa3.sa_flags = SA_RESTART;
+        int error =0;
+        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
+            perror("child");
+            exit(-1);
+        }
+
 }
 
 void Command::insertSimpleCommand( SimpleCommand * simpleCommand ) {
@@ -107,27 +124,8 @@ void Command::print() {
 	    printf( "\n\n" );
 }
 
-void bgHandler(int sig){
-    int pid;
-  while((pid = waitpid(-1, NULL, WNOHANG)) >0){
-    if(_background){
-            printf("[%d] exited\n", pid);
-
-    }
-  }
-}
-
 void Command::execute() {
     // Don't do anything if there are no simple commands
-    struct sigaction sa3;
-        sa3.sa_handler = bgHandler;
-        sigemptyset(&sa3.sa_mask);
-        sa3.sa_flags = SA_RESTART;
-        int error =0;
-        if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
-            perror("child");
-            exit(-1);
-        }
     if ( _simpleCommands.size() == 0 ) {
         Shell::prompt();
         return;

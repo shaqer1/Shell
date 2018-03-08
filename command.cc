@@ -39,6 +39,7 @@ extern int history_length;
 extern "C" void bgHandler(int sig){
     pid_t pid;
   while((pid = waitpid(-1, NULL, 0)) >0){
+    if(pid != -1)
         printf("[%d] exited\n", pid);
   }
     Shell::prompt();

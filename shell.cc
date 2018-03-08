@@ -53,22 +53,16 @@ int main() {
     exit(-1);
   }
 
-  /*yyin = fopen(".shellrc", "r");
-  if (yyin > 0) {
-    yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
+  FILE * fd = fopen(".shellrc", "r");
+  if (fd > 0) {
+    yy_switch_to_buffer(yy_create_buffer(fd, YY_BUF_SIZE));
     yyparse();
-    yyin = stdin;
-    Command::_currentCommand.clear();
-    Command::_currentCommand.prompt();
-    yy_switch_to_buffer(yy_create_buffer(yyin, YY_BUF_SIZE));
-    yyparse();
+    yyrestart();
   } else {
-    yyin = NULL;
-    Command::_currentCommand.prompt();
-    yyparse();
-  }*/
+    fd = NULL;
     Shell::prompt();
     yyparse();
+  }
 
 }
 

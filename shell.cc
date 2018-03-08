@@ -46,7 +46,12 @@ extern "C" void disp( int sig ) {
 }
 
 extern "C" void killZombies(int sig){
-  while(waitpid(-1, NULL, WNOHANG) >0);
+  pid_t pid;
+  while((pid = waitpid(-1, NULL, WNOHANG)) >0){
+    if(pid != -1)
+        printf("[%d] exited\n", pid);
+  }
+    Shell::prompt();
 }
 
 /*extern "C" void bgHandler(int sig){

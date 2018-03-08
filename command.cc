@@ -294,7 +294,7 @@ void Command::execute() {
 
     // Print new prompt
     if(executed){
-        printf("executed");
+        //printf("executed");
         Shell::prompt();
     }
 }

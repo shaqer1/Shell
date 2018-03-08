@@ -9,6 +9,7 @@
 #include "y.tab.hh"
 
 int yyparse(void);
+int yyrestart(void);
 
 extern "C" void disp( int sig ) {
   putchar('\n');

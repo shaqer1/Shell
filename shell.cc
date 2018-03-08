@@ -41,7 +41,7 @@ void yy_switch_to_buffer (YY_BUFFER_STATE new_buffer  );*/
 
 extern "C" void disp( int sig ) {
   printf("\n");
-  //Shell::_currentCommand.clear();
+  Shell::_currentCommand.clear();
   Shell::prompt();
 }
 
@@ -49,14 +49,14 @@ extern "C" void killZombies(int sig){
   while(waitpid(-1, NULL, WNOHANG) >0);
 }
 
-extern "C" void bgHandler(int sig){
+/*extern "C" void bgHandler(int sig){
     pid_t pid;
   while((pid = waitpid(-1, NULL, WNOHANG)) >0){
     if(pid != -1)
         printf("[%d] exited\n", pid);
   }
     Shell::prompt();
-}
+}*/
 
 
 void Shell::prompt() {
@@ -95,7 +95,7 @@ int main() {
     exit(-1);
   }
 
-  struct sigaction sa3;
+  /*struct sigaction sa3;
         sa3.sa_handler = bgHandler;
         sigemptyset(&sa3.sa_mask);
         sa3.sa_flags = 0;
@@ -103,7 +103,7 @@ int main() {
         if ((error = sigaction(SIGCHLD, &sa3, NULL))) {
             perror("child");
             exit(-1);
-        }
+        }*/
 
   FILE * fd = fopen(".shellrc", "r");
   if (fd > 0) {
